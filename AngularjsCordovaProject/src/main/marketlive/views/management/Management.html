@@ -1,0 +1,61 @@
+<div class="ml-ppos-account-wrapper">
+	<div class="ml-ppos-management-container">
+		<!-- Employee Management Start -->
+		<div class="ml-ppos-management-row" data-ng-if="managementDataModel.isUserCanSearchEmp || managementDataModel.isUserCanAddEmp || managementDataModel.isUserCanListEmp">
+			<div class="ml-ppos-management-title">
+				<i class="ml-ppos-mini-white-icon ml-ppos-employee"></i>  <span translate="hdr.ppos.employeeManagement"/>
+			</div>
+			<div class="ml-ppos-management-content">
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanSearchEmp">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-search"></span> <span translate="btn.ppos.search"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanAddEmp" ng-click="goToCsrAddScreen();">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-plus"></span> <span translate="btn.ppos.new"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanListEmp" ng-click="goToCsrListScreen();">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-browse"></span> <span translate="btn.ppos.view"/></a>
+				</div>
+			</div>
+		</div>
+		<!-- Employee Management End -->
+		<!-- Settings Start -->
+		<div class="ml-ppos-management-row" data-ng-if="managementDataModel.isUserCanDoPosSettings || managementDataModel.isUserCanDoPaymentSettings">
+			<div class="ml-ppos-management-title">
+				<i class="ml-ppos-mini-white-icon ml-ppos-settings"></i> <span translate="lbl.ppos.settings"/>
+			</div>
+			<div class="ml-ppos-management-content">
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanDoPosSettings" ng-click="goToPposSettingsScreen();">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-setting-pos"></span><span translate="btn.ppos.pos"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanDoPaymentSettings">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-payment"></span> <span translate="btn.ppos.payment"/></a>
+				</div>
+			</div>
+		</div>
+		<!-- Settings End -->
+		<!-- Reports Start -->
+		<div class="ml-ppos-management-row" data-ng-if="managementDataModel.isUserCanViewSaleSettlement || managementDataModel.isUserCanViewOrderReturn || managementDataModel.isUserCanViewOrderTransaction || managementDataModel.isUserCanViewShipmentStatus || managementDataModel.isUserCanViewEmpActivity">
+			<div class="ml-ppos-management-title">
+				<i class="ml-ppos-mini-white-icon ml-ppos-report"></i> <span translate="hdr.ppos.reports"/>
+			</div>
+			<div class="ml-ppos-management-content ml-ppos-management-content-reports">
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanViewSaleSettlement">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-sales" ></span> <span translate="btn.ppos.saleSettlement"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanViewOrderReturn">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-return"></span> <span translate="btn.ppos.orderReturn"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanViewOrderTransaction">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-transaction"></span> <span translate="btn.ppos.orderTransaction"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanViewShipmentStatus">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-browse"></span> <span translate="btn.ppos.shipmentStatus"/></a>
+				</div>
+				<div class="ml-ppos-management-icon-container" data-ng-if="managementDataModel.isUserCanViewEmpActivity">
+					<a href=""><span class="ml-ppos-white-icon ml-ppos-activity"></span> <span translate="btn.ppos.employeeActivity"/></a>
+				</div>
+			</div>
+		</div>
+		<!-- Reports End -->
+	</div>
+</div>

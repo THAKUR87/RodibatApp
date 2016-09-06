@@ -1,0 +1,29 @@
+<div class="ml-ppos-dashboard-instore-pickup-content-wrapper">
+	<div class="ml-ppos-dashboard-instore-pickup-item-row">
+		<div class="ml-ppos-dashboard-instore-pickup-content-row">
+			<div class="ml-ppos-instore-pickup-new-order"><a data-ng-href="#/pickupNewOrderShipments"><i class="ml-ppos-instore-pickup-circle-new"></i>{{ 'hdr.ppos.inStorePickup.newPickup' | translate }} <span class="ml-ppos-instore-pickup-count">{{ inStorePickupOrderShipmentsDataModel.Ordered.length }}</span></a></div>
+		</div>
+		<div class="ml-ppos-scroll-container" data-ng-if="inStorePickupOrderShipmentsDataModel.Ordered.length">
+			<div class="ml-ppos-instore-pickup-new-order-items ml-ppos-instore-pickup-new-order-head">
+				<div class="ml-ppos-instore-pickup-item-order" translate>hdr.ppos.inStorePickup.orderNumber</div>
+				<div class="ml-ppos-instore-pickup-item-date" translate>hdr.ppos.inStorePickup.orderDate</div>
+				<div class="ml-ppos-instore-pickup-item-customer" translate>hdr.ppos.inStorePickup.customer</div>
+			</div>
+
+			<div class="ml-ppos-instore-pickup-new-order-items" data-ng-repeat="pickupNewOrderShipment in inStorePickupOrderShipmentsDataModel.Ordered">
+				<div class="ml-ppos-instore-pickup-item-order">#{{ pickupNewOrderShipment.order.code }}</div>
+				<div class="ml-ppos-instore-pickup-item-date">{{pickupNewOrderShipment.order.orderDate | date : 'medium'}}</div>
+				<div class="ml-ppos-instore-pickup-item-customer">{{ pickupNewOrderShipment.order.billToInfo.firstName }} {{ pickupNewOrderShipment.order.billToInfo.lastName }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="ml-ppos-dashboard-instore-pickup-content-row">
+		<div><a data-ng-href="#/pickupInProcessOrderShipments"><i class="ml-ppos-instore-pickup-circle-process"></i>{{ 'hdr.ppos.inStorePickup.inProcess' | translate }} <span class="ml-ppos-instore-pickup-count">{{ inStorePickupOrderShipmentsDataModel.PickupInProcess.length }}</span></a></div>
+	</div>
+	<div class="ml-ppos-dashboard-instore-pickup-content-row">
+		<div><a data-ng-href="#/pickupReadyOrderShipments"><i class="ml-ppos-instore-pickup-circle-ready"></i>{{ 'hdr.ppos.inStorePickup.pickUpReady' | translate }} <span class="ml-ppos-instore-pickup-count">{{ inStorePickupOrderShipmentsDataModel.PickupReady.length }}</span></a></div>
+	</div>
+	<div class="ml-ppos-dashboard-instore-pickup-content-row">
+		<div><a data-ng-href="#/pickupDoneOrderShipments"><i class="ml-ppos-instore-pickup-circle-done"></i>{{ 'hdr.ppos.inStorePickup.done' | translate }} <span class="ml-ppos-instore-pickup-count">{{ inStorePickupOrderShipmentsDataModel.Shipped.length }}</span></a></div>
+	</div>
+</div>

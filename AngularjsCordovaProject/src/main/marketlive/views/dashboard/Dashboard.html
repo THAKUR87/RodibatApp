@@ -1,0 +1,147 @@
+<div class="ml-ppos-main-wrapper">
+	<div class="ml-ppos-dashboard-wrapper">
+		<!-- Instore Pickup Start -->
+		<div class="ml-ppos-dashboard-instore-pickup-widget-wrapper" data-ng-controller="inStorePickupOrderShipmentsController">
+			<div class="ml-ppos-dashboard-instore-pickup-bar"></div>
+			<div class="ml-ppos-dashboard-instore-pickup-container">
+				<div class="ml-ppos-dashboard-instore-pickup-content">
+					<div class="ml-ppos-dashboard-header-wrapper">
+						<div class="ml-ppos-dashboard-header-icon-left"><span class="ml-ppos-mini-white-icon ml-ppos-store"></span></div>
+						<div class="ml-ppos-dashboard-header-message"><a data-ng-href="#/inStorePickupOrderShipments" translate>hdr.ppos.inStorePickup</a></div>
+						<div class="ml-ppos-dashboard-header-icon-right"><a data-ng-href="#/inStorePickupOrderShipments"><span class="ml-ppos-mini-white-icon ml-ppos-arrow-right"></span></a></div>
+					</div>
+					<div data-ng-include="'views/dashboard/InStorePickupOrderShipmentsWidget.html'"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Instore Pickup End -->
+		
+		<div class="ml-ppos-dashboard-middle-container">
+			<div class="ml-ppos-dashboard-search-widget-wrapper">
+				<!-- Product Search Start -->
+				<div class="ml-ppos-dashboard-product-search-widget">
+					<div class="ml-ppos-dashboard-product-search-widget-bar"></div>
+					<div class="ml-ppos-dashboard-product-search-widget-container">
+						<div class="ml-ppos-dashboard-product-search-widget-content">
+							<h2 translate>hdr.ppos.product</h2>
+							<div class="ml-ppos-dashboard-product-search-button-wrapper">
+								<div class="ml-ppos-product-scan">
+                                    <ml-barcode-search data-display-as-modal="true"
+                                                       data-modal-title="Product Scan"
+                                                       data-service-url="/api/scan/skus/UPC_CODE"
+													   data-service-post-data="skuBarcodeSearchPostData"
+													   data-scan-success-callback="scanSuccessHandler()"
+													   data-create-basket="true"
+                                                       data-forward-url="/basket"
+													   data-cancel-btn-resource="btn.ppos.close"
+													   data-continue-btn-resource="btn.ppos.done"
+													   data-multi-add-msg-resource="msg.ppos.itemWithCodeAddedToBasket"
+													   data-multi-add-count-resource="msg.ppos.scanAnotherProduct"
+											></ml-barcode-search>
+                                </div>
+								<div class="ml-ppos-product-search">
+									<a href="javascript:;" class="ml-ppos-product-search-button" data-toggle="modal" data-target="#productSearchModal"><span class="ml-ppos-grey-icon ml-ppos-search"></span><span translate="btn.ppos.searchProduct"></span></a>
+									<product-search-modal></product-search-modal>
+									<product-detail-modal></product-detail-modal>
+									<near-by-stores-modal></near-by-stores-modal>
+								</div>
+								<!-- <div class="ml-ppos-product-browse">
+									<a href="javascript:;" class="ml-ppos-product-browse-button"><span class="ml-ppos-grey-icon ml-ppos-browse"></span>Browse</a>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Product Search End -->
+				<!-- Order Search Start -->
+				<div class="ml-ppos-dashboard-order-search-widget">
+					<div class="ml-ppos-dashboard-order-search-widget-bar"></div>
+					<div class="ml-ppos-dashboard-order-search-widget-container">
+						<div class="ml-ppos-dashboard-order-search-widget-content">
+							<h2 translate>hdr.ppos.order</h2>
+							<div class="ml-ppos-dashboard-product-search-button-wrapper">
+								<!-- <div class="ml-ppos-product-scan">
+									<a href="javascript:;" class="ml-ppos-product-scan-button"><span class="ml-ppos-grey-icon ml-ppos-scan-barcode"></span><span translate="btn.ppos.scanOrderReceipt"></span></a>
+								</div> -->
+								<div class="ml-ppos-product-search">
+									<a href="javascript:;" class="ml-ppos-product-search-button" data-toggle="modal" data-target="#orderSearchModal"><span class="ml-ppos-grey-icon ml-ppos-search"></span><span translate="btn.ppos.searchOrder"></span></a>
+									<order-search-modal></order-search-modal>
+								</div>
+								<div class="ml-ppos-product-browse" data-ng-controller="customerSearchModalController">
+									<a href="javascript:;" class="ml-ppos-product-browse-button" data-ng-click="showCustomerSearchModal()"><span class="ml-ppos-grey-icon ml-ppos-plus"></span><span translate="btn.ppos.orderNew"></span></a>
+									<customer-search-modal></customer-search-modal>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Order Search End -->
+				<!-- Customer Search Start -->
+				<div class="ml-ppos-dashboard-customer-search-widget">
+					<div class="ml-ppos-dashboard-customer-search-widget-bar"></div>
+					<div class="ml-ppos-dashboard-customer-search-widget-container">
+						<div class="ml-ppos-dashboard-customer-search-widget-content">
+							<h2 translate>hdr.ppos.customer</h2>
+							<div class="ml-ppos-dashboard-product-search-button-wrapper">
+								<!-- <div class="ml-ppos-product-scan">
+									<a href="javascript:;" class="ml-ppos-product-scan-button"><span class="ml-ppos-grey-icon ml-ppos-scan-barcode"></span><span translate="btn.ppos.loyalty"></span></a>
+								</div> -->
+								<div class="ml-ppos-product-search" data-ng-controller="customerSearchModalController">
+									<a href="javascript:;" class="ml-ppos-product-search-button" data-ng-click="showCustomerSearchModal()"><span class="ml-ppos-grey-icon ml-ppos-search"></span><span translate="btn.ppos.searchCustomer"></span></a>
+									<!--<customer-search-modal></customer-search-modal>-->
+								</div>
+								<div class="ml-ppos-product-browse">
+									<a href="javascript:;" class="ml-ppos-product-browse-button" data-ng-click="customerProfileInformationModal('dashboard');"><span class="ml-ppos-grey-icon ml-ppos-plus"></span><span translate="btn.ppos.customerNew"></a>
+									<customer-profile-information-modal></customer-profile-information-modal>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Customer Search End -->
+
+				<!-- Email Signup Start -->
+				<div class="ml-ppos-dashboard-email-signup-widget">
+					<div class="ml-ppos-dashboard-email-signup-widget-bar"></div>
+					<div class="ml-ppos-dashboard-email-signup-widget-container">
+						<div class="ml-ppos-dashboard-email-signup-widget-content">
+							<div data-ng-include="'views/dashboard/EmailSignupWidget.html'" data-ng-controller="emailSignupController"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Email Signup End -->
+			</div>
+
+		</div>
+		<div class="ml-ppos-dashboard-right-container">
+			<!-- Shopping Bag Start -->
+			<div class="ml-ppos-dashboard-bag-widget-wrapper">
+				<div class="ml-ppos-dashboard-bag-widget-bar"></div>
+				<div class="ml-ppos-dashboard-bag-widget-container">
+					<div class="ml-ppos-dashboard-bag-widget-content">
+						<!-- Shopping Bag Header Start -->
+						<div class="ml-ppos-dashboard-header-wrapper">
+							<div class="ml-ppos-dashboard-header-icon-left"><span class="ml-ppos-mini-white-icon ml-ppos-circle-bag"></span></div>
+							<div class="ml-ppos-dashboard-header-message" translate>hdr.ppos.shoppingBag</div>
+							<div class="ml-ppos-dashboard-header-icon-right"><a href="javascript:;" data-ng-click="openBasketPage();" class=""><span class="ml-ppos-mini-white-icon ml-ppos-arrow-right"></span></a></div>
+						</div>
+						<!-- Shopping Bag Header End -->
+						<div class="ml-ppos-dashboard-bag-widget-button-wrapper" data-ng-controller="customerSearchModalController">
+							<a href="javascript:;" class="ml-ppos-dashboard-bag-new-order-button" data-ng-click="showCustomerSearchModal()">
+								<span class="ml-ppos-btn-inner">
+									<span class="ml-ppos-btn-text" translate>btn.ppos.newOrder</span>
+									<span class="ml-ppos-btn ml-ppos-mini-grey-icon ml-ppos-plus"></span>
+								</span>
+							</a>
+							<!--<customer-search-modal></customer-search-modal>-->
+						</div>
+					</div>
+					<div class="ml-ppos-dashboard-saved-bag-widget-content">
+						<div data-ng-include="'views/dashboard/SavedBasketsWidget.html'" data-ng-controller="savedBasketsController"></div>
+					</div>
+				</div>
+			</div>
+			<!-- Shopping Bag End -->
+		</div>
+	</div>
+</div>

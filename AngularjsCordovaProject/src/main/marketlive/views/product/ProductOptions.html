@@ -1,0 +1,16 @@
+<div class="ml-product-option-container">
+    <div class="ml-product-option-type-wrapper" ng-repeat="type in options track by $index">
+        <div class="ml-product-option-type">{{type.optionType}}</div>
+        <div class="ml-product-option-wrapper">
+            <div class="ml-product-option"
+                 ng-class="{'selected': type.selectedOption == option,'disabled': !isOptionSelectable(type, option)}"
+                 ng-repeat="option in type.options track by $index">
+                <div class="ml-product-option-text" ng-click="selectOption(type, option)" ng-hide="option.image">
+                    {{option.name}}
+                </div>
+                <div class="ml-product-option-image" ng-click="selectOption(type, option)" ng-show="option.image"><img
+                        ng-src="{{option.image}}"/></div>
+            </div>
+        </div>
+    </div>
+</div>

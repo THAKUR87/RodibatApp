@@ -1,0 +1,207 @@
+<div class="ml-ppos-main-wrapper">
+	<div class="ml-ppos-instore-pickup-order-wrapper">
+
+		<!-- Pickup Headers Start -->
+		<div class="ml-ppos-instore-pickup-header-container">
+			<div class="ml-ppos-instore-pickup-header-new">
+				<div class="ml-ppos-instore-pickup-order-new-bar"></div>
+				<div class="ml-ppos-instore-pickup-title">
+					<a data-ng-href="#/pickupNewOrderShipments"><i class="ml-ppos-instore-pickup-circle-new"></i>{{ 'hdr.ppos.inStorePickup.newPickup' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Ordered.length }}</span></a>
+				</div>
+			</div>
+			<div class="ml-ppos-instore-pickup-header-process">
+				<div class="ml-ppos-instore-pickup-order-process-bar"></div>
+				<div class="ml-ppos-instore-pickup-title">
+					<a data-ng-href="#/pickupInProcessOrderShipments"><i class="ml-ppos-instore-pickup-circle-process"></i>{{ 'hdr.ppos.inStorePickup.inProcess' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupInProcess.length }}</span></a>
+				</div>
+			</div>
+			<div class="ml-ppos-instore-pickup-header-ready">
+				<div class="ml-ppos-instore-pickup-order-ready-bar"></div>
+				<div class="ml-ppos-instore-pickup-title">
+					<a data-ng-href="#/pickupReadyOrderShipments"><i class="ml-ppos-instore-pickup-circle-ready"></i>{{ 'hdr.ppos.inStorePickup.pickUpReady' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupReady.length }}</span></a>
+				</div>
+			</div>
+			<div class="ml-ppos-instore-pickup-header-done">
+				<div class="ml-ppos-instore-pickup-order-done-bar"></div>
+				<div class="ml-ppos-instore-pickup-title">
+					<a data-ng-href="#/pickupDoneOrderShipments"><i class="ml-ppos-instore-pickup-circle-done"></i>{{ 'hdr.ppos.inStorePickup.done' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Shipped.length }}</span></a>
+				</div>
+			</div>
+		</div>
+		<!-- Pickup Headers End -->
+		
+		<!-- Pickup Row Start -->
+		<div class="ml-ppos-instore-pickup-row-container">
+			<!-- Pickup New Orders Start -->
+			<div class="ml-ppos-instore-pickup-order-new ml-ppos-scroll-container">
+				<div class="ml-ppos-instore-pickup-order-new-container">
+					<div class="ml-ppos-instore-pickup-order-content">
+						<!-- Loop Start -->
+						<div data-ng-repeat="pickupNewOrderShipment in inStorePickupOrderShipmentsDataModel.Ordered" class="ml-ppos-instore-pickup-toggle">
+							
+							<button type="button" class="togglebtn" ng-click="toggleIcon({{ pickupNewOrderShipment.id }});"><span class="ml-ppos-instore-pickup-order-number">#{{ pickupNewOrderShipment.order.code }}</span> <span>{{ pickupNewOrderShipment.order.billToInfo.firstName }} {{ pickupNewOrderShipment.order.billToInfo.lastName }}</span> <i class="ml-ppos-mini-white-icon ml-ppos-arrow-down" id="arrow_{{ pickupNewOrderShipment.id }}"></i></button>
+
+							<div id="orderShipmentDetail_{{ pickupNewOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+								<div class="ml-ppos-instore-pickup-thumb-container">
+									<div data-ng-repeat="item in pickupNewOrderShipment.items" class="ml-ppos-instore-pickup-thumb-content">
+										<div class="ml-ppos-instore-pickup-thumb"><img src="{{ item.product.image.thumb }}" width="80" height="80" /></div>
+										<div class="ml-ppos-instore-pickup-item-code">{{ item.skuCode }}</div>
+									</div>
+								</div>
+
+								<div class="ml-ppos-instore-pickup-order-date">{{ 'lbl.ppos.inStorePickup.orderedDate' | translate }} {{pickupNewOrderShipment.order.orderDate | date : 'medium'}}</div>
+
+								<div class="ml-ppos-instore-pickup-button-container">
+									<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="viewOrderDetail(pickupNewOrderShipment.order.id)" translate>btn.ppos.inStorePickup.viewDetail</button></div>
+									<div class="ml-ppos-instore-pickup-button-move">
+										<span class="ml-ppos-btn-inner">
+											<span class="ml-ppos-btn-text" translate>btn.ppos.inStorePickup.move</span>
+											<span class="ml-ppos-btn ml-ppos-mini-grey-icon ml-ppos-arrow-right"></span>
+										</span>
+										<button type="button" data-ng-click="moveToPickupInProcessState(pickupNewOrderShipment.order.id, pickupNewOrderShipment.id)" class="ml-ppos-btn-hidden"></button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- Loop End -->
+					</div>
+				</div>
+			</div>
+			<!-- Pickup New Orders End -->
+
+			<!-- Pickup In Process Orders Start -->
+			<div class="ml-ppos-instore-pickup-order-process">
+				<div class="ml-ppos-instore-pickup-order-process-container ml-ppos-scroll-container">
+					<div class="ml-ppos-instore-pickup-order-content">
+						<!-- Loop Start -->
+						<div data-ng-repeat="pickupInProcessOrderShipment in inStorePickupOrderShipmentsDataModel.PickupInProcess" class="ml-ppos-instore-pickup-toggle">
+							
+							<button type="button" class="togglebtn" ng-click="toggleIcon({{ pickupInProcessOrderShipment.id }});"><span class="ml-ppos-instore-pickup-order-number">#{{ pickupInProcessOrderShipment.order.code }}</span> <span>{{ pickupInProcessOrderShipment.order.billToInfo.firstName }} {{ pickupInProcessOrderShipment.order.billToInfo.lastName }}</span> <i class="ml-ppos-mini-white-icon ml-ppos-arrow-down" id="arrow_{{ pickupInProcessOrderShipment.id }}"></i></button>
+
+							<div id="orderShipmentDetail_{{ pickupInProcessOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+								<div class="ml-ppos-instore-pickup-thumb-container">
+									<div data-ng-repeat="item in pickupInProcessOrderShipment.items" class="ml-ppos-instore-pickup-thumb-content">
+										<div class="ml-ppos-instore-pickup-thumb"><img src="{{ item.product.image.thumb }}" width="80" height="80" /></div>
+										<div class="ml-ppos-instore-pickup-item-code">{{ item.skuCode }}</div>
+									</div>
+								</div>
+								
+								<div class="ml-ppos-instore-pickup-order-date">{{ 'lbl.ppos.inStorePickup.orderedDate' | translate }} {{pickupInProcessOrderShipment.order.orderDate | date : 'medium'}}</div>
+
+								<div class="ml-ppos-instore-pickup-button-container">
+									<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="viewOrderDetail(pickupInProcessOrderShipment.order.id)" translate>btn.ppos.inStorePickup.viewDetail</button></div>
+									<div class="ml-ppos-instore-pickup-button-move" data-ng-show="pickupInProcessOrderShipment.canMoveToPickupReady">
+										<span class="ml-ppos-btn-inner">
+											<span class="ml-ppos-btn-text" translate>btn.ppos.inStorePickup.move</span>
+											<span class="ml-ppos-btn ml-ppos-mini-grey-icon ml-ppos-arrow-right"></span>
+										</span>
+										<button type="button" data-ng-click="moveToPickupReadyState(pickupInProcessOrderShipment.order.id, pickupInProcessOrderShipment.id)" class="ml-ppos-btn-hidden" translate>btn.ppos.inStorePickup.move</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="ml-ppos-instore-pickup-csr-list">
+								<!-- Assigned CSR -->
+								<button type="button" class="togglebtn" data-toggle="collapse" data-target="#activeCSRList_{{ pickupInProcessOrderShipment.id }}">{{ pickupInProcessOrderShipment.CSR.firstName }} {{ pickupInProcessOrderShipment.CSR.lastName }}</button>
+								<!-- CSR list to choose from -->
+								<div id="activeCSRList_{{ pickupInProcessOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+									<ul>
+										<li data-ng-repeat="activeCSR in activeCSRs" ng-if="activeCSR.id != pickupInProcessOrderShipment.CSR.id">
+											<span></span><a href="javascript:;" data-ng-click="associateCSRtoShipment(activeCSR.id, pickupInProcessOrderShipment.order.id, pickupInProcessOrderShipment.id)">{{ activeCSR.firstName }} {{ activeCSR.lastName }}</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+						<!-- Loop End -->
+					</div>
+				</div>
+			</div>
+			<!-- Pickup In Process Orders End -->
+
+			<!-- Pickup Ready Orders Start -->
+			<div class="ml-ppos-instore-pickup-order-ready">
+				<div class="ml-ppos-instore-pickup-order-ready-container ml-ppos-scroll-container">
+					<div class="ml-ppos-instore-pickup-order-content">
+						<!-- Loop Start -->
+						<div data-ng-repeat="pickupReadyOrderShipment in inStorePickupOrderShipmentsDataModel.PickupReady" class="ml-ppos-instore-pickup-toggle">
+							
+							<button type="button" class="togglebtn" ng-click="toggleIcon({{ pickupReadyOrderShipment.id }});"><span class="ml-ppos-instore-pickup-order-number">#{{ pickupReadyOrderShipment.order.code }}</span> <span>{{ pickupReadyOrderShipment.order.billToInfo.firstName }} {{ pickupReadyOrderShipment.order.billToInfo.lastName }}</span> <i class="ml-ppos-mini-white-icon ml-ppos-arrow-down" id="arrow_{{ pickupReadyOrderShipment.id }}"></i></button>
+
+							<div id="orderShipmentDetail_{{ pickupReadyOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+								<div class="ml-ppos-instore-pickup-thumb-container">
+									<div data-ng-repeat="item in pickupReadyOrderShipment.items" class="ml-ppos-instore-pickup-thumb-content">
+										<div class="ml-ppos-instore-pickup-thumb"><img src="{{ item.product.image.thumb }}" width="80" height="80" /></div>
+										<div class="ml-ppos-instore-pickup-item-code">{{ item.skuCode }}</div>
+									</div>
+								</div>
+
+								<div class="ml-ppos-instore-pickup-order-date">{{ 'lbl.ppos.inStorePickup.orderedDate' | translate }} {{pickupReadyOrderShipment.order.orderDate | date : 'medium'}}</div>
+
+								<div class="ml-ppos-instore-pickup-button-container">
+									<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="viewOrderDetail(pickupReadyOrderShipment.order.id)" translate>btn.ppos.inStorePickup.viewDetail</button></div>
+								</div>
+							</div>
+							<!-- Note Start -->
+							<div class="ml-ppos-instore-pickup-notes" data-ng-if="pickupReadyOrderShipment.note.length">
+								<button type="button" class="togglebtn" data-toggle="collapse" data-target="#show_note_{{ pickupReadyOrderShipment.id }}" translate>btn.ppos.inStorePickup.showNote</button>
+								<div id="show_note_{{ pickupReadyOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+									<textarea rows="5" cols="25" placeholder="{{ 'msg.ppos.inStorePickup.writeANote' | translate }}" data-ng-model="pickupReadyOrderShipment.note[0].note" readonly></textarea>
+									<!-- Edit Note - Phase 2 -->
+									<!-- <button type="button" data-ng-click="editShipmentNoteForPickup(pickupReadyOrderShipment.order.id, pickupReadyOrderShipment.id, pickupReadyOrderShipment.order.customer.id, pickupReadyOrderShipment.note[0].id, pickupReadyOrderShipment.note[0].note)" class="ml-ppos-primary-button ml-ppos-instore-pickup-save-button">Save Note</button> -->
+								</div>
+							</div>
+							<div class="ml-ppos-instore-pickup-notes" data-ng-if="!pickupReadyOrderShipment.note.length">
+								<button type="button" class="togglebtn" data-toggle="collapse" data-target="#add_note_{{ pickupReadyOrderShipment.id }}" translate>btn.ppos.inStorePickup.addNote</button>
+								<div id="add_note_{{ pickupReadyOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+									<textarea rows="5" cols="25" placeholder="{{ 'msg.ppos.inStorePickup.writeANote' | translate }}" data-ng-model="pickupReadyOrderShipment.noteTextToAdd" maxlength="{{ noteMaxLength }}"></textarea>
+									<div data-ng-if="pickupReadyOrderShipment.noteTextToAdd.length === noteMaxLength" translate="msg.ppos.inStorePickup.maxNoteCharacters" translate-values="{ noteMaxLength : noteMaxLength }"></div>
+									<div data-ng-if="pickupReadyOrderShipment.noteTextToAdd">
+										<button type="button" data-ng-click="addShipmentNoteForPickup(pickupReadyOrderShipment.order.id, pickupReadyOrderShipment.id, pickupReadyOrderShipment.order.customer.id, pickupReadyOrderShipment.noteTextToAdd)" class="ml-ppos-primary-button ml-ppos-instore-pickup-save-button" translate>btn.ppos.inStorePickup.saveNote</button>
+									</div>
+								</div>
+							</div>
+							<!-- Note End -->
+						</div>
+						<!-- Loop End -->
+					</div>
+				</div>
+			</div>
+			<!-- Pickup Ready Orders End -->
+
+			<!-- Pickup Done Orders Start -->
+			<div class="ml-ppos-instore-pickup-order-done">
+				<div class="ml-ppos-instore-pickup-order-done-container ml-ppos-scroll-container">
+					<div class="ml-ppos-instore-pickup-order-content">
+						<!-- Loop Start -->
+						<div data-ng-repeat="pickupDoneOrderShipment in inStorePickupOrderShipmentsDataModel.Shipped" class="ml-ppos-instore-pickup-toggle">
+							
+							<button type="button" class="togglebtn" ng-click="toggleIcon({{ pickupDoneOrderShipment.id }});"><span class="ml-ppos-instore-pickup-order-number">#{{ pickupDoneOrderShipment.order.code }}</span> <span>{{ pickupDoneOrderShipment.order.billToInfo.firstName }} {{ pickupDoneOrderShipment.order.billToInfo.lastName }}</span> <i class="ml-ppos-mini-white-icon ml-ppos-arrow-down" id="arrow_{{ pickupDoneOrderShipment.id }}"></i></button>
+
+							<div id="orderShipmentDetail_{{ pickupDoneOrderShipment.id }}" class="collapse ml-ppos-instore-pickup-order-content-data">
+								<div class="ml-ppos-instore-pickup-thumb-container">
+									<div data-ng-repeat="item in pickupDoneOrderShipment.items" class="ml-ppos-instore-pickup-thumb-content">
+										<div class="ml-ppos-instore-pickup-thumb"><img src="{{ item.product.image.thumb }}" width="80" height="80" /></div>
+										<div class="ml-ppos-instore-pickup-item-code">{{ item.skuCode }}</div>
+									</div>
+								</div>
+
+								<div class="ml-ppos-instore-pickup-order-date">{{ 'lbl.ppos.inStorePickup.orderedDate' | translate }} {{pickupDoneOrderShipment.order.orderDate | date : 'medium'}}</div>
+
+								<div class="ml-ppos-instore-pickup-button-container"><button type="button" class="ml-ppos-secondary-button" data-ng-click="viewOrderDetail(pickupDoneOrderShipment.order.id)" translate>btn.ppos.inStorePickup.viewDetail</button></div>
+							</div>
+
+						</div>
+						<!-- Loop End -->
+					</div>
+				</div>
+			</div>
+			<!-- Pickup Done Orders End -->
+
+
+		</div>
+
+	</div>
+</div>

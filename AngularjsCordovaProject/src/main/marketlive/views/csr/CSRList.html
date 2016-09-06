@@ -1,0 +1,58 @@
+<div class="ml-ppos-account-wrapper">
+	<div class="ml-ppos-csr-list-container">
+	
+		<div class="ml-ppos-csr-list-head-row">
+			<div class="ml-ppos-csr-list-title">
+				<a href="" ng-click="goToManagementScreen();"><i class="ml-ppos-mini-white-icon ml-ppos-arrow-left"></i> <span translate="lbl.ppos.management"/></a>
+			</div>
+			<div class="ml-ppos-csr-list-toggle ml-ppos-toggle-container">
+				<div class="ml-ppos-toggle btn-group btn-toggle" data-toggle="buttons">
+					<label class="ml-ppos-toggle-button btn" ng-class="{active : csrListDataModel.csrListType == 'ALL'}" data-ng-click="getAllCSRs();"><span translate="lbl.ppos.viewAll"/>
+						<input type="radio" name="showCsrUser" id="showAll"/>
+					</label>
+					<label class="ml-ppos-toggle-button btn" ng-class="{active : csrListDataModel.csrListType == 'ACTIVE'}" data-ng-click="getActiveCSRs();"><span translate="lbl.ppos.activeOnly"/>
+						<input type="radio" name="showCsrUser" id="showActiveOnly" >
+					</label>
+					<label class="ml-ppos-toggle-button btn" ng-class="{active : csrListDataModel.csrListType == 'INACTIVE'}" data-ng-click="getInActiveCSRs();"><span translate="Inactive Only"/>
+						<input type="radio" name="showCsrUser" id="showInActiveOnly" >
+					</label>
+				</div>
+			</div>
+			<div class="ml-ppos-csr-list-add-button">
+				<a href="javascript:;" name="csrAddNew" id="csrAddNew" ng-click="goToCsrAddScreen();"><span class="ml-ppos-mini-white-icon ml-ppos-plus"></a>
+			</div>
+		</div>
+
+		<div class="ml-ppos-csr-list-item-wrapper">
+			<div class="ml-ppos-csr-list-item-row ml-ppos-csr-list-item-row-head">
+				<div class="ml-ppos-csr-list-item-status"><span translate="lbl.ppos.status"/></div>
+				<div class="ml-ppos-csr-list-item-id"><span translate="lbl.ppos.id"/></div>
+				<div class="ml-ppos-csr-list-item-first-name"><span translate="lbl.ppos.firstName"/></div>
+				<div class="ml-ppos-csr-list-item-last-name"><span translate="lbl.ppos.lastName"/></div>
+				<div class="ml-ppos-csr-list-item-user-name"><span translate="lbl.ppos.userName"/></div>
+				<div class="ml-ppos-csr-list-item-delete"></div>
+				<div class="ml-ppos-csr-list-item-edit"></div>
+			</div>
+			
+			<div class="ml-ppos-csr-list-item-row ml-ppos-csr-list-item-row-head" ng-show="!csrListDataModel.userData.length">
+				<span translate="msg.ppos.noRecordFound"/>
+			</div>
+
+			<div ng-show="showUserRow('{{items.typePPOS}}');" class="ml-ppos-csr-list-item-row" ng-repeat="items in csrListDataModel.userData">
+				<div class="ml-ppos-csr-list-item-status">
+					<div class="ml-ppos-csr-list-item-status-active" data-ng-show="isActive('{{items.active}}', 'showActive');">Active</div>
+					<div class="ml-ppos-csr-list-item-status-inactive" data-ng-show="isActive('{{items.active}}', 'showInactive');">Inactive</div>
+				</div>
+				<div class="ml-ppos-csr-list-item-id">{{items.employeeID}}</div> 
+				<div class="ml-ppos-csr-list-item-first-name">{{items.firstName}}</div>
+				<div class="ml-ppos-csr-list-item-last-name">{{items.lastName}}</div>
+				<div class="ml-ppos-csr-list-item-user-name">{{items.email}}</div>
+				<div class="ml-ppos-csr-list-item-delete" ><a href="" ng-show="showDelete('{{items.active}}', '{{items.typePPOS}}');" ng-click="deleteUser(items.id, items.email);"><span class="ml-ppos-mini-white-icon ml-ppos-close"></a></div>
+				<csr-delete-confirmation-modal></csr-delete-confirmation-modal>
+				<div class="ml-ppos-csr-list-item-edit"><a href="" ng-show="showEdit('{{items.typePPOS}}');" data-ng-click="goToCsrEditScreen(items.id);"><span class="ml-ppos-mini-white-icon ml-ppos-todo"></a></div>
+			</div>
+		</div>
+
+	</div>
+</div>
+

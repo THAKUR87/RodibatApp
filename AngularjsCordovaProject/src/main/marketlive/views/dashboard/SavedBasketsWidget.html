@@ -1,0 +1,35 @@
+<!-- Saved Baskets Header Start -->
+<div class="ml-ppos-dashboard-header-wrapper">
+	<div class="ml-ppos-dashboard-header-icon-left"><span class="ml-ppos-mini-white-icon ml-ppos-circle-bag"></span></div>
+	<div class="ml-ppos-dashboard-header-message" translate>hdr.ppos.saved</div>
+</div>
+<!-- Saved Baskets Header End -->
+
+<!-- Saved Baskets Body Start -->
+<div class="ml-ppos-dashboard-saved-bag-widget-items-container">
+	<div class="ml-ppos-scroll-container">
+		<div data-ng-repeat="savedBasket in savedBasketsDataModel.baskets" class="ml-ppos-dashboard-saved-bag-widget-items">
+			<div>
+				<div class="ml-ppos-dashboard-saved-bag-widget-items-detail">
+					<a data-ng-click="openSavedBasket(savedBasket.customer.id, savedBasket.id)">
+						<div class="ml-ppos-dashboard-saved-bag-widget-customer-name">
+							<span data-ng-if="savedBasket.customer.guest">
+								<span data-ng-if="savedBasket.customer.primaryContact.phone1">
+									{{ savedBasket.customer.primaryContact.phone1 }}
+								</span>
+								<span data-ng-if="!savedBasket.customer.primaryContact.phone1" translate>hdr.ppos.guest</span>
+							</span> 
+							<span data-ng-if="!savedBasket.customer.guest">{{ savedBasket.customer.primaryContact.person.firstName }} {{ savedBasket.customer.primaryContact.person.lastName }}</span> 
+						</div>
+						{{savedBasket.dateModified | date : 'medium'}}
+						<div><span translate>lbl.ppos.totalAmount</span> {{ savedBasket.total }}</div>
+					</a>
+				</div>
+				<div class="ml-ppos-dashboard-saved-bag-widget-items-button">			
+					<a data-ng-click="deleteSavedBasket(savedBasket.id)"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Saved Baskets Body End -->

@@ -1,0 +1,17 @@
+<div class="ml-ppos-modal-container ml-ppos-csr-list-confirm-wrapper">
+    <div class="modal" id="csrDeleteConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span translate="hdr.ppos.confirmDelete"/></h4>
+                </div>
+				<div class="ml-ppos-csr-list-confirm-message"><span translate="msg.ppos.csrConfirmDeleteMsg"/> <span>{{csrListDataModel.csrDeleteUser}}</span>
+				</div>
+				<div class="ml-ppos-csr-list-confirm-button-container">
+					<div class="ml-ppos-csr-list-confirm-button-save"><button class="ml-ppos-primary-button" type="button" name="ok" id="ok" ng-click="deleteCsrUser();"  translate="btn.ppos.ok"/></div>
+					<div class="ml-ppos-csr-list-confirm-button-cancel"><button class="ml-ppos-secondary-button" type="button" name="cancel" id="cancel" ng-click="closeDelConfirmModal();" translate="btn.ppos.cancel"/></div>
+				</div>					
+            </div>
+        </div>
+    </div>
+</div>

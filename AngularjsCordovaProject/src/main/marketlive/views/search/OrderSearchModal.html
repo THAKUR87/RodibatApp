@@ -1,0 +1,34 @@
+<div class="ml-ppos-modal-container ml-ppos-product-search-wrapper">
+	<div class="modal" id="orderSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title" translate="hdr.ppos.searchOrder"></h4>
+				</div>
+	  
+				<form novalidate data-ng-submit="searchOrderByCode()">
+					<div class="modal-body">
+						<div data-ng-show="orderSearchDataModel.showOrderSearchError" class="ml-ppos-error-container">
+							<div class="ml-icon-error"></div>
+							<div class="ml-ppos-error-message">
+								{{ orderSearchDataModel.orderSearchErrorMessage }}
+							</div>
+						</div>
+
+						<div class="ml-ppos-product-search-head" translate="lbl.ppos.enterOrderNumber"></div>
+
+						<div class="ml-ppos-product-search-label-content">
+							<input type="text" name="orderCode" id="orderCode" class="form-control" data-ng-model="orderSearchDataModel.orderCode" />
+						</div>
+					</div>
+					
+					<div class="modal-footer ml-ppos-button-product-search">
+						<div><button type="submit" name="orderSearchButton" id="orderSearchButton" class="ml-ppos-primary-button" translate="btn.ppos.searchOrder"></button></div>
+						<div><button type="button" class="ml-ppos-secondary-button" data-dismiss="modal" translate="btn.ppos.cancel"></button></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

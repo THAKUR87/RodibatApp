@@ -1,0 +1,72 @@
+/*! theme.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+/* ML BOOTSTRAP OVERRIDES/THEME */
+
+/***********************************************************************************************************************
+* variables.less
+***********************************************************************************************************************/
+
+@screen-md: @ml-md-screen-width;
+@screen-lg: @ml-lg-screen-width; 
+@container-desktop: ((@ml-container-md + @grid-gutter-width));
+@container-large-desktop: ((@ml-container-lg + @grid-gutter-width));
+@grid-gutter-width: @ml-grid-gutter-width;
+
+/***********************************************************************************************************************
+* forms.less
+***********************************************************************************************************************/
+.form-control {
+    border: 0px;
+    border-radius: 0px;
+    background: none;
+    box-shadow: none;
+    color: @ml-modal-field-color;
+	font-size: @ml-font-size-base;
+    padding-left: 0px;
+    padding-right: 0px;
+    &:focus {
+        box-shadow: none;
+		border-color: none;
+    }
+}
+
+.form-control-select {
+    border: 0px;
+    border-radius: 0px;
+    background: #fff;
+    box-shadow: none;
+    color: @ml-base-gray-dark;
+	font-size: @ml-font-size-base;
+    padding: (@ml-spacer-default/3+3) (@ml-spacer-default - 3);
+	border-radius: (@ml-spacer-default/5);
+	cursor: pointer;
+    &:focus {
+        box-shadow: none;
+		border-color: none;
+    }
+}
+
+.placeholder {
+    &::-moz-placeholder {
+        color: @ml-modal-border-color;
+    }
+    &::-webkit-input-placeholder {
+        color: @ml-modal-border-color;
+    }
+}
+
+button.close, .close:hover, .close:focus {
+    opacity: 1;
+	outline: 0px;
+}
+
+/*** ML FONT AWESOME OVERRIDES/THEME  ***/
+
+@fa-font-path: "../fonts";
+
+/*** Buttons ***/
+.btn {
+    &:active, &.active {
+	    box-shadow: none;
+	}
+}

@@ -1,0 +1,51 @@
+<!-- ScanBarcode.html | (c) 2015 MarketLive, Inc. | All Rights Reserved -->
+
+<div>
+    <!-- Modal Display -->
+    <div data-ng-show="displayAsModal === 'true'">
+        <a href="javascript:;" class="ml-ppos-product-scan-button" data-ng-click="showScanDialog()"><span
+                class="ml-ppos-grey-icon ml-ppos-scan-barcode"></span><span translate="btn.ppos.scanProductBarcode"></span></a>
+
+        <div class="ml-ppos-modal-container ml-ppos-scan-barcode-wrapper">
+            <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close"><span aria-hidden="true"><span
+                                    class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+                            <!-- Title -->
+                            <h4 class="modal-title">{{modalTitle}}</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <ml-barcode-search-body></ml-barcode-search-body>
+                        </div>
+
+                        <!-- Footer Buttons -->
+                        <div class="modal-footer ml-ppos-button-customer-search">
+                            <div>
+                                <button class="ml-ppos-secondary-button"
+                                        data-ng-show="cancelBtnResource"
+                                        data-dismiss="modal"
+                                        translate="{{cancelBtnResource}}">
+                                </button>
+                                <button class="ml-ppos-primary-button"
+                                        data-ng-show="continueBtnResource"
+                                        data-ng-click="continue()"
+                                        data-ng-class="{disabled: !canContinue}"
+                                        translate="{{continueBtnResource}}">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inline Display -->
+    <div class="ml-ppos-scan-barcode-wrapper" data-ng-show="displayAsModal === 'false'">
+        <ml-barcode-search-body></ml-barcode-search-body>
+    </div>
+ </div>

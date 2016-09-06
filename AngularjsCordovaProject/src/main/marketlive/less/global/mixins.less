@@ -1,0 +1,285 @@
+/*! mixins.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+.ml-ppos-light-transparent-bg {
+    background: rgba(255, 255, 255, 0.3);
+}
+.ml-ppos-dark-transparent-bg {
+    background: rgba(255, 255, 255, 0.5);
+}
+.ml-ppos-darker-transparent-bg {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.ml-default-background {
+    background: -moz-linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -webkit-linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -moz-linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -ms-linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -o-linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: linear-gradient(-45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+}
+
+.ml-ppos-bg-gradient {
+    background: #00d2ff; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #274a8a 0%, #5b7dbb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, -45deg, color-stop(0%, #274a8a), color-stop(100%, #5b7dbb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #274a8a 0%, #5b7dbb 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(-45deg, #274a8a 0%, #5b7dbb 100%); /* W3C */
+    background: -ms-linear-gradient(-45deg, #274a8a 0%, #5b7dbb 100%); /* IE10+ */
+    background: linear-gradient(-45deg, #274a8a 0%, #5b7dbb 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#274a8a', endColorstr='#5b7dbb', GradientType=1); /* IE6-9 */
+}
+
+.ml-ppos-left-gradient {
+    background: -moz-linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -webkit-linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -moz-linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -ms-linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: -o-linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+    background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+}
+
+.ml-instore-background {
+    background: -moz-linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+    background: -webkit-linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+    background: -moz-linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+    background: -ms-linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+    background: -o-linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+    background: linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.2));
+}
+
+.ml-error-background {
+    background-color: rgba(255,255,255, .2);
+	-moz-box-shadow: inset 0 0 10px rgba(255,255,255,.30);
+	-webkit-box-shadow: inset 0 0 10px rgba(255,255,255,.30);
+	box-shadow: inset 0 0 10px rgba(255,255,255,.30);
+	border: 1px solid rgba(255,255,255,.4);
+}
+
+.ml-ppos-lighter-gradient {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.ml-ppos-button-base {
+    height: (@ml-spacer-default*3-5);
+    line-height: (@ml-spacer-default*3-5);
+    font-size: @ml-font-size-base;
+    border: 0;
+    cursor: pointer;
+	border-radius: 0px;
+}
+
+.ml-ppos-primary-button {
+    .ml-ppos-button-base();
+	background: @ml-primary-submit-bg-color;
+    border: 0px;
+    color: @ml-base-gray-dark;
+    padding: 0px @ml-padding-default;
+	border: 1px solid #fff;
+    &:hover {
+		color: @ml-base-gray-dark;
+    }
+    &.disabled {
+        opacity: .3;
+        pointer-events: none;
+    }
+}
+
+.ml-ppos-primary-button-understated {
+    .ml-ppos-button-base();
+    background: transparent;
+    border: 1px solid @ml-modal-border-color;
+    color: @ml-modal-font-color;
+    padding: 0px @ml-padding-default;
+    &:hover {
+        background: transparent;
+		color: @ml-modal-font-color;
+    }
+}
+
+.ml-ppos-secondary-button {
+    .ml-ppos-button-base();
+    background: transparent;
+    border: 1px solid @ml-modal-border-color;
+    color: @ml-modal-font-color;
+    padding: 0px @ml-padding-default;
+    &:hover {
+        background: transparent;
+		color: @ml-modal-font-color;
+		border: 1px solid @ml-modal-border-color;
+    }
+}
+
+.ml-ppos-secondary-button-understated {
+    .ml-ppos-button-base();
+    background: transparent;
+    color: @ml-modal-font-color;
+    padding: 0px @ml-padding-default;
+    text-decoration: underline;
+    margin-right: -@ml-padding-default;
+    &:hover, &:visited, &:active {
+        background: transparent;
+		color: @ml-modal-font-color;
+    }
+}
+
+.ml-ppos-nav-widget-button {
+    width: @ml-default-button-width;
+    height: @ml-default-button-height;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: @ml-dashboard-widget-link-color;
+    font-size: @ml-font-size-small;
+    &:hover, &:visited, &:active {
+		text-decoration: none;
+		color: @ml-dashboard-widget-link-color;
+    }
+}
+
+.ml-ppos-submit-button {
+    .ml-ppos-button-base();
+    background: @ml-primary-submit-bg-color;
+    border: 0px;
+    color: @ml-base-gray-darker;
+    height: (@ml-spacer-default*3);
+    line-height: (@ml-spacer-default*3);
+    padding: 0px @ml-padding-default;
+    font-size: @ml-primary-font-size-header;
+    text-decoration: none;
+    &:hover {
+        background: @ml-primary-submit-bg-color;
+		color: @ml-base-gray-dark;
+		border: 0px;
+    }
+}
+
+.ml-ppos-text-button {
+    .ml-ppos-button-base();
+    background: transparent;
+    border: 1px solid @ml-basket-border-color;
+    color: @ml-base-font-color;
+    height: (@ml-spacer-default*3);
+    line-height: (@ml-spacer-default*3);
+    padding: 0px @ml-padding-default;
+    font-size: @ml-primary-font-size-header;
+    text-decoration: none;
+    &:hover {
+        background: transparent;
+		color: @ml-base-font-color;
+    }
+}
+
+.ml-ppos-login-button {
+    .ml-ppos-button-base();
+    .ml-ppos-dark-transparent-bg();
+    border: 0px;
+    color: @ml-login-font-color;
+    padding: 0px @ml-padding-default;
+    &:hover {
+        .ml-ppos-dark-transparent-bg();
+		color: @ml-login-font-color;
+		border: 0px;
+    }
+}
+
+.ml-ppos-bold-font {
+    font-weight: bold;
+}
+
+.ml-ppos-textarea {
+	.ml-ppos-light-transparent-bg();
+	width: 100%;
+	border: 0px;
+	padding: @ml-padding-10;
+}
+
+.ml-flex-display() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.ml-flex-column() {
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    box-orient: vertical;
+}
+
+.ml-flex-row() {
+    -webkit-flex-flow: row;
+    -ms-flex-flow: row;
+    flex-flow: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    box-orient: horizontal;
+}
+
+.ml-flex-wrap() {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.ml-flex(@rest...) {
+    -webkit-box-flex: @rest;
+    -webkit-flex: @rest;
+    -ms-flex: @rest;
+    flex: @rest;
+}
+
+.ml-ppos-input-text {
+	border-top: 1px solid rgba(255,255,255, .5);
+	border-width: 1px 0px 0px 0px;
+	border-radius: 0px;
+	padding: 10px;
+	background: transparent;
+	width: 100%;
+	&:focus {
+		outline: 0px;
+	}
+}
+
+
+.ml-ppos-icon {
+	width: @ml-ppos-icon-width;
+	height: @ml-ppos-icon-height;
+	border: 0px;
+	display: block;
+	margin-bottom: @ml-padding-5;
+}
+.ml-ppos-mini-icon {
+	width: @ml-ppos-mini-icon-width;
+	height: @ml-ppos-mini-icon-height;
+	border: 0px;
+	display: inline-block;
+}
+.ml-ppos-mini-icon-head {
+	width: (@ml-ppos-mini-icon-width+6);
+	height: (@ml-ppos-mini-icon-height+6);
+	border: 0px;
+	display: inline-block;
+}
+
+.ml-instore-pickup-circle {
+	border-radius: 50%;
+    margin-right: 5px;
+    height: 8px;
+    width: 8px;
+    line-height: 8px;
+    float: left;
+    margin-top: 3px;
+}
+.ml-ppos-dark-bg {
+	background: rgba(0,0,0,.4);
+}

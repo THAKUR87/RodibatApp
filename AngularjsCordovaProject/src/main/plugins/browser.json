@@ -1,0 +1,30 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        },
+        "marketlive-plugin-socketmobile": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        },
+        "marketlive-plugin-starmicronics": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        },
+        "marketlive-unimag-plugin": {
+            "PACKAGE_NAME": "com.marketlive.MLPPOS"
+        }
+    },
+    "dependent_plugins": {}
+}

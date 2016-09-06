@@ -1,0 +1,211 @@
+/*! variables.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+/* Dimensions *********************************************************************************************************/
+@ml-grid-gutter-width: 30px;
+@ml-container-md: (@ml-md-screen-width - @ml-grid-gutter-width);
+@ml-container-lg: (@ml-lg-screen-width - @ml-grid-gutter-width);
+
+/* Family */
+@ml-font-family-base: Helvetica, Arial, sans-serif;
+
+/* Sizes */
+@ml-font-size-base: 16px; //H2,H3
+@ml-primary-font-size-header: 20px; //H1
+@ml-font-size-small: 13px; //H4,H5,P
+@ml-font-size-xsmall: 11px; //small text
+@ml-font-size-base-header: 22px;
+@ml-base-border-radius: 3px;
+
+@ml-font-size-big-button: 20px;
+@ml-placeholder-color: #ccc;
+@ml-default-body-scroll-height: 615px;
+
+/* Color */
+@ml-base-font-color: #ffffff;
+@ml-base-gray-dark: #363636;
+@ml-base-gray-darker: #000000;
+@ml-base-bg-color: #ffffff;
+@ml-base-modal-bar-color: #00b6a7;
+@ml-font-size-big-button-color: #000000;
+
+@ml-primary-button-bg-color: #ffffff;
+@ml-primary-submit-bg-color: #ffffff;
+
+/* Buttons */
+@ml-default-button-width: 102px;
+@ml-default-button-height: 90px;
+
+/* Padding */
+@ml-padding-default: 15px;
+@ml-padding-10: 10px;
+@ml-padding-5: 5px;
+@ml-top-border-default: 4px;
+@ml-spacer-default: 15px;
+
+/* Border */
+@ml-ppos-light-border: 1px solid rgba(255,255,255,0.2);
+@ml-ppos-dark-border: 1px solid rgba(255,255,255,0.5);
+@ml-ppos-darker-border: 1px solid rgba(255,255,255,0.7);
+
+/* Background Color */
+@ml-base-background: #182842;
+
+/* Item Separator */
+@ml-item-separator: 1px solid @ml-basket-border-color;
+
+/* Dashboard min-height */
+@ml-header-main-height: 60px;
+@ml-body-appointment-pickup-widget-height: 456px;
+@ml-body-search-widget-height: 152px;
+@ml-body-sales-notification-widget-height: 238px;
+@ml-body-default-height: 694px;
+
+@ml-dashboard-heading-font-color: #ffffff;
+@ml-dashboard-widget-link-color: #4d4d4d;
+
+/* Appointment Color/Font/Sizes/Backgrounds/Images */
+@ml-appointment-widget-bar-color: #00AEEF;
+
+/* Instore Pickup Color/Font/Sizes/Backgrounds/Images */
+@ml-instore-pickup-widget-bar-color: #DC3972;
+
+/* Product Search Color/Font/Sizes/Backgrounds/Images */
+@ml-product-search-widget-bar-color: #FFDA02;
+
+/* Product Detail Color/Font/Sizes/Backgrounds/Images */
+@ml-product-detail-bar-color: #FFDA02;
+@ml-product-detail-data-wrapper-width: 320px;
+@ml-product-detail-suggestions-height: 140px;
+@ml-product-detail-img-max-height: 520px;
+@ml-product-detail-img-min-height: @ml-product-detail-img-max-height;
+@ml-product-option-selected-border-color: #FFFFFF;
+@ml-product-option-img-width: 30px;
+@ml-product-option-img-height: @ml-product-option-img-width;
+@ml-product-option-text-max-width: 145px;
+@ml-product-item-scroll-height: 630px;
+
+/* Order Search Color/Font/Sizes/Backgrounds/Images */
+@ml-order-search-widget-bar-color: #65BD60;
+
+/* Customer Search Color/Font/Sizes/Backgrounds/Images */
+@ml-customer-search-widget-bar-color: #B482BA;
+
+/* My Sales Color/Font/Sizes/Backgrounds/Images */
+@ml-mysales-widget-bar-color: #F05662;
+
+/* Notifications Color/Font/Sizes/Backgrounds/Images */
+@ml-notification-widget-bar-color: #F7901E;
+
+/* Email Signup Color/Font/Sizes/Backgrounds/Images */
+@ml-email-singup-widget-bar-color: #F7901E;
+
+/* Shopping Bag Color/Font/Sizes/Backgrounds/Images */
+@ml-bag-widget-bar-color: #00ACA0;
+@ml-bag-content-link-color: #666666;
+
+/* Modal Window */
+@ml-modal-font-color: @ml-base-font-color;
+@ml-modal-field-color: @ml-base-font-color;
+@ml-modal-border-color: #8da5d1;
+@ml-modal-close-button-color: @ml-base-font-color;
+
+/* Login Window */
+@ml-login-font-color: @ml-base-font-color;
+
+/* Basket */
+@ml-basket-font-color: @ml-base-font-color;
+@ml-basket-border-color: #ffffff;
+@ml-basket-item-line-height: 20px;
+@ml-basket-item-scroll-height: 590px;
+
+/* Quantity Spinner */
+@ml-quantity-spinner-width: 30px;
+@ml-quantity-spinner-height: 30px;
+@ml-quantity-spinner-color: #ffffff;
+@ml-quantity-spinner-text-color: #363636;
+@ml-quantity-spinner-font-size: 16px;
+@ml-quantity-spinner-small-font-size: 13px;
+@ml-quantity-spinner-container-width: 100px;
+
+/* Icons */
+@ml-ppos-icon-width: 48px;
+@ml-ppos-icon-height: 48px;
+
+@ml-ppos-mini-icon-width: 24px;
+@ml-ppos-mini-icon-height: 24px;
+
+/* Search */
+@ml-search-font-color: @ml-base-font-color;
+@ml-search-item-scroll-height: 630px;
+
+/* Pagination/Grid/List View */
+@ml-grid-font-color: #ffffff;
+@ml-grid-border-color: #ffffff;
+@ml-grid-active-font-color: #363636;
+@ml-grid-active-background-color: #ffffff;
+
+@ml-paging-font-color: #ffffff;
+@ml-paging-active-font-color: #363636;
+@ml-paging-inactive-font-color: #999999;
+@ml-paging-active-background-color: #ffffff;
+
+/* Sorting */
+@ml-sorting-font-color: #ffffff;
+
+/* Button Color .ml-ppos-dark-transparent-bg */
+@ml-dark-button-color: #ffffff;
+
+/* Nearby Stores */
+@ml-stores-popup-width: 960px;
+@ml-stores-border-color: #ffffff;
+@ml-stores-product-wrapper-width: 250px;
+@ml-stores-input-width: 150px;
+@ml-stores-detail-content-height: 420px;
+
+/* Account */
+@ml-account-title-font-size: 20px;
+@ml-account-border-color: #ffffff;
+
+@ml-account-toggle-border-color: #ffffff;
+@ml-account-toggle-bg-color: transparent;
+@ml-account-toggle-font-color: #ffffff;
+@ml-account-toggle-bg-color-active: #ffffff;
+@ml-account-toggle-font-color-active: #363636;
+
+/* Account Drop Down */
+@ml-ppos-account-drop-down-width: 300px;
+
+@ml-ppos-csr-permission-head-background: #f4f4f4;
+@ml-ppos-csr-permission-border-color: #f4f4f4;
+@ml-ppos-csr-permission-width: 280px;
+
+/* Form */
+@ml-form-input-delimiter: 1px solid rgba(255,255,255,0.5);
+@ml-form-field-error-message-color: #520000;
+
+/* InStore */
+@ml-instore-pickup-sort-width: 248px;
+@ml-instore-pickup-sort-background-color: #FFFFFF;
+@ml-instore-pickup-scroll-height: 630px;
+@ml-instore-pickup-circle-color-new: #dc3972;
+@ml-instore-pickup-circle-color-ready: #00AEEF;
+@ml-instore-pickup-circle-color-process: #FFDA02;
+@ml-instore-pickup-circle-color-done: #F99DC4;
+@ml-instore-pickup-item-row-max-height: 480px;
+@ml-instore-pickup-sort-max-height: 540px;
+
+/* Dashboard Saved Cart */
+@ml-dashboard-saved-bag-widget-row-max-height: 490px;
+
+/* New Shipping Address */
+@ml-basket-new-shipping-modal-width: 700px;
+@ml-basket-new-shipping-selected-option-bg: #FFFFFF;
+
+/* Instore Custom Modal window */
+@ml-instore-customer-modal-window-width: 450px;
+
+/* Unlock Screen */
+@ml-unlock-font-color: #FFFFFF;
+@ml-unlock-key-size: 90px;
+@ml-unlock-key-font-size: 40px;
+@ml-unlock-font-size: 16px;

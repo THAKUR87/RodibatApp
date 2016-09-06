@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+	<definition name=".layout" template="/WEB-INF/views/layout/Main03.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/Header.jsp" />
+		<put-attribute name="categoryNav" value=".tile.common.categoryNav" />
+		<put-attribute name="body" value="/WEB-INF/views/Default.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/Footer.jsp" />
+	</definition>
+	
+	<definition name=".tile.common.categoryNav" template="/WEB-INF/views/common/CategoryNav.jsp" preparer="categoryNavViewPreparer" />
+	
+	<definition name=".tile.home" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/Home.jsp" />
+    </definition>
+    
+    <definition name=".tile.p2p.detail.productDetail" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/p2p/detail/ProductDetail.jsp" />
+    </definition>
+    
+    <definition name=".tile.checkout.billing" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/checkout/Billing.jsp" />
+    </definition>
+    
+    <definition name=".tile.checkout.shippingMethod" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/checkout/ShippingMethod.jsp" />
+    </definition>
+    
+    <definition name=".tile.checkout.payment" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/checkout/Payment.jsp" />
+    </definition>
+    
+    <definition name=".tile.checkout.review" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/checkout/Review.jsp" />
+    </definition>
+    
+    <definition name=".tile.checkout.thankYou" extends=".layout">
+        <put-attribute name="body" value="/WEB-INF/views/checkout/ThankYou.jsp" />
+    </definition>
+</tiles-definitions>

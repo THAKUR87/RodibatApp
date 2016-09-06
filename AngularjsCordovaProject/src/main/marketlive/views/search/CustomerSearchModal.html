@@ -1,0 +1,59 @@
+<div class="ml-ppos-modal-container ml-ppos-customer-search-wrapper">
+	<div class="modal" id="customerSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-ng-click="close()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title" translate>hdr.ppos.newOrder</h4>
+				</div>
+	  
+				<div data-ng-show="customerSearchDataModel.customerSearchResult == null">
+					<form name="customerSearchForm" novalidate data-ng-submit="searchCustomer()">
+						<div class="modal-body">
+							<div data-ng-show="showPhoneNumberRequiredMessage" class="ml-ppos-error-container">
+								<div class="ml-icon-error"></div>
+								<div class="ml-ppos-error-message">
+									<div translate>msg.ppos.phoneNumberRequired</div>
+								</div>
+							</div>
+							<div data-ng-show="showInValidPhoneNumberMessage" class="ml-ppos-error-container">
+								<div class="ml-icon-error"></div>
+								<div class="ml-ppos-error-message">
+									<div translate>msg.ppos.invalidPhoneNumberEntered</div>
+								</div>
+							</div>
+							<div class="ml-ppos-customer-search-head" translate>lbl.ppos.customerPhoneNumber</div>
+							<div class="ml-ppos-customer-search-label-content">
+								<input type="tel" name="customerPhoneNumber" id="customerPhoneNumber" class="form-control" placeholder="{{ 'msg.ppos.phoneNumberSearchPlaceholder' | translate }}" data-ng-model="customerSearchDataModel.customerPhoneNumber" show-focus="customerSearchDataModel.customerSearchResult == null"/>
+							</div>
+						</div>
+						<div class="modal-footer ml-ppos-button-customer-search">
+							<div><button type="submit" name="customerSearchButton" id="customerSearchButton" class="ml-ppos-primary-button" translate>btn.ppos.searchCustomerButon</button></div>
+							<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancel()" data-dismiss="modal" translate="btn.ppos.cancel"></button></div>
+							<div class="ml-ppos-button-customer-skip-button"><a href="javascript:;" data-ng-click="skipCustomerSearchAndStartNewOrder(null)" class="ml-ppos-secondary-button-understated" translate>btn.ppos.skip</a></div>
+						</div>
+					</form>
+				</div>
+
+				<div data-ng-show="customerSearchDataModel.customerSearchResult != null">
+					<div class="modal-body">
+						<div class="ml-ppos-customer-search-result-message" translate="msg.ppos.customerSearchResult" translate-values="{ customerCount : customerSearchDataModel.customerSearchResult.data.length, customerPhoneNumber : customerSearchDataModel.customerPhoneNumber }"></div>
+						<div data-ng-repeat="customer in customerSearchDataModel.customerSearchResult.data" class="ml-ppos-customer-search-result-row">
+							<a href="" data-ng-click="startNewOrder(customer.id)">{{ customer.primaryContact.person.firstName }} {{ customer.primaryContact.person.lastName }} <span class="ml-ppos-customer-search-zip-code">{{ customer.primaryContact.address.postalCode }}</span> <span class="ml-ppos-mini-white-icon ml-ppos-arrow-right"></span></a>
+						</div>
+					</div>
+					<div class="modal-footer ml-ppos-button-customer-search-result">
+						<div><button type="button" class="ml-ppos-secondary-button-understated" data-ng-click="skipCustomerSearchAndStartNewOrder(null)" translate>btn.ppos.skip</button></div>
+						<div class="ml-ppos-button-customer-search-place-order">
+							<span class="ml-ppos-btn-inner">
+								<span class="ml-ppos-btn-text" translate>btn.ppos.searchAgain</span>
+								<span class="ml-ppos-btn ml-ppos-mini-white-icon ml-ppos-arrow-left"></span>
+							</span>
+							<button type="button" class="ml-ppos-btn-hidden" data-ng-click="searchAgain()" translate>btn.ppos.searchAgai</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

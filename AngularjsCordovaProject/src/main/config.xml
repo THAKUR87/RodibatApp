@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.marketlive.MLPPOS" version="0.0.20" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MarketLive PPOS</name>
+    <description>
+        MarketLive 'Point of Sale' application.
+    </description>
+    <author email="kasingh@marketlive.com" href="http://www.marketlive.com">
+        MarketLive 'Point of Sale' Application Developer
+    </author>
+
+    <!-- Icon Images -->
+    <platform name="ios">
+        <icon src="/www/images/icon-72.png" width="72" height="72"/>
+        <icon src="/www/images/icon-72@2x.png" width="144" height="144"/>
+        <icon src="/www/images/icon-76.png" width="76" height="76"/>
+        <icon src="/www/images/icon-76@2x.png" width="152" height="152"/>
+        <icon src="/www/images/icon-57.png" width="57" height="57"/>
+        <icon src="/www/images/icon-small-40.png" width="40" height="40"/>
+        <icon src="/www/images/icon-small-40@2x.png" width="80" height="80"/>
+        <icon src="/www/images/icon-small-50.png" width="50" height="50"/>
+        <icon src="/www/images/icon-small-50@2x.png" width="100" height="100"/>
+        <icon src="/www/images/icon-small.png" width="29" height="29"/>
+        <icon src="/www/images/icon-small@2x.png" width="58" height="58"/>
+        <icon src="/www/images/icon-120.png" width="120" height="120"/>
+    </platform>
+
+     <!--Splash Screen Images -->
+    <platform name="ios">
+        <splash src="www/images/Default~iphone.png" width="320" height="480"/>
+        <splash src="www/images/Default-Portrait~ipad.png" width="768" height="1024"/>
+        <splash src="www/images/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
+        <splash src="www/images/Default-Landscape~ipad.png" width="1024" height="768"/>
+        <splash src="www/images/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
+        <splash src="www/images/Default-568h@2x~iphone.png" width="640" height="1136"/>
+        <splash src="www/images/Default@2x~iphone.png" width="640" height="960"/>
+    </platform>
+
+
+    <content src="index.html" />
+    <plugin name="cordova-plugin-file-transfer" version="1.2.1"/>
+    <access origin="*" />
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="Fullscreen" value="true" />
+    <preference name="Orientation" value="landscape" />
+</widget>

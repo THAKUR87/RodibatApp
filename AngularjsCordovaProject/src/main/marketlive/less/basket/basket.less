@@ -1,0 +1,851 @@
+/*! basket.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+.ml-ppos-basket-wrapper {
+	color: @ml-basket-font-color;
+    height: @ml-body-default-height;
+	border-top: @ml-top-border-default solid @ml-bag-widget-bar-color;
+
+	.ml-ppos-basket-container {
+		.ml-flex-display();
+		.ml-flex-row();
+        width: 100%;
+        height: 100%;
+
+		.ml-ppos-basket-detail-container {
+			.ml-flex(1);
+			.ml-default-background();
+			padding: @ml-padding-default;
+
+			.ml-ppos-scroll-container {
+				height: @ml-basket-item-scroll-height;
+				margin-right: 0px;
+				padding-right: @ml-padding-5;
+			}
+
+			.ml-ppos-basket-order-number {
+				padding: @ml-padding-10 0px (@ml-spacer-default/3*5) 0px;
+			}
+
+			.ml-ppos-basket-head-item-row {
+				.ml-flex-display();
+				border-bottom: 1px solid @ml-basket-border-color;
+				padding-bottom: (@ml-spacer-default/3);
+			
+				.ml-ppos-basket-head-info {
+					-webkit-flex: 1 54%;
+					flex: 1 54%;
+				}
+				.ml-ppos-basket-head-price, .ml-ppos-basket-head-total {
+					-webkit-flex: 1 12%;
+					flex: 1 12%;
+				}
+				.ml-ppos-basket-head-quantity {
+					-webkit-flex: 1 15%;
+					flex: 1 15%;
+				}
+				.ml-ppos-basket-head-close-button {
+					-webkit-flex: 1 3%;
+					flex: 1 3%;
+				}
+				.ml-ppos-basket-head-adjustment, .ml-ppos-basket-head-quantity, .ml-ppos-basket-head-total {
+					text-align: center;
+				}
+			}
+
+			.ml-ppos-basket-items-row-container {
+				border-bottom: 1px solid @ml-basket-border-color;
+				padding: @ml-padding-default 0px;
+				
+				.ml-ppos-basket-items-row {
+					.ml-flex-display();
+					align-items: center;
+
+					.ml-ppos-basket-item-info {
+						-webkit-flex: 1 54%;
+						flex: 1 54%;
+						display: flex;
+
+						.ml-ppos-basket-item-thumb {
+							float: left;
+							width: 120px;
+							padding-right: @ml-padding-10;
+							img {
+								max-width: 100%;
+							}
+						}
+						.ml-ppos-basket-item-thumb-detail {
+							flex: 2;
+							padding: 0px @ml-padding-5;
+							overflow: hidden;
+						}
+					}
+					.ml-ppos-basket-item-price, .ml-ppos-basket-item-total {
+						-webkit-flex: 1 12%;
+						flex: 1 12%;
+					}
+					.ml-ppos-basket-item-quantity {
+						-webkit-flex: 1 15%;
+						flex: 1 15%;
+
+						.ml-ppos-quantity-spinner-wrapper {
+							margin: 0 auto;
+						}
+					}
+					.ml-ppos-basket-item-close-button {
+						-webkit-flex: 1 3%;
+						flex: 1 3%;
+					}
+					.ml-ppos-basket-item-adjustment, .ml-ppos-basket-item-quantity, .ml-ppos-basket-item-total {
+						text-align: center;
+					}
+				}
+				.ml-ppos-basket-item-discount {
+					padding-top: @ml-padding-default;
+				}
+				.ml-ppos-basket-shipment-container {
+					.ml-flex-display();
+					.ml-flex-row();
+					font-size: @ml-font-size-small;
+					padding-top: @ml-padding-10;
+					padding-right: @ml-padding-default;
+
+					.ml-ppos-basket-shipment-options {
+						label {
+							display: block;
+							position: relative;
+							span {
+								position: relative;
+								display: block;
+								padding-left: (@ml-spacer-default*2+2);
+								margin-top: -26px;
+								width: 250px;
+								cursor: pointer;
+								line-height: (@ml-spacer-default*2-4);
+								text-align: left;
+							}
+							.ml-ppos-basket-shipment-pickup-store-info {
+								padding-left: 0px;
+							}
+						}
+						input[type="radio"] {
+							position: absolute;
+							left: -99999px;
+						}
+						.ml-ppos-shipment-toggle {
+							background: url("@{ml-image-prefix}ppos-sprite-white-icons.png") no-repeat;
+							width: (@ml-spacer-default*2-6);
+							height: (@ml-spacer-default*2-6);
+							display: inline-block;
+							cursor: pointer;
+						}
+						input[type="radio"]+div>i {
+							.ml-ppos-shipment-toggle();
+							background-position: -450px -200px;
+						}
+						input[type="radio"]:checked+div>i {
+							.ml-ppos-shipment-toggle();
+							background-position: -350px -150px;
+						} 
+					}
+				}
+			}
+		
+		}
+
+		.ml-ppos-basket-nav-container {
+			.ml-flex(1);
+			max-width: 250px;
+			.ml-ppos-lighter-gradient();
+			padding: @ml-padding-default;
+			color: @ml-basket-font-color;
+
+			.ml-ppos-basket-header-customer {
+				font-size: @ml-primary-font-size-header;
+				font-weight: bold;
+				margin-top: @ml-padding-5;
+				margin-bottom: @ml-padding-default;
+				.ml-ppos-default-header-wrapper();
+			}
+		.ml-ppos-basket-sub-head {
+			font-size: @ml-font-size-base;
+			padding-bottom: (@ml-spacer-default/3);
+			flex: 1 100%;
+		}
+		.ml-ppos-basket-product-search-row, .ml-ppos-basket-product-coupon-row {
+			.ml-flex-display();
+			.ml-flex-row();
+			justify-content: space-between;
+			-webkit-justify-content: space-between;
+			padding-bottom: (@ml-spacer-default/3*2);
+
+			.ml-ppos-basket-product-search {
+				.ml-ppos-basket-product-search-button {
+					.ml-ppos-nav-widget-button;
+					padding-top: @ml-padding-10;
+					background: @ml-primary-button-bg-color;
+				}
+			}
+			.ml-ppos-basket-product-scan {
+				.ml-ppos-basket-product-scan-button {
+					.ml-ppos-nav-widget-button;
+					padding-top: @ml-padding-10;
+					background: @ml-primary-button-bg-color;
+				}
+			}
+			.ml-ppos-basket-product-typein {
+				width: 100%;
+				.ml-ppos-basket-product-typein-button {
+					.ml-ppos-nav-widget-button;
+					background: @ml-primary-button-bg-color;
+					width: 100%;
+					height: 50px;
+					span {
+						float: left;
+						width: 53%;
+						line-height: 50px;
+						text-align: right;
+						padding-right: 15px;
+					}
+					span+span {
+						float: left;
+						width: 48px;
+					}
+				}
+			}
+		}
+
+		.ml-ppos-basket-coupon-message {
+			padding-top: @ml-padding-default;
+			clear: both;
+			min-height: (@ml-spacer-default*3-5);
+			.ml-ppos-basket-coupon-amount {
+				margin-left: @ml-padding-default;
+				float: none;
+			}
+		}
+		
+		.ml-ppos-basket-summary-row {
+			.ml-ppos-basket-sub-head {
+				border-bottom: 1px solid @ml-basket-border-color;
+				margin-bottom: @ml-padding-5;
+			}
+			.ml-ppos-scroll-container {
+				padding-right: @ml-padding-5;
+				height: (@ml-spacer-default*10);
+			}
+			.ml-ppos-basket-summary-content {
+				.ml-flex-display();
+				padding: (@ml-spacer-default/3) 0px;
+				font-size: @ml-font-size-xsmall;
+				.ml-ppos-basket-summary-label {
+					text-align: left;
+					width: 70%;
+					padding-right: @ml-padding-5;
+				}
+				.ml-ppos-basket-summary-value {
+					text-align: right;
+					width: 30%;
+				}
+			}
+			.ml-ppos-basket-summary-total-content {
+				.ml-flex-display();
+
+				padding: @ml-padding-default 0px;
+				margin: @ml-padding-5 0px;
+				border-top: 1px solid @ml-basket-border-color;
+				border-bottom: 1px solid @ml-basket-border-color;
+					.ml-ppos-basket-summary-label {
+						text-align: left;
+						font-size: @ml-primary-font-size-header;
+						width: 50%;
+						padding-right: @ml-padding-10;
+					}
+					.ml-ppos-basket-summary-value {
+						text-align: right;
+						font-size: @ml-primary-font-size-header;
+						width: 50%;
+					}
+				}
+			}
+		}
+		.ml-ppos-basket-button-row {
+			.ml-ppos-basket-button-place-order {
+				position: relative;
+				margin: @ml-padding-default 0px @ml-padding-10 0px;
+				.ml-ppos-btn-inner {
+					width: 100%;
+					text-align: left;
+					background: @ml-primary-submit-bg-color;
+					color: @ml-font-size-big-button-color;
+					font-size: @ml-font-size-big-button;
+					padding: .65em 1em;
+				}
+			}
+			.ml-ppos-basket-button-adjustment {
+				a {
+					.ml-ppos-text-button();
+					text-align: center;
+					display: block;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			.ml-ppos-basket-button-save-bag {
+				a {
+					.ml-ppos-text-button();
+					text-align: left;
+					display: block;
+					position: relative;
+					&:hover {
+						text-decoration: none;
+					}
+					span {
+						margin-left: (@ml-spacer-default*4);
+						margin-right: (@ml-spacer-default/3*2);
+					}
+					i {
+						position: absolute;
+						top: 8px;
+					}
+				}
+			}
+		}
+		.ml-ppos-basket-button-update {
+			a {
+				.ml-ppos-text-button();
+				text-align: center;
+				display: inline-block;
+				font-size: @ml-font-size-base;
+				line-height: (@ml-spacer-default*2);
+				height: (@ml-spacer-default*2);
+				margin-top: @ml-padding-default;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+    .ml-ppos-modal-container {
+        label {
+            margin-bottom: 0px;
+            font-weight: normal;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .ml-ppos-payment-method {
+            width: 50%;
+            float: left;
+            padding-right: 10px;
+        }
+        .ml-ppos-payment-summary {
+            width: 50%;
+            float: left;
+            text-align: right;
+        }
+        #paymentModal {
+            .modal-title {
+                border-bottom: @ml-item-separator;
+                padding-bottom: 10px;
+            }
+            .modal-footer div {
+                padding-right: 10px;
+            }
+        }
+        .ml-ppos-payment-method-item {
+            width: 110px;
+            height: 45px;
+            line-height: 25px;
+            float: left;
+            cursor: pointer;
+            background-color: #fff;
+            color: #666;
+            text-align: center;
+            padding: 10px;
+            margin: 5px 10px 5px 0px;
+            text-transform: capitalize;
+        }
+        .ml-ppos-payment-method-item div {
+            width: 100%;
+        }
+        .ml-ppos-payment-method-label {
+            padding: 5px 10px 10px 0px;
+        }
+        .modal-footer {
+            clear: both;
+        }
+        .modal-footer div {
+            float: right;
+        }
+		.disabled {
+			opacity: .3;
+			pointer-events: none;
+		}
+        .ml-ppos-payment-selection,
+        .ml-ppos-payment-method-credit,
+        .ml-ppos-payment-method-credit-enter,
+        .ml-ppos-payment-method-credit-scan,
+        .ml-ppos-payment-method-cash,
+        .ml-ppos-payment-method-gift-certificate {
+            display: none;
+        }
+        .ml-ppos-payment-selection.active,
+        .ml-ppos-payment-method-credit.active,
+        .ml-ppos-payment-method-credit-enter.active,
+        .ml-ppos-payment-method-credit-scan.active,
+        .ml-ppos-payment-method-cash.active,
+        .ml-ppos-payment-method-gift-certificate.active {
+            display: block;
+        }
+        .ml-ppos-payment-method-credit-enter {
+            width: 85%;
+        }
+        .ml-ppos-payment-method-credit-scan {
+            .ml-ppos-payment-method-credit-scan-content {
+                text-align: center;
+                height: 150px;
+            }
+            .ml-ppos-error-container {
+                margin-top: 0px;
+                .ml-ppos-error-message {
+                    text-align: left;
+                }
+            }
+            .ml-ppos-payment-method-credit-scan-icons {
+                display: inline-block;
+                position: relative
+            }
+
+            .ml-icon-circle-o-notch {
+                font-size: 40px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                margin-top: 40px;
+                margin-left: 40px;
+            }
+
+            .ml-icon-long-arrow-down {
+                font-size: 100px;
+                position: absolute;
+                top: 0px;
+                left: -33px;
+
+                &.error {
+                    color:#8B0000;
+                }
+            }
+
+            .ml-icon-credit-card {
+                font-size: 120px;
+                &.disabled {
+                    opacity: 0.25;
+                }
+                &.ml-ppos-credit-card-icon {
+                    font-size:100px;
+                    display: inline-block;
+                    -webkit-transform: rotate(270deg);
+                    -ms-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                }
+            }
+        }
+        .ml-ppos-payment-method-credit {
+            text-align: center;
+            text-decoration: none;
+        }
+        .ml-ppos-payment-method-credit a:hover {
+            text-decoration: none;
+        }
+        .ml-ppos-payment-method-credit div {
+            padding: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            margin: 0px 0px 20px 0px;
+            text-decoration: none;
+        }
+        .ml-ppos-scan-button, .ml-ppos-typein-button {
+            text-decoration: none;
+            color: #4d4d4d;
+        }
+        .ml-ppos-scroll-container {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            height: 175px;
+            overflow: auto;
+        }
+        .ml-ppos-payment-summary-footer .ml-ppos-summary-content {
+            border-bottom: 0px;
+        }
+        .ml-ppos-summary-content {
+            .ml-flex-display();
+            padding: 8px 0;
+            border-top: @ml-item-separator;
+            border-bottom: @ml-item-separator;
+            align-items: center;
+            -webkit-align-items: center;
+            &.ml-ppos-summary-payments {
+                border: 0px;
+            }
+            &.ml-ppos-summary-remaining-balance.active {
+                .ml-flex-display();
+            }
+            &.ml-ppos-summary-total-paid.active{
+                .ml-flex-display();
+                border-top: @ml-item-separator;
+                border-bottom: 0px;
+            }
+            &.ml-ppos-summary-change-amount.active {
+                .ml-flex-display();
+                border-top: 0px;
+                border-bottom: 0px;
+            }
+            &.ml-ppos-summary-remaining-balance, &.ml-ppos-summary-total-paid, &.ml-ppos-summary-change-amount {
+                display:none;
+            }
+        }
+        .ml-ppos-summary-label {
+            .ml-flex(2);
+            text-align: left;
+            padding-right: 10px;
+        }
+        .ml-ppos-summary-value {
+            .ml-flex(1);
+            text-align: right;
+        }
+        .ml-ppos-credit-card-footer {
+            padding-top: 10px;
+        }
+        .ml-ppos-credit-card-footer div {
+            float: right;
+            padding-left: 10px;
+        }
+        .ml-ppos-summary-payments .ml-ppos-summary-label {
+            text-transform: capitalize;
+        }
+        .ml-ppos-summary-payments {
+            .ml-flex(1 12%);
+        }
+        .ml-ppos-basket-item-close-button {
+            .ml-flex(1 3%);
+
+            .ml-ppos-close {
+                cursor: pointer;
+            }
+        }
+        .ml-ppos-payment-form-content div {
+            float: left;
+        }
+        .ml-ppos-payment-card-number .form-control,
+        .ml-ppos-payment-card-cvv .form-control,
+        .ml-ppos-payment-card-zip .form-control {
+            padding: 5px;
+        }
+        .ml-ppos-payment-card-month {
+            width: 75%;
+            padding-right: 10px;
+        }
+        .ml-ppos-payment-card-year {
+            width: 25%;
+        }
+        .ml-ppos-payment-form-content select.form-control {
+            color: #fff;
+            width: auto;
+        }
+        .ml-ppos-payment-form-field-delimiter {
+            border-top: @ml-form-input-delimiter;
+            padding-top: 5px;
+        }
+        .ml-ppos-payment-form-content legend {
+            color: #fff;
+            border: 0px;
+            font-size: 13px;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+        .ml-ppos-payment-error {
+            color: @ml-form-field-error-message-color;
+            margin-bottom: 5px;
+        }
+        .ml-ppos-payment-no-selection{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .ml-ppos-payment-method-cash{
+            .ml-ppos-payment-no-selection;
+            @ml-ppos-cash-key-size:80px;
+            .ml-ppos-cash-key {
+                text-align: center;
+                border-radius:@ml-ppos-cash-key-size/2;
+                border: 1px solid #FFF;
+                cursor: pointer;
+                width:@ml-ppos-cash-key-size;
+                height:@ml-ppos-cash-key-size;
+                line-height:@ml-ppos-cash-key-size;
+                font-size: 30px;
+            }
+            .ml-ppos-cash-key-wrapper{
+                float:left;
+                padding-bottom:10px;
+                padding-right:10px;
+            }
+            .ml-ppos-payment-cash-entry{
+                text-align:center;
+                font-weight: bold;
+                font-size: @ml-font-size-base-header;
+                padding-bottom:10px;
+                line-height: 30px;
+            }
+            .ml-ppos-cash-key-pad{
+                margin-left: 5px;
+            }
+            .ml-ppos-cash-key-delete{
+                font-size: 15px;
+            }
+        }
+        .ml-ppos-payment-display.active{
+            display:block;
+        }
+        .ml-ppos-payment-display{
+            display:none;
+        }
+        .ml-ppos-payment-change-due{
+          padding-bottom:5px;
+		  border-bottom: 1px solid #FFFFFF;
+		  margin-bottom:10px;
+        }
+        .ml-ppos-signature-content{
+            width:600px;
+            height:397px;
+            .ml-ppos-payment-no-selection;
+            .ml-ppos-payment-modal-total{
+                float:right;
+                padding-right: 10px;
+            }
+            .ml-ppos-signature-wrapper canvas{
+                border-bottom: 1px solid #FFF;
+            }
+            .modal-footer .ml-ppos-signature-clear-button{
+                float:left;
+                button{
+                    width:72px;
+                }
+            }
+            .ml-ppos-signature-agreement{
+                font-size: @ml-font-size-xsmall;
+            }
+            .ml-ppos-signature{
+                cursor: default;
+            }
+        }
+    }
+}
+
+/*** New Shipping Address ***/
+.ml-ppos-basket-new-shipping-wrapper {
+	.modal-dialog {
+		width: @ml-basket-new-shipping-modal-width;
+		.modal-title {
+			margin-left: (@ml-spacer-default*2+5);
+		}
+		.ml-ppos-button-product-search {
+			margin-right: (@ml-spacer-default*2+5);
+		}
+		.modal-footer {
+			padding-top: 0px;
+		}
+	}
+	.modal-body {
+		margin: 0px (@ml-spacer-default*3+5) !important;
+	}
+	.ml-ppos-basket-new-shipping-container {
+		.ml-flex-display();
+		.ml-flex-row();
+
+		.ml-ppos-basket-new-shipment-address-container {
+			.ml-flex(1);
+			margin-right: (@ml-spacer-default/3*5);
+
+			.ml-ppos-basket-new-address-row {
+				.ml-flex-display();
+				.ml-flex-column();
+				padding: (@ml-spacer-default/3*2) 0px 0px 0px;
+				border-top: @ml-form-input-delimiter;
+
+				label {
+					font-size: @ml-font-size-small;
+				}
+				div {
+					font-size: @ml-font-size-base;
+					select option {
+						background: @ml-basket-new-shipping-selected-option-bg;
+						color: @ml-base-gray-dark;
+					}
+				}
+			}
+		}
+		.ml-ppos-basket-new-shipment-container {
+			.ml-flex(1);
+			margin-left: (@ml-spacer-default/3*5);
+
+			.ml-ppos-toggle {
+				label {
+					margin-bottom: @ml-padding-default;
+					width: 100% !important;
+				}
+				.ml-ppos-toggle-button {
+					line-height: inherit;
+					height: inherit;
+					padding: (@ml-spacer-default+5);
+					text-align: left;
+					border-radius: 0px;
+					.ml-ppos-light-transparent-bg();
+					border: @ml-ppos-light-border; 
+					div {
+						font-size: @ml-font-size-big-button;
+						padding-bottom: (@ml-spacer-default+5);
+						position: relative;
+						.ml-ppos-basket-new-shipment-name {
+							position: absolute;
+							top: (@ml-spacer-default/5+1);
+							left: (@ml-spacer-default*3-5);
+						}
+					}
+				}
+				.active {
+					background: @ml-basket-new-shipping-selected-option-bg;
+				}
+			}
+		}
+	}
+}
+
+
+#receiptModal .ml-icon-unchecked {
+  display: inline-block;
+  font-size:25px;
+  width: 30px;
+  height: 30px;
+  margin-bottom: -10px;
+  margin-top: -10px;
+  margin-right:-5px;
+}
+
+.ml-ppos-radio-selected {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-bottom: -10px;
+  margin-top: -10px;
+  margin-right:-5px;
+  background-position: -450px -150px;
+}
+
+/*** Customer Profile ***/
+.ml-ppos-customer-profile-wrapper {
+	font-weight: normal;
+	font-size: @ml-font-size-base;
+	.ml-ppos-customer-profile-form-container {
+		padding: @ml-padding-default;
+		.ml-ppos-customer-profile-row {
+			.ml-flex-display();
+
+			label {
+				.ml-flex(1);
+				margin: 0px;
+				line-height: (@ml-spacer-default*3+1);
+				max-width: 180px;
+				text-align: right;
+				padding-right: @ml-padding-default+5;
+			}
+			.ml-ppos-account-form-field {
+				.ml-flex(1);
+				.form-control {
+					border-top: 1px solid rgba(255,255,255,0.5);
+					height: (@ml-spacer-default*3+1);
+				}
+				select option {
+					background: @ml-basket-new-shipping-selected-option-bg;
+					color: @ml-base-gray-dark;
+				}
+			}
+			.ml-ppos-account-form-last-item {
+				.form-control {
+					border-bottom: 1px solid rgba(255,255,255,0.5);
+				}
+			}
+		}
+	}
+	.ml-ppos-customer-profile-button-container {
+		padding-top: @ml-padding-default;
+		.clearfix();
+		div {
+			float: right;
+			position: relative;
+		}
+		div:first-child {
+			padding-left: @ml-padding-10;
+		}
+	}
+	.ml-ppos-customer-profile-details {
+		.ml-ppos-customer-profile-details-message {
+			padding-bottom: @ml-padding-default;
+		}
+		.ml-ppos-customer-profile-details-row {
+			border-top: 1px solid rgba(255,255,255,0.5);
+			position: relative;
+			span {
+				margin-left: (@ml-spacer-default*3);
+			}
+			i {
+				position: absolute;
+				top: @ml-padding-10;
+				right: 0px;
+			}
+			a {
+				line-height: (@ml-spacer-default*3+1);
+				display: block;
+			}
+		}
+	}
+	.ml-ppos-customer-result-byemail {
+		.ml-ppos-customer-profile-details-row {
+			padding-top: @ml-padding-default;
+		}
+		.ml-ppos-customer-profile-button-container {
+			border-top: 1px solid rgba(255,255,255,0.5);
+			margin-top: @ml-padding-default;
+			padding: @ml-padding-default 0px @ml-padding-5 0px;
+			span {
+				margin-left: 0px;
+			}
+		}
+		.ml-ppos-customer-result-byemail-info {
+			.ml-flex-display();
+			.ml-flex-row();
+			div {
+				.ml-flex(1.5);
+				padding-right: @ml-padding-default;
+			}
+			div+div {
+				.ml-flex(.5);
+				padding-right: @ml-padding-10;
+			}
+			div+div+div {
+				.ml-flex(2);
+				padding-right: 0px;
+			}
+		}
+	}
+}

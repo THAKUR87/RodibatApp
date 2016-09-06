@@ -1,0 +1,75 @@
+<!-- PaymentCreditCardManual.html | (c) 2015 MarketLive, Inc. | All Rights Reserved -->
+
+<div>
+    <form name="paymentManualCreditCard" ng-submit="submitForm()" novalidate>
+        <!-- Credit Card Number -->
+        <div class="ml-ppos-payment-card-number ml-ppos-payment-form-field-delimiter">
+            <label for="creditCardNumber"><span>*</span> <span translate="lbl.ppos.creditCardNumber"></span></label>
+            <input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber"
+                   data-ng-model="mlPaymentModel.creditCard.number" size="16" maxlength="16" required>
+            <input type="hidden" id="creditCardType" name="creditCardType" ng-model="mlPaymentModel.creditCard.type"
+                   required>
+            <!-- Validation Messages -->
+            <div class="ml-ppos-payment-error"
+                 ng-show="paymentManualCreditCard.creditCardNumber.$error.required && formSubmitted"
+                 translate="msg.ppos.fieldRequiredError"></div>
+            <div class="ml-ppos-payment-error"
+                 ng-show="paymentManualCreditCard.creditCardNumber.$valid && paymentManualCreditCard.creditCardType.$error.required && formSubmitted"
+                 translate="msg.ppos.creditCardNotSupportedError"></div>
+        </div>
+
+        <!-- Expiry Month and Year -->
+        <div class="ml-ppos-payment-form-content ml-ppos-payment-form-field-delimiter">
+            <fieldset>
+                <legend><span>*</span> <span translate="lbl.ppos.expirationDate"></span></legend>
+                <!-- Expiry Month -->
+                <div class="ml-ppos-payment-card-month">
+                    <select class="form-control"
+                            id=creditCardExpiryMonth
+                            name="creditCardExpiryMonth"
+                            ng-model="mlPaymentModel.creditCard.expiryMonth.selectedOption"
+                            ng-options="option.value as option.label for option in mlPaymentModel.creditCard.expiryMonth.options"
+                            required>
+                        <option value="" translate="sel.ppos.month"></option>
+                    </select>
+                </div>
+                <!-- Expiry Year -->
+                <div class="ml-ppos-payment-card-year">
+                    <select class="form-control"
+                            name="creditCardExpiryYear"
+                            ng-model="mlPaymentModel.creditCard.expiryYear.selectedOption"
+                            ng-options="option.value as option.label for option in mlPaymentModel.creditCard.expiryYear.options"
+                            required>
+                        <option value="" translate="sel.ppos.year"></option>
+                    </select>
+                </div>
+                <!-- Validation Messages -->
+                <div class="ml-ppos-payment-error"
+                     ng-show="(paymentManualCreditCard.creditCardExpiryMonth.$error.required || paymentManualCreditCard.creditCardExpiryYear.$error.required) && formSubmitted"
+                     translate="msg.ppos.fieldsRequiredError"></div>
+            </fieldset>
+        </div>
+
+        <!-- CVV -->
+        <div class="ml-ppos-payment-card-cvv ml-ppos-payment-form-field-delimiter">
+            <label for="creditCardCVV"><span>*</span> <span translate="lbl.ppos.cardIdentification"></span></label>
+            <input type="text" class="form-control" id="creditCardCVV" name="creditCardCVV"
+                   data-ng-model="mlPaymentModel.creditCard.cvv" maxlength="4" required>
+            <!-- Validation Messages -->
+            <div class="ml-ppos-payment-error"
+                 ng-show="paymentManualCreditCard.creditCardCVV.$error.required && formSubmitted"
+                 translate="msg.ppos.fieldRequiredError"></div>
+        </div>
+
+        <!-- Zip/Postal Code -->
+        <div class="ml-ppos-payment-card-zip ml-ppos-payment-form-field-delimiter">
+            <label for="creditCardPostalCode"><span>*</span> <span translate="lbl.ppos.billingZipCode"></span></label>
+            <input type="text" class="form-control" id="creditCardPostalCode" name="creditCardPostalCode"
+                   data-ng-model="mlPaymentModel.creditCard.postalCode" maxlength="10" required>
+            <!-- Validation Messages -->
+            <div class="ml-ppos-payment-error"
+                 ng-show="paymentManualCreditCard.creditCardPostalCode.$error.required && formSubmitted"
+                 translate="msg.ppos.fieldRequiredError"></div>
+        </div>
+    </form>
+</div>

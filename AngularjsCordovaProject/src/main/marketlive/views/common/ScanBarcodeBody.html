@@ -1,0 +1,41 @@
+<!-- ScanBarcodeBody.html | (c) 2015 MarketLive, Inc. | All Rights Reserved -->
+
+<div>
+    <!-- Messages -->
+    <div class="ml-ppos-error-container">
+        <div ng-show="searchError" class="ml-icon-error"></div>
+        <div ng-show="!deviceConnected" class="ml-ppos-error-message">
+            <div translate="msg.ppos.connecting"></div>
+        </div>
+        <div ng-show="deviceConnected && !searchInProgress && !searchError && !canContinue"
+             class="ml-ppos-error-message">
+            <div translate="msg.ppos.readyToScan"></div>
+        </div>
+        <div ng-show="deviceConnected && searchInProgress" class="ml-ppos-error-message">
+            <div translate="msg.ppos.searchingForCode"
+                 translate-values="{ code: scannedValue }"></div>
+        </div>
+        <div ng-show="deviceConnected && !searchInProgress && searchError"
+             class="ml-ppos-error-message">
+            <div translate="msg.ppos.searchingForCodeFailed"
+                 translate-values="{ code: scannedValue }"></div>
+            <div translate="msg.ppos.tryAgain"></div>
+        </div>
+        <div ng-show="deviceConnected && !searchInProgress && canContinue && !searchError && multiAddMsgResource"
+             class="ml-ppos-error-message">
+            <div translate="{{multiAddMsgResource}}"
+                 translate-values="{ code: scannedValue }"></div>
+            <div data-ng-show="multiAddCountResource && itemFoundCount" translate="{{multiAddCountResource}}"
+                 translate-values="{count: itemFoundCount}"></div>
+        </div>
+    </div>
+
+    <!-- Icons -->
+    <div class="ml-ppos-scan-barcode-icons-wrapper">
+        <div class="ml-ppos-scan-barcode-icons"
+             data-ng-class="{ready: deviceConnected && !searchInProgress}">
+            <span class="ml-icon-lib ml-icon-circle-o-notch ml-icon-spin"></span><span
+                class="ml-icon-lib ml-icon-barcode"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="ml-ppos-main-wrapper">
+	<div class="ml-ppos-instore-pickup-order-wrapper">
+
+		<!-- Pickup Headers Start -->
+		<div data-ng-include="'views/instorepickup/InStorePickupHeader.html'"></div>
+		<!-- Pickup Headers End -->
+		
+		<!-- Content Start -->
+		<div class="ml-ppos-instore-pickup-content-container">
+			<!-- Sorting Start -->
+			<div class="ml-ppos-instore-pickup-sort-container" data-ng-if="inStorePickupOrderShipmentsDataModel.PickupReady.length">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" aria-haspopup="true" aria-expanded="false">
+							{{ 'lbl.ppos.inStorePickup.sortBy' | translate }} <span class="ml-icon-lib ml-icon-arrow-down"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="" data-ng-click="sortInStorePickupOrderShipmentsDataModel('orderNumber')">{{ 'lbl.ppos.inStorePickup.sortByOrderNumber' | translate }} <span class="ml-ppos-mini-grey-icon ml-ppos-arrow-down" data-ng-if="currentSortParam === 'orderNumber'"></span></a>
+							</li>
+							<li>
+								<a href="" data-ng-click="sortInStorePickupOrderShipmentsDataModel('orderDate')">{{ 'lbl.ppos.inStorePickup.sortByOrderDate' | translate }} <span class="ml-ppos-mini-grey-icon ml-ppos-arrow-down" data-ng-if="currentSortParam === 'orderDate'"></span></a>
+							</li>
+							<li>
+								<a href="" data-ng-click="sortInStorePickupOrderShipmentsDataModel('customerLastName')">{{ 'lbl.ppos.inStorePickup.sortByCustomerName' | translate }} <span class="ml-ppos-mini-grey-icon ml-ppos-arrow-down" data-ng-if="currentSortParam === 'customerLastName'"></span></a>
+							</li>
+							<li>
+								<a href="" data-ng-click="sortInStorePickupOrderShipmentsDataModel('csrLastName')">{{ 'lbl.ppos.inStorePickup.sortBySalesAssociateName' | translate }} <span class="ml-ppos-mini-grey-icon ml-ppos-arrow-down" data-ng-if="currentSortParam === 'csrLastName'"></span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- Sorting End -->
+			
+			<div class="ml-ppos-scroll-container">
+				<div class="panel-group ml-ppos-instore-pickup-order-detail-row" id="accordion">
+					<div class="panel panel-default" data-ng-repeat="pickupReadyOrderShipment in inStorePickupOrderShipmentsDataModel.PickupReady">
+						
+						<div class="panel-heading">
+							<div class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" data-target="#orderShipmentDetail_{{ pickupReadyOrderShipment.id }}">#{{ pickupReadyOrderShipment.order.code }} <span>{{pickupReadyOrderShipment.order.orderDate | date : 'medium'}}</span><span class="ml-ppos-instore-pickup-customer-name">{{ pickupReadyOrderShipment.order.billToInfo.firstName }} {{ pickupReadyOrderShipment.order.billToInfo.lastName }}</span><i class="ml-ppos-mini-white-icon ml-ppos-arrow-down"></i></a>
+							</div>
+						</div>
+
+						<div id="orderShipmentDetail_{{ pickupReadyOrderShipment.id }}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div data-ng-repeat="item in pickupReadyOrderShipment.items" class="ml-ppos-instore-pickup-order-detail">
+									<div class="ml-ppos-instore-pickup-order-detail-img">
+										<img src="{{ item.product.image.thumb }}" width="80" height="80" />
+									</div>
+									<div class="ml-ppos-instore-pickup-order-detail-info">
+										<div>{{ item.product.name }}</div>
+										<div><span translate="lbl.ppos.style"/> {{ item.skuCode }}</div>
+										<div><span translate="msg.ppos.qty"/> {{ item.qty }}</div>
+									</div>
+									<div class="ml-ppos-instore-pickup-order-detail-options"></div>
+								</div>
+
+								<div class="ml-ppos-instore-pickup-order-detail-footer">
+									<div class="ml-ppos-instore-pickup-order-detail-button">
+										<a href="" data-ng-click="viewOrderDetail(pickupReadyOrderShipment.order.id)" class="ml-ppos-primary-button"><span translate>btn.ppos.inStorePickup.viewDetail</span><i class="ml-ppos-mini-grey-icon ml-ppos-arrow-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Content End -->
+	</div>
+</div>

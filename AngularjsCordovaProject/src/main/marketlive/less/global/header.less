@@ -1,0 +1,114 @@
+/*! header.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+.ml-ppos-header-wrapper {
+    min-height: @ml-header-main-height;
+	.ml-flex-display();
+	.ml-flex-row();
+	width: 100%;
+	height: 100%;
+
+    .ml-ppos-header-logo {
+		.ml-flex(1);
+
+        font-size: @ml-font-size-base-header;
+        color: #fff;
+        font-weight: bold;
+        padding: (@ml-spacer-default/5+1) 0px;
+
+		span {
+			display: inline-block;
+			width: 210px;
+			height: 52px;
+			background: url("@{ml-image-prefix}app-logo-home.png");
+			background-size: 210px 52px;
+			background-repeat: no-repeat;
+		}
+    }
+    .ml-ppos-header-nav {
+		.ml-flex(1);
+		position: relative;
+		padding-top: @ml-padding-default;
+
+		a {
+			color: @ml-base-font-color;
+			text-decoration: none;
+			display: inline-block;
+			&:hover, &:active {
+			    text-decoration: none;
+			}
+		}
+		.ml-ppos-header-nav-user a {
+			line-height: (@ml-spacer-default*2);
+		}
+
+		.ml-ppos-header-nav-basket, .ml-ppos-header-nav-logout, .ml-ppos-header-nav-unlock, .ml-ppos-header-nav-user {
+			float: right;
+			padding-left: @ml-padding-default;
+			position: relative;
+			z-index: 999;
+		}
+		.ml-ppos-header-nav-user {
+			padding-right: @ml-padding-10;
+			.ml-icon-arrow-down {
+				margin-left: @ml-padding-5;
+			}
+			img {
+			    width: (@ml-spacer-default*2);
+				height: (@ml-spacer-default*2);
+				margin-right: @ml-padding-5;
+			}
+		}
+    }
+}
+
+/*** Account Drop Down ***/
+.ml-ppos-account-drop-down-container {
+	#ml-ppos-account-overlay {
+		display: none;
+		z-index: 2;
+		background: rgba(0,0,0,.30);
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+	}
+	#ml-ppos-account-drop-down {
+		display: none;
+		position: absolute;
+		z-index: 3;
+		top: 0px;
+		right: 0px;
+		width: @ml-ppos-account-drop-down-width;
+		.ml-ppos-bg-gradient();
+		color: #000;
+		z-index: 99;
+		height: 100vh;
+		ul {
+			margin: (@ml-spacer-default*6) 0px 0px 0px;
+			padding: 0px;
+		}
+		li {
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+			position: relative;
+		}
+		a {
+			line-height: inherit;
+			padding: (@ml-spacer-default - 3) (@ml-spacer-default/3*5);
+			display: block;
+			&:hover {
+				text-decoration: none;
+			}
+			span {
+				position: absolute;
+				top: inherit;
+				left: (@ml-spacer-default*4);
+				line-height: (@ml-spacer-default/3*5);
+			}
+		}
+	}
+
+
+}

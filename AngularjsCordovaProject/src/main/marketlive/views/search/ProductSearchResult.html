@@ -1,0 +1,146 @@
+<div data-ng-controller="productSearchResultController" class="ml-ppos-product-search-result-wrapper">
+	<div class="ml-ppos-search-container">
+		<div class="ml-ppos-facet-nav-container">
+		<div data-ng-if="productSearchResultDataModel.showSorting">
+			<div class="ml-ppos-facet-refine-head" translate="hdr.ppos.refineYourSearch"></div>
+				<div class="ml-ppos-facet-sortbg">
+					<div class="ml-ppos-default-header-wrapper">
+						<div class="ml-ppos-default-header-message" translate="lbl.ppos.sortBy"></div>
+						<div class="ml-ppos-default-header-icon"><a href="" data-toggle="collapse" data-target="#Sorting"><span class="ml-ppos-mini-white-icon ml-ppos-arrow-down"></span></a></div>
+					</div>
+					<div class="ml-ppos-facet-selected">
+						<span data-ng-repeat="sortOption in productSearchResultDataModel.sortOptions" data-ng-if="sortOption.sortOptionConfig === productSearchResultDataModel.currentSortOptionConfig" 
+						translate="sel.ppos.{{ productSearchResultDataModel.currentSortOptionConfig }}">
+						</span>
+					</div>
+					<div id="Sorting" class="collapse">
+						<a data-toggle="collapse" data-target="#Sorting" href="" data-ng-repeat="sortOption in productSearchResultDataModel.sortOptions" data-ng-click="searchProduct(productSearchResultDataModel.productSearchKeyword, 0, 1, sortOption.sortOptionOrder, sortOption.sortOptionParam)" translate="sel.ppos.{{ sortOption.sortOptionConfig }}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="ml-ppos-search-detail-container">
+			<div class="ml-ppos-search-head-row">
+				<!-- Title and search field. -->
+				<div class="ml-ppos-search-title-wrapper">
+					<div class="ml-ppos-search-title" translate="lbl.ppos.searchTerm"></div>
+					<div class="ml-ppos-search-keyword">
+						<form novalidate data-ng-submit="searchProduct(productSearchKeyword, 0, 1)">
+							<input type="text" name="productSearchKeyword" id="productSearchKeyword" class="form-control" placeholder="{{ 'msg.ppos.keywordOrItem' | translate }}" data-ng-model="productSearchKeyword" />
+						</form>
+					</div>
+				</div>
+
+				<!-- Pagination -->
+				<div class="ml-ppos-search-pagination" data-ng-show="productSearchResultDataModel.pagingModel.showPagination">
+					<ul class="ml-ppos-pagination">
+						<!-- Previous Page Group Link Disabled -->
+						<li data-ng-show="!productSearchResultDataModel.pagingModel.previousPageGroup.hasPreviousPageGroup" class="ml-ppos-paging-default ml-ppos-paging-disabled">
+							<span class="ml-ppos-paging-previous ml-icon-lib ml-icon-previous"></span>
+						</li>
+						<!-- Previous Page Group Link Clickable -->
+						<li data-ng-show="productSearchResultDataModel.pagingModel.previousPageGroup.hasPreviousPageGroup" class="ml-ppos-paging-default">
+							<a href="" data-ng-click="searchProduct(productSearchResultDataModel.productSearchKeyword, productSearchResultDataModel.pagingModel.previousPageGroup.previousPageGroupPageNumberOffSet, productSearchResultDataModel.pagingModel.previousPageGroup.previousPageGroupPageNumber, productSearchResultDataModel.currentSortOrder, productSearchResultDataModel.currentSortParam)" class="ml-ppos-paging-previous ml-icon-lib ml-icon-previous"> </a>
+						</li>
+
+						<!-- Pages for current Page Group -->
+						<li data-ng-repeat="page in productSearchResultDataModel.pagingModel.pages" class="ml-ppos-paging-default">
+							<!-- Current Page should not be clickable. -->
+							<a href="" data-ng-if="productSearchResultDataModel.pagingModel.currentPage == page.pageNumber" class="active">{{ page.pageNumber }}</a>
+							<!-- All other pages should be clickable. -->
+							<a href="" data-ng-if="productSearchResultDataModel.pagingModel.currentPage != page.pageNumber" data-ng-click="searchProduct(productSearchResultDataModel.productSearchKeyword, page.offSet, page.pageNumber, productSearchResultDataModel.currentSortOrder, productSearchResultDataModel.currentSortParam)">{{ page.pageNumber }}</a>
+						</li>
+
+						<!-- Next Page Group Link Disabled -->
+						<li data-ng-show="!productSearchResultDataModel.pagingModel.nextPageGroup.hasNextPageGroup" class="ml-ppos-paging-default ml-ppos-paging-disabled">
+							<span class="ml-ppos-paging-next ml-icon-lib ml-icon-next"></span>
+						</li>
+						<!-- Next Page Group Link Clickable -->
+						<li data-ng-show="productSearchResultDataModel.pagingModel.nextPageGroup.hasNextPageGroup" class="ml-ppos-paging-default">
+							<a href="" data-ng-click="searchProduct(productSearchResultDataModel.productSearchKeyword, productSearchResultDataModel.pagingModel.nextPageGroup.nextPageGroupPageNumberOffSet, productSearchResultDataModel.pagingModel.nextPageGroup.nextPageGroupPageNumber, productSearchResultDataModel.currentSortOrder, productSearchResultDataModel.currentSortParam)" class="ml-ppos-paging-next ml-icon-lib ml-icon-next"> </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="ml-ppos-scroll-container">
+			<!-- Error Messages. -->
+			<div>
+				<div data-ng-show="productSearchResultDataModel.showKeywordRequiredErrorMessage" class="ml-ppos-error-container">
+					<div class="ml-icon-error"></div>
+					<div class="ml-ppos-error-message">
+						<div translate="msg.ppos.shortSearchTerm" translate-values="{ minLength : 3 }"></div>
+					</div>
+				</div>
+
+				<div data-ng-show="productSearchResultDataModel.showProductNotFoundErrorMessage" class="ml-ppos-error-container">
+					<div class="ml-icon-error"></div>
+					<div class="ml-ppos-error-message">
+						<div translate="msg.ppos.searchNoResults" translate-values="{ searchTerm : productSearchResultDataModel.searchTerm }"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Success Messages. -->
+			<div data-ng-if="!productSearchResultDataModel.showKeywordRequiredErrorMessage && !productSearchResultDataModel.showProductNotFoundErrorMessage">
+				<div data-ng-if="!productSearchResultDataModel.searchResult.alternateTermsQueryEncoded">
+					<div class="ml-ppos-search-result-message" translate="msg.ppos.searchResults" translate-values="{ productCount: productSearchResultDataModel.searchResult.searchResultSize, searchKeyword: productSearchResultDataModel.productSearchKeyword }">
+					</div>
+				</div>
+
+				<div data-ng-if="productSearchResultDataModel.searchResult.alternateTermsQueryEncoded">
+					<div class="ml-ppos-error-container">
+						<div class="ml-icon-error"></div>
+						<div class="ml-ppos-error-message">
+							<div translate="msg.ppos.noMatchesFound" translate-values="{ searchKeyword: productSearchResultDataModel.productSearchKeyword }">
+							</div>
+
+							<div data-ng-if="productSearchResultDataModel.searchResult.alternateTermsQueryEncoded.length == 1">
+								<span translate="msg.ppos.didYouMean"></span>
+								<span data-ng-repeat="alternateTerm in productSearchResultDataModel.searchResult.alternateTermsQueryEncoded">
+									<a href="" data-ng-click="searchProduct(alternateTerm, 0, 1)" translate="msg.ppos.alternateTerm" translate-values="{ alternateTerm: alternateTerm }"></a>?
+								</span>
+							</div>
+
+							<div data-ng-if="productSearchResultDataModel.searchResult.alternateTermsQueryEncoded.length > 1">
+								<span translate="msg.ppos.didYouMean"></span>
+								<span data-ng-repeat="alternateTerm in productSearchResultDataModel.searchResult.alternateTermsQuery">
+									<span data-ng-if="$first"><a href="" data-ng-click="searchProduct(alternateTerm, 0, 1)" translate="msg.ppos.alternateTerm" translate-values="{ alternateTerm: alternateTerm }"></a></span>
+									
+									<span data-ng-if="$middle">, <a href="" data-ng-click="searchProduct(alternateTerm, 0, 1)" translate="msg.ppos.alternateTerm" translate-values="{ alternateTerm: alternateTerm }"></a></span>
+									
+									<span data-ng-if="$last">or <a href="" data-ng-click="searchProduct(alternateTerm, 0, 1)" translate="msg.ppos.alternateTerm" translate-values="{ alternateTerm: alternateTerm }"></a>?</span>
+								</span>
+							</div>
+
+							<div translate="msg.ppos.alternateMatchCount" translate-values="{ productCount: productSearchResultDataModel.searchResult.searchResultSize }">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Product Thumbnails. -->
+			<div class="ml-ppos-grid-view-items">	
+				<div data-ng-repeat="product in productSearchResultDataModel.searchResult.productInfo" class="ml-ppos-grid-view-item">
+					<a data-ng-href="#/productDetail?productId={{ product.id }}&fromProductSearch=true">
+						<div class="ml-ppos-item-image"><img ng-src="{{ product.imageResolved }}" /></div>
+						<div class="ml-ppos-item-info">
+							<div class="ml-ppos-item-product-name" data-ng-if="productSearchConfigModel.showName">{{ product.name }}</div>
+							<div class="ml-ppos-item-short-desc" data-ng-if="productSearchConfigModel.showShortDescription">{{ product.description.shortDescription }}</div>
+							<div class="ml-ppos-item-product-code" data-ng-if="productSearchConfigModel.showCode">{{ product.code }}</div>
+							<div class="ml-ppos-item-price" data-ng-if="productSearchConfigModel.showPrices">
+								<div>{{ product.priceInfo.priceMsg }}</div>
+								<div class="ml-item-price-was">{{ product.priceInfo.priceWasMsg }}</div>
+								<div>{{ product.priceInfo.priceNowMsg }}</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			</div>
+
+		</div>
+	</div>
+</div>

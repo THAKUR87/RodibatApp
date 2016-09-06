@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html data-ng-app="pointOfSaleApplication">
+    <head>
+        <!-- Title -->
+		<title translate>msg.ppos.application.title</title>
+		
+		<!-- Meta Information -->
+		<meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi" />
+        
+		<!-- Stylesheet -->
+		<link rel="stylesheet" type="text/css" href="css/standalone.css" />
+    </head>
+    <body class="ml-ppos-login-app">
+        <div class="container" data-ng-controller="applicationController">
+			<header><div data-ng-include="'views/common/Header.html'"></div></header>
+			
+			<main role="main"><div data-ng-view></div></main>
+		</div>
+
+        <ml-app-spinner></ml-app-spinner>
+
+        <!-- JavaScript -->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/libs.min.js"></script>
+		<script type="text/javascript" src="js/marketlive.min.js"></script>
+    </body>
+</html>

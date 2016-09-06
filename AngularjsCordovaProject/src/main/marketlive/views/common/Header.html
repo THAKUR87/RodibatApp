@@ -1,0 +1,62 @@
+<div class="ml-ppos-header-wrapper">
+
+	<div class="ml-ppos-header-logo"><span class="ml-ppos-header-logo-img" data-ng-click="openDashboardPage();"></span></div>
+
+	<div class="ml-ppos-header-nav" data-ng-show="!applicationModel.isScreenLocked"> 
+		<div class="ml-ppos-header-nav-logout ml-ppos-a-href-close-overlay">
+			<a href="javascript:;" data-ng-show="applicationModel.isCSRLoggedIn" data-ng-click="logout();hideOverlay();" data-ng-controller="logoutController"><span class="ml-ppos-mini-white-icon ml-ppos-logout-head"></span></a>
+		</div>
+		<div class="ml-ppos-header-nav-basket ml-ppos-a-href-close-overlay">
+			<a href="javascript:;" data-ng-show="applicationModel.isCSRLoggedIn" data-ng-click="openBasketPage();hideOverlay();"><span class="ml-ppos-mini-white-icon ml-ppos-basket-head"></span></a>
+		</div>
+		<div class="ml-ppos-header-nav-unlock ml-ppos-a-href-close-overlay">
+			<a href="javascript:;" data-ng-show="applicationModel.isCSRLoggedIn" data-ng-click="lockScreen();hideOverlay();"><span class="ml-ppos-mini-white-icon ml-ppos-unlock-head"></span></a>
+		</div>
+		<div class="ml-ppos-header-nav-user">
+			<a href="javascript:;" data-ng-show="applicationModel.isCSRLoggedIn" data-ng-click="toggleOverlay();" id="ml-ppos-header-nav-user-link">{{ applicationModel.csrUserName }}<span class="ml-icon-lib ml-icon-arrow-down"></span></a>
+		</div>
+
+		<!-- Account Drop Down -->
+		<div class="ml-ppos-account-drop-down-container">
+			<div id="ml-ppos-account-overlay" style="display:block" ng-show="applicationModel.toggleValue" data-ng-click="hideOverlay();"></div>
+			<div id="ml-ppos-account-drop-down" style="display:block" ng-show="applicationModel.toggleValue">
+				<ul>
+					<li class="ml-ppos-a-href-close-overlay"><a href="" data-ng-click="openCSRChangePasswordPage();toggleOverlay();"><i class="ml-ppos-mini-white-icon ml-ppos-change-password"></i> <span translate="lbl.ppos.changePassword"/></a></li>
+					<li class="ml-ppos-a-href-close-overlay"><a href="" data-ng-click="openCSRChangePINPage();toggleOverlay();"><i class="ml-ppos-mini-white-icon ml-ppos-unlock"></i> <span translate="lbl.ppos.changePin"/></a></li>
+					<!--<li class="ml-ppos-a-href-close-overlay"><a href=""><i class="ml-ppos-mini-white-icon ml-ppos-appointment"></i> <span translate="lbl.ppos.appointment"/></a></li>
+					<li class="ml-ppos-a-href-close-overlay"><a href=""><i class="ml-ppos-mini-white-icon ml-ppos-todo"></i> <span translate="lbl.ppos.toDoList"/></a></li>
+					<li class="ml-ppos-a-href-close-overlay"><a href=""><i class="ml-ppos-mini-white-icon ml-ppos-profile"></i> <span translate="lbl.ppos.profile"/></a></li>
+					<li class="ml-ppos-a-href-close-overlay"><a href=""><i class="ml-ppos-mini-white-icon ml-ppos-my-sale"></i> <span translate="lbl.ppos.mySales"/></a></li>
+					<li class="ml-ppos-a-href-close-overlay"><a href=""><i class="ml-ppos-mini-white-icon ml-ppos-dashboard"></i> <span translate="lbl.ppos.dashboard"/></a></li>-->
+					<li class="ml-ppos-a-href-close-overlay"><a href="" data-ng-click="openManagementPage();toggleOverlay();"><i class="ml-ppos-mini-white-icon ml-ppos-settings"></i> <span translate="lbl.ppos.settings"/></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Account Drop Down End -->
+	</div>
+
+</div>
+
+<!-- No Shopping Bag Message -->
+<div class="ml-ppos-modal-container ml-ppos-product-search-wrapper">
+	<div class="modal" id="noShoppingBagModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<div class="ml-ppos-error-container">
+						<div class="ml-icon-error"></div>
+						<div class="ml-ppos-error-message">
+							<div translate>btn.ppos.noShoppingBagMessage</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="modal-footer ml-ppos-button-product-search">
+					<div><button type="submit" name="noShoppingBagOkButton" id="noShoppingBagOkButton" data-dismiss="modal" class="ml-ppos-primary-button" translate="btn.ppos.ok"></button></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

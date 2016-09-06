@@ -1,0 +1,32 @@
+<div class="ml-ppos-modal-container ml-ppos-customer-search-wrapper">
+    <div class="modal" id="orderConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-ng-click="close()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+                    <h4 class="modal-title"><span translate="lbl.ppos.orderNo"></span>&nbsp;{{orderConfirmationDataModel.orderid}}</h4>
+                </div>
+
+                <form name="receiptForm" novalidate data-ng-submit="">
+                    <div class="modal-body" class="form-control">
+
+                        <div class="ml-ppos-customer-search-head ng-scope" style="text-align:center;border-top:1px solid #8da5d1;padding-top:30px;padding-bottom:30px">
+                            <div data-ng-if="orderConfirmationDataModel.printSelected"><span translate="lbl.ppos.receiptReadyOn"></span>&nbsp;{{orderConfirmationDataModel.deviceName}}</div>
+                               <p/>
+                            <div data-ng-if="orderConfirmationDataModel.emailSelected"><span translate="lbl.ppos.receiptHasBeenSentTo"></span>&nbsp;{{orderConfirmationDataModel.email}}</div>
+
+                            <div data-ng-if="!orderConfirmationDataModel.printSelected && !orderConfirmationDataModel.emailSelected"><span translate="lbl.ppos.orderConfirmationMessage"></span></div>
+
+                           </div>
+                        <div class="modal-footer ml-ppos-button-customer-search" style="border-top:1px solid #8da5d1;">
+                        <button type="button" class="ml-ppos-secondary-button" data-ng-click="close()" data-dismiss="modal"><span translate="btn.ppos.done"></span></button>
+                        </div>
+
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="ml-ppos-order-detail-instore-pickup-button" data-ng-if="processInStorePickup">
+	<a href="javascript:;" data-ng-click="showInStorePickupCustomerVerificationModal()" class="ml-ppos-primary-button">{{ 'btn.ppos.inStorePickup' | translate }} <span class="ml-ppos-mini-grey-icon ml-ppos-store"></span></a>
+</div>
+
+<div class="ml-ppos-modal-container ml-ppos-instore-customer-wrapper">
+	<div class="modal" id="inStorePickupCustomerVerificationModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-ng-click="closeInStorePickupCustomerVerificationModal()" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title" translate="hdr.ppos.inStorePickupCustomerVerification" translate-values="{ orderNumber : orderNumber }"></h4>
+				</div>
+	  
+				<div data-ng-show="showStep1">
+					<form novalidate data-ng-submit="processStep1()">
+						<div class="modal-body ml-ppos-order-detail-customer-options">
+							<div data-ng-show="paymentTypeCreditCard && cardVerificationRequired">
+								<div class="ml-ppos-order-detail-customer-head" translate>lbl.ppos.lastFourDigitsCreditCard</div>
+								<label>
+									<input type="checkbox" name="creditCardVerified" id="creditCardVerified" data-ng-model="creditCardVerified" />
+									<div for="creditCardVerified"><i></i><span>{{ creditCardType }} {{ creditCardLastFourDigits }}</span></div>
+								</label>
+							</div>
+
+							<div>
+								<div class="ml-ppos-order-detail-customer-sub-head" translate>lbl.ppos.customerIdentification</div>
+								<label>
+									<input type="checkbox" name="customerVerified" id="customerVerified" data-ng-model="customerVerified" />
+									<div for="customerVerified"><i></i><span>{{ pickupContactFirstName }} {{ pickupContactLastName }}</span></div>
+								</label>
+							</div>							
+						</div>
+						
+						<div class="modal-footer ml-ppos-button-product-search">
+							<div><button type="submit" class="ml-ppos-primary-button" translate>btn.ppos.process</button></div>
+							<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelStep1()" translate="btn.ppos.cancel"></button></div>
+						</div>
+					</form>
+				</div>
+				<div data-ng-show="showStep2">
+					<form novalidate data-ng-submit="processStep2(orderId, pickupShipment.id)">
+						<div class="modal-body ml-ppos-order-detail-customer-options">
+							<div class="ml-ppos-signature-wrapper">
+								<div class="ml-ppos-order-detail-customer-head"><span translate="lbl.ppos.creditCardSignatureHeader"></span></div>
+								<canvas ng-signature-pad="signature" ng-signature-pad-pen-color="rgb(255,255,255)" width="420" height="200" class="ml-ppos-signature"></canvas>
+								<div class="ml-ppos-order-detail-customer-sub-head" translate="lbl.ppos.inStorePickupSignatureAgreement"></div>
+							</div>
+						</div>
+
+						<div class="modal-footer ml-ppos-button-product-search">
+							<div><button type="submit" class="ml-ppos-primary-button" translate>btn.ppos.acceptSignature</button></div>
+							<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelStep2()" translate="btn.ppos.cancel"></button></div>
+							<div class="ml-ppos-order-detail-clear-button"><button type="button" class="ml-ppos-secondary-button" data-ng-click="clearSignature()" translate="btn.ppos.clearSignature"></button></div>
+						</div>
+					</form>
+				</div>
+
+				<div data-ng-show="showStep3">
+					<form novalidate data-ng-submit="processStep3()">
+						<div class="modal-body ml-ppos-order-detail-customer-options">
+							<div data-ng-show="hasValidationErrors" class="ml-ppos-error-container">
+								<div class="ml-icon-error"></div>
+								<div class="ml-ppos-error-message">
+									<div data-ng-repeat="validationError in validationErrors">{{ validationError }}</div>
+								</div>
+							</div>
+
+							<div class="ml-ppos-order-detail-customer-info">
+								<label>
+									<input type="checkbox" name="receiptTypePrinter" id="receiptTypePrinter" data-ng-model="receiptTypePrinter" ng-disabled="!printerAvailable" />
+									<div><i for="receiptTypePrinter"></i><span for="receiptTypePrinter" translate="lbl.ppos.print"></span><span class="ml-ppos-order-detail-device-name">{{ deviceName }}</span></div>
+								</label>
+							</div>
+
+							<div class="ml-ppos-order-detail-customer-info">
+								<label>
+									<input type="checkbox" name="receiptTypeEmail" id="receiptTypeEmail" data-ng-model="receiptTypeEmail" />
+									<div><i for="receiptTypeEmail"></i><span for="receiptTypeEmail" translate="lbl.ppos.email"></span></div>
+									<div class="ml-ppos-order-detail-customer-email"><input type="email" name="pickupCustomerEmail" id="pickupCustomerEmail" data-ng-model="pickupCustomerEmail" class="form-control" /></div>
+								</label>
+							</div>
+						</div>
+
+						<div class="modal-footer ml-ppos-button-product-search">
+							<div><button type="submit" class="ml-ppos-primary-button"><span translate="lbl.ppos.receipt"></span></button></div>
+							<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="noReceipt()"><span translate="lbl.ppos.noReceipt"></span></button></div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- -->
+<div class="ml-ppos-modal-container ml-ppos-instore-customer-wrapper">
+	<div class="modal" id="inStorePickupConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-ng-click="closeInStorePickupConfirmationModal()" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title" translate="hdr.ppos.inStorePickupCustomerVerification" translate-values="{ orderNumber : orderNumber }"></h4>
+				</div>
+
+				<div>
+					<form novalidate data-ng-submit="inStorePickupConfirmationDone()">
+						<div class="modal-body ml-ppos-order-detail-customer-options">
+							<div data-ng-show="receiptTypePrinter"><span translate="lbl.ppos.receiptReadyOn"></span>&nbsp;{{ deviceName }}</div>
+
+							<div data-ng-show="receiptTypeEmail"><span translate="lbl.ppos.receiptHasBeenSentTo"></span>&nbsp;{{ pickupCustomerEmail }}</div>
+
+							<div data-ng-show="!receiptTypePrinter && !receiptTypeEmail"><span translate="msg.ppos.inStorePickupComplete"></span></div>
+						</div>
+
+						<div class="modal-footer ml-ppos-button-product-search">
+							<div><button type="submit" class="ml-ppos-primary-button"><span translate="btn.ppos.done"></span></button></div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

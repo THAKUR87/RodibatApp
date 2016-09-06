@@ -1,0 +1,74 @@
+/*! modal.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+.ml-ppos-modal-container {
+    .modal-content {
+        .ml-ppos-bg-gradient();
+		border-radius: 0px;
+		border-top: @ml-top-border-default solid @ml-base-modal-bar-color;
+		border-left: 0px;
+		border-right: 0px;
+		color: @ml-modal-font-color;
+		.modal-header {
+            border-bottom: 0px;
+			padding: @ml-padding-10 @ml-padding-default @ml-padding-default @ml-padding-default;
+		}
+		.modal-body {
+			padding: @ml-padding-10 0px;
+			margin: 0px @ml-padding-default;
+		}
+		.modal-footer {
+            border-top: 0px;
+			padding-top: @ml-padding-default;
+		}
+    }
+
+    .ml-ppos-button-customer-search, .ml-ppos-button-product-search {
+	.clearfix();
+		div {
+			float: right;
+			position: relative;
+		}
+		div:first-child {
+			padding-left: @ml-padding-10;
+		}
+		.ml-ppos-button-customer-skip-button {
+			margin-right: (@ml-spacer-default/3*5);
+		}
+		.ml-ppos-btn-inner {
+			width: 100%;
+			text-align: left;
+			background-color: @ml-primary-submit-bg-color;
+			color: @ml-font-size-big-button-color;
+			padding: .65em 4em .65em 1em;
+		}
+		.disabled {
+			opacity: .3;
+			pointer-events: none;
+		}
+    }
+    .ml-ppos-button-customer-search-result {
+		.clearfix();
+		div {
+			float: left;
+		}
+		div:first-child {
+			padding-left: @ml-padding-10;
+			float: right;
+		}
+		.ml-ppos-button-customer-search-place-order {
+		    position: relative;
+			.ml-ppos-btn-inner {
+			    padding: 1em;
+				.ml-ppos-primary-button-understated();
+				.ml-ppos-btn {
+				    left: @ml-padding-default;
+					right: inherit;
+				}
+				.ml-ppos-btn-text {
+					padding-left: (@ml-spacer-default*2);
+				}
+			}
+		}
+    }
+}
+

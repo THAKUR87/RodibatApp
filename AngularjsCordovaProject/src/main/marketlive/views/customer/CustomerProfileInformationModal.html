@@ -1,0 +1,113 @@
+<div class="ml-ppos-modal-container ml-ppos-customer-profile-wrapper">
+	<div class="modal" id="customerProfileInformation" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				
+				<div id="customerProfileForm" name= "customerProfileForm" ng-hide='customerFormDiv'>
+					<form novalidate id="frmSaveUpdateCustomer">
+						<div class="modal-header">
+							<button type="button" class="close" data-ng-click="closeProfileInformationModal()" data-dismiss="modal" aria-label="Close" id="btnCloseCustomerProfileModal"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+							<h4 class="modal-title"><span translate="hdr.ppos.customerProfileInformation"/></h4>
+						</div>
+						<div class="ml-ppos-customer-profile-form-container">
+							<!-- Error Block Start -->
+							<div class="ml-ppos-error-container" data-ng-show="customerDO.showOpFailureMessage">
+								<div class="ml-icon-error"></div>
+								<div class="ml-ppos-error-message">
+									<div>{{ customerDO.opFailureMessage | translate }}</div>
+								</div>
+							</div>
+							<!-- Error Block End -->
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.phoneNumber"/></label>
+								<div class="ml-ppos-account-form-field"><input type="tel" name="phoneNumber" id="phoneNumber" maxlength="10" class="form-control" data-ng-model="customerDO.phoneNumber"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.firstName"/></label>
+								<div class="ml-ppos-account-form-field"><input type="text" name="firstName" id="firstName" maxlength="40" class="form-control" data-ng-model="customerDO.firstName"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.lastName"/></label>
+								<div class="ml-ppos-account-form-field"><input type="text" name="lastName" id="lastName" maxlength="40" class="form-control" data-ng-model="customerDO.lastName"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.email"/></label>
+								<div class="ml-ppos-account-form-field"><input type="email" name="email" id="email" maxlength="100" class="form-control" data-ng-model="customerDO.email"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.password"/></label>
+								<div class="ml-ppos-account-form-field"><input type="password" name="password" id="password" maxlength="100" class="form-control" data-ng-model="customerDO.password"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.confirmPassword"/></label>
+								<div class="ml-ppos-account-form-field"><input type="password" name="confirmPassword" id="confirmPassword" maxlength="100" class="form-control" data-ng-model="customerDO.confirmPassword"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.securityQuestion"/></label>
+								<div class="ml-ppos-account-form-field"><select name="hint" class="form-control" id="hint" data-ng-model="customerDO.hint"> 
+									<option ng-repeat="option in customerDO.securityQuestions" value="{{option.id}}" ng-selected="{{option.id == customerDO.hint}}">{{ option.question | translate }}</option>
+								</select></div>
+							</div>
+							<div class="ml-ppos-customer-profile-row">
+								<label>* <span translate="lbl.ppos.securityAnswer"/></label>
+								<div class="ml-ppos-account-form-field ml-ppos-account-form-last-item"><input type="text" name="hintAnswer" id="hintAnswer" maxlength="100" class="form-control" data-ng-model="customerDO.hintAnswer"/></div>
+							</div>
+							<div class="ml-ppos-customer-profile-button-container">
+								<div><button type="submit" name="btnSaveUpdateCustomer" class="ml-ppos-primary-button" id="btnSaveUpdateCustomer" translate="btn.ppos.saveCustomer" data-ng-click="saveOrUpdateCustomer(customerDO)"></button></div>
+								<div><button type="button" name="btnCancelSaveUpdateCustomer" class="ml-ppos-secondary-button" id="btnCancelSaveUpdateCustomer" translate="btn.ppos.cancel" data-ng-click="closeProfileInformationModal();" data-dismiss="modal"></button></div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div data-ng-show="customerSearchDataModel.existingPhoneCustomerResult != null" class="ml-ppos-customer-profile-details" >
+					<div class="modal-body">
+						<div class="ml-ppos-customer-profile-details-message" translate="msg.ppos.customerSearchResultByPhone" translate-values="{ customerPhoneNumber : customerSearchDataModel.customerPhoneNumber }"></div>
+						<div data-ng-repeat="customer in customerSearchDataModel.existingPhoneCustomerResult.data" class="ml-ppos-customer-profile-details-row">
+							<a href="" data-ng-click="updateSelectedContact(customer.id, customer.primaryContact.id, customerDO)">{{ customer.primaryContact.person.firstName }} {{ customer.primaryContact.person.lastName }} <span class="ml-ppos-customer-search-zip-code">{{ customer.primaryContact.address.postalCode }}</span> <span> {{ customer.email }} </span><i class="ml-ppos-mini-white-icon ml-ppos-arrow-right"></i></a>
+						</div>
+					</div>
+					<div class="modal-footer ml-ppos-customer-profile-button-container">
+						<div><button type="button" class="ml-ppos-primary-button" data-ng-click="saveCustomer(customerDO)"><span translate="btn.ppos.saveCustomer"/></button></div>
+						<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="closeSearchModal();"><span translate="btn.ppos.cancel"/></button></div>
+					</div>
+				</div>
+
+				<div data-ng-show="customerSearchDataModel.existingEmailCustomerResult != null" class="ml-ppos-customer-profile-details ml-ppos-customer-result-byemail">
+					<div class="modal-body">
+						<div class="ml-ppos-customer-profile-details-message" translate="msg.ppos.customerSearchResultByEmail" translate-values="{ customerEmail : customerSearchDataModel.existingEmail }"></div>
+						<div data-ng-repeat="customer in customerSearchDataModel.existingEmailCustomerResult.data" class="ml-ppos-customer-profile-details-row">
+							<div class="ml-ppos-customer-result-byemail-info">
+								<div>{{ customer.primaryContact.person.firstName }} {{ customer.primaryContact.person.lastName }}</div>
+								<div>{{ customer.primaryContact.address.postalCode }}</div>
+								<div>{{ customer.email }}</div>
+							</div>
+							<div class="modal-footer ml-ppos-customer-profile-button-container">
+								<div><button type="button" class="ml-ppos-primary-button" data-ng-click="updateSelectedContact(customer.id, customer.primaryContact.id, customerDO)"><span translate="btn.ppos.saveCustomer"/></button></div>
+								<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="closeSearchModal();"><span translate="btn.ppos.cancel"/></button></div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Following script tag added for fixing PEBL-16484 -->
+<script>
+$('#btnSaveUpdateCustomer').on('touchend', function(e){
+    e.stopPropagation(); e.preventDefault();
+	$('#btnSaveUpdateCustomer').trigger('click');
+});
+$('#btnCancelSaveUpdateCustomer').on('touchend', function(e){
+	e.stopPropagation(); e.preventDefault();
+	// following is the hack to hide soft keyboard
+	document.activeElement.blur();
+	$('input').blur();
+	$('select').blur();
+	$('#btnCancelSaveUpdateCustomer').trigger('click');
+});
+</script>

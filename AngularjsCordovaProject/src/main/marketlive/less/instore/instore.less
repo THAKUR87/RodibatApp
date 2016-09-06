@@ -1,0 +1,529 @@
+/*! instore.less | (c) 2015 MarketLive, Inc. | All Rights Reserved */
+
+.ml-ppos-dashboard-instore-pickup-content {
+	.ml-ppos-dashboard-instore-pickup-content-wrapper {
+		.ml-flex-display();
+		.ml-flex-column();
+		
+		.ml-ppos-dashboard-instore-pickup-content-row {
+			.ml-flex-row();
+
+			border-bottom: 1px solid rgba(255,255,255,.5);
+			a {
+				display: block;
+				padding: (@ml-spacer-default/3*2) 0px;
+				span {
+					float: right;
+					text-decoration: underline;
+				}
+			}
+			.ml-ppos-instore-pickup-new-order {
+				margin-bottom: (@ml-spacer-default/5);
+				font-weight: bold;
+			}
+			.ml-ppos-instore-pickup-circle-new {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-new;
+			}
+			.ml-ppos-instore-pickup-circle-process {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-process;
+			}
+			.ml-ppos-instore-pickup-circle-ready {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-ready;
+			}
+			.ml-ppos-instore-pickup-circle-done {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-done;
+			}
+		}
+		.ml-ppos-dashboard-instore-pickup-item-row {
+			padding-bottom: @ml-padding-default;
+			.ml-ppos-scroll-container {
+				height: auto;
+				max-height: @ml-instore-pickup-item-row-max-height;
+				padding-left: (@ml-spacer-default/3*2);
+				padding-right: (@ml-spacer-default/3*2);
+			}
+
+			.ml-ppos-instore-pickup-new-order-items {
+				.ml-flex-display();
+				.ml-flex-row();
+
+				padding: @ml-padding-default 0px (@ml-spacer-default/3);
+				border-bottom: 1px solid rgba(255,255,255,.5);
+				font-size: @ml-font-size-small;
+
+				.ml-ppos-instore-pickup-item-order {
+					.ml-flex(1 30%);
+					padding-right: (@ml-spacer-default/3);
+				}
+				.ml-ppos-instore-pickup-item-date {
+					.ml-flex(1 33%);
+					padding-right: (@ml-spacer-default/3);
+				}
+				.ml-ppos-instore-pickup-item-customer {
+					.ml-flex(1 37%);
+				}
+			}
+			.ml-ppos-instore-pickup-new-order-head {
+				text-transform: uppercase;
+				font-weight: bold;
+				font-size: @ml-font-size-small;
+			}
+		}
+		div:first-child {
+			border: 0px;
+		}
+	}
+	
+}
+
+/*** Main Order Screen ***/
+.ml-ppos-instore-pickup-order-wrapper {
+	.ml-flex-display();
+	.ml-flex-column();
+	height: @ml-body-default-height;
+
+	.ml-ppos-instore-pickup-header-container {
+		.ml-flex-display();
+		.ml-flex-row();
+	
+		.ml-ppos-instore-pickup-title {
+			padding: @ml-padding-default;
+			a {
+				display: block;
+				&:hover {
+					text-decoration: none;
+				}
+				span {
+					float: right;
+					text-decoration: underline;
+				}
+			}
+		}
+		.ml-ppos-instore-pickup-inactive {
+			border-top: @ml-top-border-default solid transparent !important;
+		}
+
+		.ml-ppos-instore-pickup-header-new {
+			.ml-flex(1);
+			.ml-instore-background();
+			.ml-ppos-instore-pickup-order-new-bar {
+				border-top: @ml-top-border-default solid @ml-instore-pickup-widget-bar-color;
+			}
+			.ml-ppos-instore-pickup-circle-new {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-new;
+			}
+		}
+		.ml-ppos-instore-pickup-header-process {
+			.ml-flex(1);
+			.ml-instore-background();
+			.ml-ppos-instore-pickup-order-process-bar {
+				border-top: @ml-top-border-default solid @ml-instore-pickup-circle-color-process;
+			}
+			.ml-ppos-instore-pickup-circle-process {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-process;
+			}
+		}
+		.ml-ppos-instore-pickup-header-ready {
+			.ml-flex(1);
+			.ml-instore-background();
+			.ml-ppos-instore-pickup-order-ready-bar {
+				border-top: @ml-top-border-default solid @ml-instore-pickup-circle-color-ready;
+			}
+			.ml-ppos-instore-pickup-circle-ready {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-ready;
+			}
+		}
+		.ml-ppos-instore-pickup-header-done {
+			.ml-flex(1);
+			.ml-instore-background();
+			.ml-ppos-instore-pickup-order-done-bar {
+				border-top: @ml-top-border-default solid @ml-instore-pickup-circle-color-done;
+			}
+			.ml-ppos-instore-pickup-circle-done {
+				.ml-instore-pickup-circle();
+				background: @ml-instore-pickup-circle-color-done;
+			}
+		}
+	}
+
+	.ml-ppos-instore-pickup-row-container {
+		.ml-flex-display();
+		.ml-flex-row();
+		height: 100%;
+		
+		.ml-ppos-scroll-container {
+			height: @ml-instore-pickup-scroll-height;
+			margin-right: 0px;
+			padding-right: 0px;
+		}
+		
+		/* New Order */
+		.ml-ppos-instore-pickup-order-new {
+			.ml-flex(1);
+			.ml-instore-background();
+
+			.ml-ppos-instore-pickup-order-new-container {
+				padding: @ml-padding-default;
+			}
+		}
+		
+		/* In Process */
+		.ml-ppos-instore-pickup-order-process {
+			.ml-flex(1);
+			.ml-instore-background();
+
+			.ml-ppos-instore-pickup-order-process-container {
+				padding: @ml-padding-default;
+				.ml-ppos-instore-pickup-csr-list {
+					.ml-ppos-light-transparent-bg();
+					> button {
+						padding: @ml-padding-10;
+					}
+					ul, li {
+						margin: 0px;
+						padding: 0px;
+						list-style: none;
+						font-size: @ml-font-size-small;
+						a {
+							padding: @ml-padding-10;
+							display: block;
+							line-height: (@ml-spacer-default*2-6);
+							border-top: 1px solid rgba(255,255,255,.5);
+						}
+					}
+				}
+			}
+		}
+
+		/* Pick up Ready */
+		.ml-ppos-instore-pickup-order-ready {
+			.ml-flex(1);
+			.ml-instore-background();
+
+			.ml-ppos-instore-pickup-order-ready-container {
+				padding: @ml-padding-default;
+				.ml-ppos-instore-pickup-notes {
+					textarea {
+						.ml-ppos-textarea();
+					}
+					.ml-ppos-instore-pickup-save-button {
+						width: 100%;
+						margin-top: @ml-padding-5;
+					}
+				}
+			}
+		}
+
+		/* Done */
+		.ml-ppos-instore-pickup-order-done {
+			.ml-flex(1);
+			.ml-instore-background();
+
+			.ml-ppos-instore-pickup-order-done-container {
+				padding: @ml-padding-default;
+			}
+		}
+	}
+
+	/* Instore toggle buttons / common elements */
+	.ml-ppos-instore-pickup-order-content {
+		
+		.ml-ppos-instore-pickup-order-content-data {
+			.ml-ppos-instore-pickup-thumb-container {
+				.ml-flex-display();
+				-webkit-flex-wrap: wrap;
+				-webkit-justify-content: space-between;
+			}
+			.ml-ppos-instore-pickup-item-code, .ml-ppos-instore-pickup-thumb, .ml-ppos-instore-pickup-custom-name, .ml-ppos-instore-pickup-order-date {
+				padding-bottom: @ml-padding-5;
+				font-size: @ml-font-size-small;
+			}
+			.ml-ppos-instore-pickup-button-container {
+				.ml-flex-display();
+				.ml-flex-row();
+				-webkit-justify-content: space-between;
+				margin-top: @ml-padding-10;
+				margin-bottom: @ml-padding-default;
+
+				.ml-ppos-secondary-button {
+					border: 1px solid rgba(255,255,255,.8);
+					font-size: @ml-font-size-small;
+				}
+				
+				.ml-ppos-instore-pickup-button-move {
+					position: relative;
+					text-align: left;
+					background: @ml-base-bg-color;
+					.ml-ppos-btn-inner {
+						padding: .9em 4em .9em 1em;
+						color: @ml-base-gray-dark;
+						font-size: @ml-font-size-small;
+					}
+					
+				}
+			}
+		}
+		> div:last-child {
+			border-bottom: 1px solid rgba(255,255,255,.5);
+		}
+
+	}
+	.ml-ppos-instore-pickup-toggle {
+		color: @ml-base-font-color;
+		.togglebtn {
+			background: transparent;
+			padding: @ml-padding-10 0px;
+			border: 0px;
+			border-top: 1px solid rgba(255,255,255,.5);
+			width: 100%;
+			text-align: left;
+			color: @ml-base-font-color;
+			line-height: (@ml-spacer-default*2-6);
+			position: relative;
+			i {
+				position: absolute;
+				right: 0px;
+				top: (@ml-spacer-default - 4);
+			}
+			span {
+				display: block;
+				font-size: @ml-font-size-small;
+				line-height: (@ml-spacer-default - 1);
+				margin-right: (@ml-spacer-default*2);
+			}
+			span.ml-ppos-instore-pickup-order-number {
+				font-size: @ml-font-size-base;
+			}
+		}
+	}
+	.ml-ppos-instore-pickup-content-container {
+		.ml-instore-background();
+		height: 100%;
+
+		.ml-ppos-scroll-container {
+			overflow-y: auto;
+			height: auto;
+			max-height: (@ml-default-body-scroll-height - @ml-padding-default);
+			margin-right: 0px;
+		}
+
+		.ml-ppos-instore-pickup-sort-container {
+			color: @ml-base-font-color;
+			border-bottom: 1px solid rgba(255,255,255,.5);
+			margin: 0px @ml-padding-default;
+			.nav-tabs {
+				border: 0px;
+				li>a {
+					padding: @ml-padding-10 @ml-padding-default @ml-padding-10 0px;
+					border: 0px;
+					border-radius: 0px;
+					color: @ml-base-font-color;
+					&:hover, &:active, &:visited, a:focus, a.active, &.visited {
+						background: transparent;
+						border: 0px;
+						color: @ml-base-font-color;
+					}
+				}
+				.dropdown-menu {
+					font-size: @ml-font-size-base;
+					background: transparent;
+					border-radius: 0px;
+					border: 0px;
+					box-shadow: none;
+					min-width: @ml-instore-pickup-sort-width;
+				}
+				.dropdown-menu {
+					li:last-child a {
+						border: 0px;
+					}
+				}
+				.open {
+					min-width: @ml-instore-pickup-sort-width;
+					background: @ml-instore-pickup-sort-background-color;
+					margin-left: -@ml-padding-default;
+					a {
+						color: @ml-base-gray-dark;
+						margin-left: @ml-padding-default;
+						&:hover, a:focus, a.active {
+							color: @ml-base-gray-dark;
+						}
+					}
+					.dropdown-menu {
+						background: @ml-instore-pickup-sort-background-color;
+						a {
+							position: relative;
+							color: @ml-base-gray-dark;
+							margin: 0px @ml-padding-default;
+							padding: @ml-padding-10 0px;
+							border-bottom: 1px solid rgba(0,0,0,.3);
+							&:hover, a:focus, a.active {
+								color: @ml-base-gray-dark;
+							}
+							span {
+								position: absolute;
+								top: 7px;
+								right: 0px;
+							}
+						}
+					}
+				}
+			}
+			.nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus {
+				background: transparent;
+			}
+		}
+		
+		/*** Accordion Classes Start ***/
+		.ml-ppos-instore-pickup-order-detail-row {
+			margin: 0px;
+			.panel {
+				font-size: @ml-font-size-base;
+				border: 0px;
+				background: transparent;
+				border-radius: 0px;
+				box-shadow: none;
+				color: @ml-base-font-color;
+				margin: 0px;
+			}
+			.panel-title a {
+				padding: @ml-padding-default 0px;
+				display: block;
+				color: @ml-base-font-color;
+				font-size: @ml-font-size-base;
+				cursor: pointer;
+				position: relative;
+				span {
+					margin-left: (@ml-spacer-default*2);
+				}
+				i {
+					position: absolute;
+					right: 0px;
+					top: @ml-padding-10;
+				}
+				span.ml-ppos-instore-pickup-customer-name {
+					position: absolute;
+					right: (@ml-spacer-default*3+5);
+					padding: (@ml-spacer-default/3+3) @ml-padding-10;
+					top: (@ml-spacer-default/3+2);
+					.ml-ppos-dark-bg();
+				}
+			}
+			.panel-default {
+				margin: 0px @ml-padding-default;
+				border-bottom: 1px solid rgba(255,255,255,.5);
+			}
+			.panel-heading {
+				background: transparent;
+				border-color: transparent;
+				border-radius: 0px;
+				padding: 0px;
+			}
+			.panel-body {
+				border: 0px !important;
+				padding: @ml-padding-default 0px;
+			}
+			.panel-collapse {
+				margin-left: (@ml-spacer-default*8+8);
+			}
+		}
+		/*** Accordion Classes End ***/
+		.ml-ppos-instore-pickup-order-detail {
+			.ml-flex-display();
+			.ml-flex-row();
+			margin-bottom: @ml-padding-default;
+
+			.ml-ppos-instore-pickup-order-detail-img {
+				.ml-flex(1 11%);
+				img {
+					max-width: 100%;
+				}
+			}
+			.ml-ppos-instore-pickup-order-detail-info {
+				.ml-flex(1 49%);
+				div {
+					padding-bottom: @ml-padding-10;
+				}
+			}
+			.ml-ppos-instore-pickup-order-detail-options {
+				.ml-flex(1 40%);
+			}
+		}
+		.ml-ppos-instore-pickup-order-detail-footer {
+			.ml-flex-display();
+			.ml-flex-row();
+
+			.ml-ppos-instore-pickup-order-detail-customer {
+				padding-bottom: @ml-padding-10;
+				.ml-flex(1);
+			}
+			.ml-ppos-instore-pickup-order-detail-button {
+				text-align: right;
+				.ml-flex(1);
+				.ml-ppos-primary-button {
+					display: inline-block;
+					color: @ml-base-gray-dark;
+					position: relative;
+					span {
+						margin-right: (@ml-spacer-default*2);
+					}
+					i {
+						position: absolute;
+						top: (@ml-spacer-default/3+1);
+						right: @ml-padding-10;
+					}
+				}
+			}
+		}
+	}
+	.ml-ppos-instore-pickup-sort-wrapper {
+		padding: @ml-padding-default;
+		color: @ml-base-font-color;
+		.ml-ppos-instore-pickup-sort-head {
+			.ml-flex-display();
+			.ml-flex-row();
+			border-bottom: 1px solid rgba(255,255,255,.5);
+			padding-bottom: @ml-padding-10;
+			
+			div {
+				.ml-flex(4);		
+			}
+			div+div {
+				.ml-flex(1);		
+			}
+		}
+		.ml-ppos-instore-pickup-sort-content {
+			.ml-flex-display();
+			.ml-flex-row();
+			padding: @ml-padding-10 0px;
+			border-bottom: 1px solid rgba(255,255,255,.5);
+
+			.ml-ppos-instore-pickup-sort-name {
+				.ml-flex(3.6);
+				padding-left: @ml-padding-10;
+				padding-right: @ml-padding-10;
+			}
+			.ml-ppos-instore-pickup-sort-qty {
+				.ml-flex(1);
+			}
+			.ml-ppos-instore-pickup-sort-thumb {
+				width: 120px;
+				img {
+					max-width: 100%;
+				}
+			}
+			.ml-ppos-instore-pickup-sku {
+				padding-top: @ml-padding-10;
+			}
+		}
+		.ml-ppos-scroll-container {
+			height: @ml-instore-pickup-sort-max-height;
+		}
+	}
+}

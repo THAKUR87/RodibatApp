@@ -1,0 +1,105 @@
+<div class="ml-ppos-account-wrapper">
+	<div class="ml-ppos-add-csr-container">
+	<form novalidate>
+		<div class="ml-ppos-add-csr-head-row">
+			<div class="ml-ppos-add-csr-title">
+				<a href="" ng-click="goToManagementScreen();"><i class="ml-ppos-mini-white-icon ml-ppos-arrow-left"></i> <span translate="lbl.ppos.management"/></a>
+			</div>
+			<div class="ml-ppos-add-csr-add-buttons">
+				<button type="button" name="cancelButton" class="ml-ppos-secondary-button" id="cancelButton" translate="btn.ppos.cancel" ng-click="goToCsrListScreen();"></button><button type="submit" name="saveButton" class="ml-ppos-primary-button" id="saveButton" translate="btn.ppos.save" data-ng-click="updateCSR(csr)"></button>
+			</div>
+		</div>
+
+		<!-- Error Block Start -->
+		<div class="ml-ppos-error-container" data-ng-show="csr.showCsrOpFailureMessage">
+			<div class="ml-icon-error" id="divMsgIconContainer"></div>
+			<div class="ml-ppos-error-message">
+				<div>{{ csr.csrOpFailureMessage | translate }}</div>
+			</div>
+		</div>
+		<!-- Error Block End -->
+		<div class="ml-ppos-add-csr-form">
+			<div class="ml-ppos-add-csr-image"></div>
+			<div class="ml-ppos-add-csr-content">
+				<div class="ml-ppos-add-csr-row">
+					<label><span translate="lbl.ppos.employeeId"/></label>
+					<div class="ml-ppos-add-csr-input ml-ppos-edit-csr-disable"><span name="employeeId">{{csr.employeeId}}</span></div>
+				</div>
+
+				<div class="ml-ppos-add-csr-row">
+					<label><span>*</span> <span translate="lbl.ppos.firstName"/></label>
+					<div class="ml-ppos-add-csr-input"><input type="text" name="firstName" id="firstName" maxlength="40" class="form-control" data-ng-model="csr.firstName" /></div>
+				</div>
+
+				<div class="ml-ppos-add-csr-row">
+					<label><span>*</span> <span translate="lbl.ppos.lastName"/></label>
+					<div class="ml-ppos-add-csr-input"><input type="text" name="lastName" id="lastName" maxlength="40" class="form-control" data-ng-model="csr.lastName" /></div>
+				</div>
+
+				<div class="ml-ppos-add-csr-row">
+					<label><span>*</span> <span translate="lbl.ppos.userID"/></label>
+					<div class="ml-ppos-add-csr-input ml-ppos-edit-csr-disable"><span name="email">{{csr.email}}</span></div>
+				</div>
+				<div class="ml-ppos-add-csr-row ml-ppos-add-input-pin-message">
+					<label></label>
+					<div class="ml-ppos-add-csr-input"><span translate="User email"/></div>
+				</div>
+
+				
+				<div class="ml-ppos-add-csr-row">
+					<label><span>*</span> <span translate="lbl.ppos.roleType"/></label>
+					<div class="ml-ppos-add-csr-input ml-ppos-toggle-container">
+						<div data-ng-show="csr.roleType.length == 2" class="ml-ppos-toggle btn-group btn-toggle">
+							<label class="ml-ppos-toggle-button btn" ng-class="{active : option.id == csr.selectedRole}" data-ng-repeat="option in csr.roleType" id="lblRoleRadio{{option.id}}">
+								<input type="radio" data-ng-model="csr.selectedRole"  name="roleTypeRadio" id="roleTypeRadio" value="{{option.id}}" data-ng-change="populateCSRTypeDetails(csr.selectedRole)"/> <span>{{ option.code | translate }}</span>
+							</label>
+						</div>
+						<div data-ng-show="csr.roleType.length != 2" class="ml-ppos-edit-csr-role">
+							<select name="roleTypeSelect" id="roleTypeSelect" class="form-control-select" data-ng-model="csr.selectedRole" data-ng-change="populateCSRTypeDetails(csr.selectedRole)"> 
+								<option ng-repeat="option in csr.roleType" ng-selected="{{option.id == csr.selectedRole}}" value="{{option.id}}">{{ option.code | translate }}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="ml-ppos-add-csr-row ml-ppos-toggle-container">
+					<label><span>*</span> <span translate="lbl.ppos.activeStatus"/></label>
+					<div class="ml-ppos-add-csr-input ml-ppos-toggle btn-group btn-toggle" data-toggle="buttons">
+						<label id="lblActive" class="ml-ppos-toggle-button btn" ng-class="{active : csr.activeStatus.toString() == 'true'}" data-ng-click="setStatus(true)">
+							<input type="radio" name="activeStatus" id="activeStatus" value="true" data-ng-model="csr.activeStatus" /> <span translate="lbl.ppos.active"/></label>
+						<label id="lblInactive" class="ml-ppos-toggle-button btn" ng-class="{active : csr.activeStatus.toString() == 'false'}" data-ng-click="setStatus(false)">
+							<input type="radio" name="activeStatus" id="activeStatus" value="false" data-ng-model="csr.activeStatus"/> <span translate="lbl.ppos.inactive"/>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+			<!-- Permission Block Start -->
+			<div class="ml-ppos-add-csr-permission-wrapper">
+				<div class="ml-ppos-add-csr-permission-head">
+					<button class="btn" type="button" data-toggle="collapse" data-target="#collapseDiv" aria-expanded="false" aria-controls="collapse" ng-click="showHidePermission();"><i id="permissionDivElement" class="ml-icon-lib ml-icon-plus"></i> <span translate="hdr.ppos.permissions"/></button>
+				</div>
+				<div class="collapse" id="collapseDiv">
+					<div id="permissionListDiv"></div>
+				</div>
+			</div>
+			<!-- Permission Block End -->
+		</div>
+	</div>
+</div>
+<!-- Following script tag added for fixing PEBL-16516 -->
+<script>
+$('#saveButton').on('touchend', function(e){
+    e.stopPropagation(); e.preventDefault();
+	$('#saveButton').trigger('click');
+});
+$('#cancelButton').on('touchend', function(e){
+	e.stopPropagation(); e.preventDefault();
+	// following is the hack to hide soft keyboard
+	document.activeElement.blur();
+	$('input').blur();
+	$('select').blur();
+	$('#cancelButton').trigger('click');
+});
+</script>

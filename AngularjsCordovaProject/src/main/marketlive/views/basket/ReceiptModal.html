@@ -1,0 +1,42 @@
+<div class="ml-ppos-modal-container ml-ppos-customer-search-wrapper">
+    <div class="modal" id="receiptModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-ng-click="cancel()" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+                    <h4 class="modal-title"> <span translate="lbl.ppos.receipt"></span></h4>
+                </div>
+
+                    <form name="receiptForm" novalidate data-ng-submit="processReceipt()">
+                        <div class="modal-body" class="form-control">
+
+                          <div data-ng-show="receiptDataModel.paymentChange" class="ml-ppos-payment-change-due"><span translate="lbl.ppos.changeDue"></span>&nbsp; {{receiptDataModel.paymentChange}}</div>
+
+                            <div data-ng-show="receiptDataModel.hasValidationErrors" class="ml-ppos-error-container">
+                                <div class="ml-icon-error"></div>
+                                <div class="ml-ppos-error-message">
+                                    <div data-ng-repeat="validationError in receiptDataModel.validationErrors">{{ validationError }}</div>
+                                </div>
+                            </div>
+
+                            <span id="print" ng-class="receiptDataModel.printSelected == true ?  'ml-ppos-mini-white-icon ml-ppos-radio ml-ppos-radio-selected' : 'ml-icon-lib ml-icon-unchecked' " data-ng-model="receiptDataModel.printSelected" data-ng-click="manageSelection('print')"></span>
+                            <span translate="lbl.ppos.print"></span> {{receiptDataModel.deviceName}}
+
+                            <p/>
+                            <span id="email" ng-class="receiptDataModel.emailSelected == true ?  'ml-ppos-mini-white-icon ml-ppos-radio ml-ppos-radio-selected' : 'ml-icon-lib ml-icon-unchecked' " ng-model="receiptDataModel.emailSelected"  data-ng-click="manageSelection('email')"></span>
+                            <span translate="lbl.ppos.email"></span> <div style="width:400px;display: inline-block"><input id="receiptModalEmail" type="email" data-ng-model="email" class="form-control"></div>
+
+                            <div class="modal-footer ml-ppos-button-customer-search">
+
+                            <div><button type="submit" data-ng-disabled="!receiptDataModel.printSelected && ! receiptDataModel.emailSelected " name="emailReceiptButton" id="emailReceiptButton" class="ml-ppos-primary-button" ng-disabled="buttonClicked"><span translate="lbl.ppos.receipt"></span> </button></div>
+                            <div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancel()"><span translate="lbl.ppos.noReceipt"></span> </button></div>
+
+                        </div>
+                        </div>
+                    </form>
+           
+               
+            </div>
+        </div>
+    </div>
+</div>

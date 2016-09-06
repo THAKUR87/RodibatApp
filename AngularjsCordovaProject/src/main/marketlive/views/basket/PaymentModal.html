@@ -1,0 +1,127 @@
+<!-- PaymentModal.html | (c) 2015 MarketLive, Inc. | All Rights Reserved -->
+
+<div class="ml-ppos-modal-container">
+    <div class="modal" id="paymentModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" ng-class="{ 'ml-ppos-signature-content' : selection == 'SIGNATURE' }">
+                <!-- Modal Dialog Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+                    <h4 class="modal-title ml-ppos-payment-modal-total" ng-show="selection == 'SIGNATURE'"><span>{{model.total}}</span></h4>
+                    <h4 class="modal-title"><span translate="hdr.ppos.basketNumber"></span>: <span>{{model.id}}</span></h4>
+                </div>
+
+                <!-- Modal Dialog Body -->
+                <div class="modal-body">
+                    <div class="ml-ppos-payment-display" ng-class="{ 'active' : showDefaultLayout() }">
+                        <div class="ml-ppos-payment-method">
+                            <!-- Payment Type Selection -->
+                            <div class="ml-ppos-payment-selection" ng-class="{ 'active' : selection == 'PAYMENT_SELECTION' }">
+                                <div class="ml-ppos-payment-method-label"><span translate="msg.ppos.selectPaymentMethod"></span></div>
+                                <div class="ml-ppos-payment-method-item" ng-repeat="type in model.paymentTypes track by $index" ng-click="select(type.code)">
+                                    <div>{{type.displayName}}</div>
+                                </div>
+                            </div>
+                            <!-- Credit Card Selection Options -->
+                            <div class="ml-ppos-payment-method-credit" ng-class="{ 'active' : selection == 'CARDPRESENT' }">
+                                <!-- Scan Option -->
+                                <div class="ml-ppos-scan" data-ng-click="select('CREDIT_CARD_SWIPE')">
+                                    <span class="ml-ppos-scan-button">
+                                        <span class="ml-ppos-grey-icon ml-ppos-scan-barcode"></span>
+                                        <span translate="btn.ppos.scanCreditCard"></span>
+                                    </span>
+                                </div>
+                                <!-- Manual Option -->
+                                <!-- TODO: uncomment, to add the manual credit card entry. -->
+                                <!--<div class="ml-ppos-typein" data-ng-click="select('CREDIT_CARD_ENTRY')">-->
+                                    <!--<span class="ml-ppos-typein-button">-->
+                                        <!--<span class="ml-ppos-grey-icon ml-ppos-typein"></span>-->
+                                        <!--<span translate="btn.ppos.typeIn"></span>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                            </div>
+                            <!-- Credit Card Manual Entry -->
+                            <div class="ml-ppos-payment-method-credit-enter" ng-class="{ 'active' : selection == 'CREDIT_CARD_ENTRY' }">
+                                <ml-payment-credit-card-manual data-ml-payment-model="model" data-ml-parent-submit="addPayment()" data-payment-service="paymentService"></ml-payment-credit-card-manual>
+                            </div>
+                            <!-- Cash -->
+                            <div class="ml-ppos-payment-method-cash" ng-class="{ 'active' : selection == 'CASH' }">
+                                <ml-payment-cash data-ml-payment-model="model" data-ml-parent-submit="addPayment()" data-payment-service="paymentService"></ml-payment-cash>
+                            </div>
+                            <!-- Gift Certificates -->
+                            <div class="ml-ppos-payment-method-gift-certificate" ng-class="{ 'active' : selection == 'GIFTCERT' }">
+                                <span translate="btn.ppos.enterGiftCertificate"></span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Summary -->
+                        <div class="ml-ppos-payment-summary">
+                            <!-- Total -->
+                            <div class="ml-ppos-summary-content">
+                                <div class="ml-ppos-summary-label"><span translate="lbl.ppos.total"></span>:</div>
+                                <div class="ml-ppos-summary-value">{{model.total}}</div>
+                            </div>
+                            <!-- Payment List -->
+                            <div class="ml-ppos-scroll-container">
+                                <div class="" ng-repeat="payment in model.data.payments track by $index">
+                                    <div class="ml-ppos-summary-content ml-ppos-summary-payments">
+                                        <div class="ml-ppos-summary-label">{{payment.displayName}}:</div>
+                                        <div class="ml-ppos-summary-value">{{payment.displayAmount}}</div>
+
+                                        <div class="ml-ppos-basket-item-close-button">
+                                            <span data-ng-click="removePayment(payment.code)" class="ml-ppos-mini-white-icon ml-ppos-close"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-ppos-payment-summary-footer">
+                                <!-- Balance -->
+                                <div class="ml-ppos-summary-content ml-ppos-summary-remaining-balance" ng-class="{ 'active' : model.displayBalance }">
+                                    <div class="ml-ppos-summary-label"><span translate="lbl.ppos.remainingBalance"></span>:</div>
+                                    <div class="ml-ppos-summary-value">{{model.displayBalance}}</div>
+                                </div>
+                                <div class="ml-ppos-summary-content ml-ppos-summary-total-paid" ng-class="{ 'active' : model.data.displayTotal }">
+                                    <div class="ml-ppos-summary-label"><span translate="lbl.ppos.totalPaid"></span>:</div>
+                                    <div class="ml-ppos-summary-value">{{model.data.displayTotal}}</div>
+                                </div>
+                                <div class="ml-ppos-summary-content ml-ppos-summary-change-amount" ng-class="{ 'active' : model.data.change }">
+                                    <div class="ml-ppos-summary-label"><span translate="lbl.ppos.changeAmount"></span>:</div>
+                                    <div class="ml-ppos-summary-value">{{model.data.change}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Credit Card Swipe -->
+                    <div class="ml-ppos-payment-method-credit-scan" ng-class="{ 'active' : selection == 'CREDIT_CARD_SWIPE' }">
+                        <ml-payment-credit-card-swipe data-ml-payment-model="model"
+                                                      data-ml-parent-submit="addPayment()"
+                                                      data-ml-change-selection="select(selection)"
+                                                      data-payment-service="paymentService"
+                                                      data-ml-view-selection="selection"></ml-payment-credit-card-swipe>
+                    </div>
+                    <!-- Signature -->
+                    <div class="ml-ppos-signature-wrapper" ng-show="selection == 'SIGNATURE'">
+                        <div class="ml-ppos-signature-header" ng-show="selection == 'SIGNATURE'"><span translate="lbl.ppos.creditCardSignatureHeader"></span></div>
+                        <canvas ng-signature-pad="model.signature" width="570px" height="200px" class="ml-ppos-signature"></canvas>
+                        <div class="ml-ppos-signature-agreement" ng-show="selection == 'SIGNATURE'">
+                            <span translate="lbl.ppos.creditCardSignatureAgreement"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Dialog Footer Buttons -->
+                <div class="modal-footer">
+                    <!--<div ng-show="model.placeOrder"><button type="submit" name="" id="markAsPaid" class="ml-ppos-primary-button" data-ng-click="basketCheckout()" translate="btn.ppos.markAsPaid"></button></div>-->
+                    <div ng-show="!model.placeOrder && showDefaultLayout()"><button type="submit" name="" id="" class="ml-ppos-primary-button" data-ng-click="apply()" translate="btn.ppos.addPayment"></button></div>
+                    <div ng-show="selection == 'SIGNATURE'"><button type="submit" name="" id="acceptSignature" class="ml-ppos-primary-button" data-ng-click="acceptSignature()" translate="Accept Signature"></button></div>
+
+                    <div ng-show="selection == 'PAYMENT_SELECTION'"><button type="button" class="ml-ppos-secondary-button" data-dismiss="modal" translate="btn.ppos.cancel"></button></div>
+                    <div ng-hide="selection == 'PAYMENT_SELECTION' || selection == 'SIGNATURE'"><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancel()"  translate="btn.ppos.cancel"></button></div>
+                    <div ng-show="selection == 'SIGNATURE'"><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelSignature()"  translate="btn.ppos.cancel"></button></div>
+                    <div ng-show="selection == 'SIGNATURE'" class="ml-ppos-signature-clear-button"><button type="button" class="ml-ppos-secondary-button" data-ng-click="clearSignature()"  translate="btn.ppos.clearSignature"></button></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

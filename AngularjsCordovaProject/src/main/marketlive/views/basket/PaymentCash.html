@@ -1,0 +1,10 @@
+<!-- PaymentCash.html | (c) 2015 MarketLive, Inc. | All Rights Reserved -->
+
+<div>
+    <div class="ml-ppos-payment-cash-entry">{{mlPaymentModel['cash'].amountDisplay}}</div>
+    <div class="ml-ppos-cash-key-pad">
+        <div class="ml-ppos-cash-key-wrapper" ng-repeat="button in mlPaymentModel.cash.buttons track by $index" ng-click="selectCashKey(button.value)">
+            <div class="ml-ppos-cash-key" ng-class="{ 'ml-ppos-cash-key-delete' : button.label == 'Delete' }">{{button.label}}</div>
+        </div>
+    </div>
+</div>

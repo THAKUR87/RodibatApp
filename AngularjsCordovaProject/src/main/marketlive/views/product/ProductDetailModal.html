@@ -1,0 +1,96 @@
+<div class="ml-ppos-modal-container ml-ppos-product-search-wrapper">
+	<div class="modal" id="productDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-ng-click="closeProductDetailModal()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title">{{ model.product.name }}</h4>
+				</div>
+                <form novalidate data-ng-submit="closeProductDetailModal(); addItemToBasketAndReloadBasket();">
+					<div class="modal-body">
+						<div class="ml-ppos-product-search-label-content">
+							<div class="ml-ppos-product-search-row">
+								<div class="ml-ppos-product-search-thumb"><img data-ng-src="{{model.addToBasketItem.thumb}}" width="150" height="150" /></div>
+								<div class="ml-ppos-product-search-info">
+
+                                    <!-- Short Description -->
+									<div class="ml-ppos-product-search-short-desc" data-ng-if="model.showShortDescription">{{ model.product.description.shortDescription }}</div>
+									
+									<!-- Long Description -->
+									<div data-ng-if="model.showLongDescription">{{ model.product.description.longDescription }}</div>
+									
+									<!-- Code -->
+									<div class="ml-ppos-product-search-code"><span translate="lbl.ppos.style"></span> {{ model.product.code }}</div>
+
+									<!-- Product Level Price -->
+									<div class="ml-product-detail-price-product">
+										<div class="ml-item-price-was">{{model.product.prices.displayPrice.priceWas}}</div>
+										<div>{{model.product.prices.displayPrice.price}}</div>
+									</div>
+
+									<!-- Options -->
+									<div class="ml-product-detail-options-wrapper"
+										data-ml-product-options
+										data-options="model.product.optionsWithAssociatedSkuIDs"></div>
+                    
+									<!-- Qty -->
+									<div>
+										<label class="ml-ppos-quantity-spinner-label"><div translate="msg.ppos.qty"></div></label>
+										<div class="ml-ppos-quantity-spinner-wrapper">
+											<ml-numeric-spinner data-mapped-value="model.addToBasketItem.qty" data-max-length="2"></ml-numeric-spinner>
+										</div>
+									</div>
+
+									<!-- Sku Level Price -->
+									<div class="ml-product-detail-price-wrapper">
+										<div class="ml-product-detail-price-sku">{{model.priceSkuMsg}}</div>
+									</div>
+
+									<!-- Stock Availability -->
+									<div class="ml-product-detail-stock-wrapper">
+										<div data-ng-if="model.stockAvailable === true">
+											<span class="ml-product-detail-stock-label" translate="msg.ppos.inStock"></span>
+											<span class="ml-product-detail-stock-qty">{{model.stockQty}}</span>
+											<span class="ml-product-detail-stock-available" translate="msg.ppos.available"></span>
+										</div>
+										<div data-ng-if="model.stockUnavailable === true">
+											<span class="ml-product-detail-stock-unavailable" translate="msg.ppos.unavailable"></span>
+										</div>
+
+										<div data-ng-if="model.initialized">
+											<div data-ng-if="!getSelectedSku()" class="ml-ppos-error-container">
+												<div class="ml-icon-error"></div>
+												<div class="ml-ppos-error-message" translate>msg.ppos.selectValidOption</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal-footer ml-ppos-button-set ml-ppos-button-product-search">
+						<div data-ng-if="model.initialized">
+							<!-- Add to Cart Button -->
+							<div data-ng-class="{'disabled' : model.disableAddToCartButton}">
+								<span class="ml-ppos-btn-inner">
+									<span class="ml-ppos-btn-text" translate="btn.ppos.addToBasket"></span>
+									<span class="ml-ppos-btn ml-ppos-mini-grey-icon ml-ppos-plus"></span>
+								</span>
+								<button type="submit" name="addToCartButton" id="addToCartButton" class="ml-ppos-btn-hidden" translate="btn.ppos.addToBasket"></button>
+							</div>
+
+							<!-- Nearby Store Button -->
+							<div class="ml-product-detail-store-button" data-ng-class="{'disabled' : model.disableStoresButton}"><input type="button" name="nearByStoresButton" id="nearByStoresButton" value="{{'btn.ppos.stores' | translate}}" data-ng-click="showNearByStoresModal(model.product.id, getSelectedSku(), model.addToBasketItem.qty)" class="ml-ppos-secondary-button"></div>
+						</div>
+
+						<div>
+							<button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelProductDetailModal()" data-dismiss="modal" translate="btn.ppos.cancel"></button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="ml-numeric-spinner-wrapper">
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button"
+                    ng-click="decrementValue($event)"
+                    ng-disabled="isButtonDisabled('decrement')">
+                <span class="ml-icon-lib ml-icon-minus"></span>
+            </button>
+        </span>
+        <input type="text" size="3" maxlength="{{maxLength}}" class="ml-ppos-quantity-spinner"
+               data-ng-model="mappedValue"
+               data-ng-blur="handleBlur()">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button"
+                    ng-click="incrementValue($event)"
+                    ng-disabled="isButtonDisabled('increment')">
+                <span class="ml-icon-lib ml-icon-plus"></span>
+            </button>
+        </span>
+    </div>
+</div>

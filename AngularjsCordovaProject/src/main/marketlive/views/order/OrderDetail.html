@@ -1,0 +1,245 @@
+<div class="ml-ppos-order-detail-instore-pickup-wrapper">
+	<div class="ml-ppos-order-detail-instore-pickup-container">
+		<div class="ml-ppos-order-pickup-detail-container">
+			<div class="ml-ppos-order-pickup-order-number"><span><span translate="lbl.ppos.orderDetail.orderNumber"/>:</span> {{ orderDetailDataModel.code }}</div>
+			
+			<div class="ml-ppos-scroll-container">
+			<!-- Loop -->
+			<div class="panel-group ml-ppos-order-pickup-detail-row" id="accordion">
+				<div class="panel panel-default" data-ng-repeat="orderShipment in orderShipmentDataModel">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#orderShipmentDetail_{{ orderShipment.id }}"> <span translate="lbl.ppos.shipmentCount" translate-values="{ shipmentCount: $index + 1, totalShipment: orderShipmentDataModel.length }"/><span class="ml-ppos-instore-pickup-customer-name">{{orderShipment.status}} </span> <i class="ml-ppos-mini-white-icon ml-ppos-arrow-down"></i></a>
+						</div> 
+					</div>
+					<div id="orderShipmentDetail_{{ orderShipment.id }}" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="ml-ppos-order-pickup-shipment-container">
+								<div class="ml-ppos-order-pickup-detail-info">
+									<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.orderDetail.shipmentContains"/></div>
+								</div>
+								<div class="ml-ppos-order-pickup-detail-subtotal">
+									<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.shipmentSubTotal" translate-values="{ shipmentCount: $index + 1 }"/></div>
+								</div>
+								<div class="ml-ppos-order-pickup-info">
+									<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.orderDetail.shippingInformation"/></div>
+								</div>
+							</div>
+							<div data-ng-repeat="item in orderShipment.items" class="ml-ppos-order-pickup-shipment-container">
+								<div class="ml-ppos-order-pickup-detail-info">
+									<div class="ml-ppos-order-pickup-image">
+										<img src="{{ item.product.image.thumb }}" width="80" height="80" />
+									</div>
+									<div class="ml-ppos-order-pickup-detail">
+										<div>{{ item.product.name }}</div>
+										<div><span translate="lbl.ppos.style"/> {{ item.skuCode }}</div>
+										<div data-ng-repeat="option in item.options">
+											<div data-ng-if="option.optionType">{{ option.optionType }}: {{ option.name }}</div>
+										</div>
+										<div><span translate="msg.ppos.qty"/> {{ item.qty }}</div>
+										<div><span translate="lbl.ppos.orderDetail.priceEach"/> {{ item.regularPrice }}</div>
+										<div data-ng-repeat="itemDiscount in item.discounts">
+											<div><span translate="lbl.ppos.orderDetail.discount"/> {{ itemDiscount.amount }}</div>
+											<div><span translate="hdr.ppos.price"/> {{ item.sellPrice }}</div>
+											<div>{{ itemDiscount.message }}</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="ml-ppos-order-pickup-detail-subtotal">
+									<div data-ng-if="$index === 0">
+										<div>
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.merchandiseSubtotalAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderShipment.merchandiseTotal }}</div>
+										</div>
+										
+										<div data-ng-repeat="shipmentDiscount in orderShipment.discounts">
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.shippingAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderShipment.discountedShippingTotal }} {{ shipmentDiscount.message }}</div>
+										</div>
+										<div data-ng-if="orderShipment.discounts.length === 0">
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.shippingAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderShipment.discountedShippingTotal }}</div>
+										</div>
+										<div>
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.taxAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderShipment.taxTotal }}</div>
+										</div>
+										<div>
+											<div class="ml-ppos-order-subtotal-content ml-ppos-order-subtotal-content-border"><span translate="lbl.ppos.totalAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value ml-ppos-order-subtotal-content-border">{{ orderShipment.total }}</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="ml-ppos-order-pickup-info">
+									<div data-ng-if="$index === 0">
+										<div class="ml-ppos-order-pickup-customer">{{ orderShipment.shipmentInfo.person.firstName }} {{ orderShipment.shipmentInfo.person.middleName }} {{ orderShipment.shipmentInfo.person.lastName }}</div>
+										<div>{{ orderShipment.shipmentInfo.address.street1 }} {{ orderShipment.shipmentInfo.address.street2 }} {{ orderShipment.shipmentInfo.address.street3 }}</div>
+										<div>{{ orderShipment.shipmentInfo.address.city }}, {{ orderShipment.shipmentInfo.address.state }} {{ orderShipment.shipmentInfo.address.postalCode }}</div>
+										<div>{{ orderShipment.shipmentInfo.address.country }}</div>
+										<div>{{ orderShipment.shipmentInfo.phone }}</div>
+										<br/>
+										<div>{{ orderShipment.shippingMethod.name }} - {{ orderShipment.shippingMethod.description }}</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>	
+			<!-- Loop End -->
+			<!-- Loop -->
+				<div class="panel panel-default" data-ng-repeat="orderPickup in orderPickupDataModel" id="PickupOptions">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#orderPickupDetail_{{ orderPickup.id }}"><span translate="lbl.ppos.pickupCount" translate-values="{ pickupCount: $index + 1, totalPickup: orderPickupDataModel.length }"/><span>- {{orderPickup.store.name}} ({{orderPickup.store.code}})</span> <span class="ml-ppos-instore-pickup-customer-name">{{orderPickup.status}}</span><i class="ml-ppos-mini-white-icon ml-ppos-arrow-down"></i></a>
+						</div> 
+					</div>
+					<div id="orderPickupDetail_{{ orderPickup.id }}" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="ml-ppos-order-pickup-shipment-container">
+								<div class="ml-ppos-order-pickup-detail-info">
+									<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.orderDetail.pickupItems"/></div>
+								</div>
+								<div class="ml-ppos-order-pickup-detail-subtotal">
+									<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.pickupSubTotal" translate-values="{ pickupCount: $index + 1 }"/></div>
+								</div>
+								<div class="ml-ppos-order-pickup-info">
+									<div data-ng-if="orderPickup.items[0].storeID != thisStore.id">
+										<div class="ml-ppos-order-pickup-subhead"><span translate="lbl.ppos.orderDetail.pickupInfo"/></div>
+									</div>
+								</div>
+							</div>
+							<div data-ng-repeat="item in orderPickup.items" class="ml-ppos-order-pickup-shipment-container">
+								<div class="ml-ppos-order-pickup-detail-info">
+									<div>
+										<div class="ml-ppos-order-pickup-image">
+											<img src="{{ item.product.image.thumb }}" width="80" height="80" />
+										</div>
+										<div class="ml-ppos-order-pickup-detail">
+											<div>{{ item.product.name }}</div>
+											<div><span translate="lbl.ppos.style"/> {{ item.skuCode }}</div>
+											<div data-ng-repeat="option in item.options">
+												<div data-ng-if="option.optionType">{{ option.optionType }}: {{ option.name }}</div>
+											</div>
+											<div><span translate="msg.ppos.qty"/> {{ item.qty }}</div>
+											<div><span translate="lbl.ppos.orderDetail.priceEach"/> {{ item.regularPrice }}</div>
+											<div data-ng-repeat="itemDiscount in item.discounts">
+												<div><span translate="lbl.ppos.orderDetail.discount"/> {{ itemDiscount.amount }}</div>
+												<div><span translate="hdr.ppos.price"/> {{ item.sellPrice }}</div>
+												<div>{{ itemDiscount.message }}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="ml-ppos-order-pickup-detail-subtotal">
+									<div data-ng-if="$index === 0">
+										<div>
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.merchandiseSubtotalAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderPickup.merchandiseTotal }}</div>
+										</div>
+										<div>
+											<div class="ml-ppos-order-subtotal-content"><span translate="lbl.ppos.taxAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value">{{ orderPickup.taxTotal }}</div>
+										</div>
+										<div>
+											<div class="ml-ppos-order-subtotal-content ml-ppos-order-subtotal-content-border"><span translate="lbl.ppos.totalAmount"/></div>
+											<div class="ml-ppos-order-subtotal-value ml-ppos-order-subtotal-content-border">{{ orderPickup.total }}</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="ml-ppos-order-pickup-info">
+									<div data-ng-if="item.storeID != thisStore.id">
+										<div data-ng-if="$index === 0">
+											<div class="ml-ppos-order-pickup-customer">{{ orderPickup.shipmentInfo.person.firstName }} {{ orderPickup.shipmentInfo.person.middleName }} {{ orderPickup.shipmentInfo.person.lastName }}</div>
+											<div>{{ orderPickup.shipmentInfo.phone }}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Loop End -->
+			</div>
+		</div>
+
+		<div class="ml-ppos-order-pickup-nav-container">
+			<div class="ml-ppos-order-pickup-header-customer">{{ orderDetailDataModel.customer.primaryContact.person.firstName }} {{ orderDetailDataModel.customer.primaryContact.person.lastName }}</div>
+				<div class="ml-ppos-order-pickup-summary-row">
+					<div class="ml-ppos-order-pickup-sub-head"><span translate="lbl.ppos.summaryOfCharges"/></div>
+					<div class="ml-ppos-scroll-container">
+						<div class="ml-ppos-order-pickup-summary-content">
+							<div class="ml-ppos-order-pickup-summary-label" translate="lbl.ppos.merchandiseSubtotalAmount"></div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderDetailDataModel.merchTotal }}</div>
+						</div>
+						<div class="ml-ppos-order-pickup-summary-content">
+							<div class="ml-ppos-order-pickup-summary-label" translate="lbl.ppos.taxAmount"></div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderDetailDataModel.taxTotal }}</div>
+						</div>
+						<div class="ml-ppos-order-pickup-summary-content">
+							<div class="ml-ppos-order-pickup-summary-label" translate="lbl.ppos.shippingAmount"></div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderDetailDataModel.shippingTotal }}</div>
+						</div>
+						<div data-ng-repeat="orderDiscount in orderDetailDataModel.discounts" class="ml-ppos-order-pickup-summary-content">
+							<div class="ml-ppos-order-pickup-summary-label">{{ orderDiscount.message }}</div>
+							<div class="ml-ppos-order-pickup-summary-value">-{{ orderDiscount.amount }}</div>
+						</div>
+						<div class="ml-ppos-order-pickup-summary-total-content">
+							<div class="ml-ppos-order-pickup-summary-label" translate="lbl.ppos.totalAmount"></div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderDetailDataModel.total }}</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="ml-ppos-order-pickup-summary-row">
+					<div class="ml-ppos-order-pickup-sub-head"><span translate="lbl.ppos.orderDetail.paymentMethods"/></div>
+					<div data-ng-repeat="orderPayment in orderDetailDataModel.payments">
+						<div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'CARD PRESENT' || orderPayment.paymentType === 'CREDIT CARD'">
+							<div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.cardType }} {{ orderPayment.maskedNumber }}</div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+						</div>
+						<div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'GIFT CERTIFICATE'">
+							<div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }} <span translate="lbl.ppos.forLabel"></span></div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+						</div>
+						<div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'CASH'">
+							<div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }}</div>
+							<div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+						</div>
+<<<<<<< .working
+                        <div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'PAYPAL'">
+                            <div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }}</div>
+                            <div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+                        </div>
+                        <div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'AMAZON'">
+                            <div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }}</div>
+                            <div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+                        </div>
+=======
+                        <div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'PAYPAL'">
+                            <div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }} <span translate="lbl.ppos.forLabel"></span></div>
+                            <div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+                        </div>
+                        <div class="ml-ppos-order-pickup-summary-content" data-ng-if="orderPayment.paymentType === 'AMAZON'">
+                            <div class="ml-ppos-order-pickup-summary-label">{{ orderPayment.paymentType }} <span translate="lbl.ppos.forLabel"></span></div>
+                            <div class="ml-ppos-order-pickup-summary-value">{{ orderPayment.amount }}</div>
+                        </div>
+>>>>>>> .merge-right.r166239
+					</div>
+					<div data-ng-if="orderDetailDataModel.sourceCodeInfoList" data-ng-repeat="sourceCodeInfo in orderDetailDataModel.sourceCodeInfoList"  class="ml-ppos-order-pickup-summary-content">
+						<div class="ml-ppos-order-pickup-summary-label"><span translate="msg.ppos.appliedCouponCodeWithAmount" translate-values="{ couponCode : sourceCodeInfo.code}"></span></div>
+						<div class="ml-ppos-order-pickup-summary-value" data-ng-if="!sourceCodeInfo.discountAmountZero">{{ sourceCodeInfo.discountAmount }}</div>
+					</div>
+				</div>
+
+				<div class="ml-ppos-order-detail-instore-pickup-button-container">
+					<in-store-pickup-customer-verification-modal data-order-detail-data-model="orderDetailDataModel"></in-store-pickup-customer-verification-modal>
+				</div>
+			</div>
+	</div>
+</div>

@@ -1,0 +1,182 @@
+<div class="ml-ppos-modal-container ml-ppos-nearby-store-wrapper">
+	<div class="modal" id="nearByStoresModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-ng-click="closeNearByStoresModal()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+					<h4 class="modal-title" translate="hdr.ppos.availabilityInNearbyStores"></h4>
+				</div>
+	  
+				<!-- Body -->
+				<div class="modal-body">
+					<div class="ml-ppos-store-wrapper">
+						<div class="ml-ppos-store-product-info-container">
+							<div class="ml-ppos-store-product-image"><img src="{{ nearByStoresDataModel.product.image.thumb }}" /></div>
+
+							<div class="ml-ppos-store-product-name">{{ nearByStoresDataModel.product.name }}</div>
+
+							<div class="ml-ppos-store-product-code"># {{ nearByStoresDataModel.selectedSku.code }}</div>
+
+							<div data-ng-if="nearByStoresDataModel.selectedSku.options">
+								<div data-ng-repeat="option in nearByStoresDataModel.selectedSku.options" class="ml-ppos-store-product-options">
+									{{ option.optionType }}: {{ option.name }}
+								</div>
+							</div>
+
+							<div class="ml-ppos-store-product-qty"><span translate="msg.ppos.qty"></span> {{ nearByStoresDataModel.requestedQuantity }}</div>
+						</div>
+						
+						<div class="ml-ppos-store-info-container">
+							<!-- Store Search -->
+							<div class="ml-ppos-store-search-container">
+								<div class="ml-ppos-store-search-box">
+									<div class="ml-ppos-store-search-zip-head" translate="lbl.ppos.cityStateZip"></div>
+									<div class="ml-ppos-store-search-form">
+										<form name="nearByStoresForm" novalidate data-ng-submit="searchNearByStores(true)">
+											<div class="ml-ppos-store-search-input"><input type="text" name="nearByStoresSearchKeyword" id="nearByStoresSearchKeyword" class="form-control" data-ng-model="nearByStoresDataModel.nearByStoresSearchKeyword" /></div>
+											<div class="ml-ppos-store-search-button"><input type="submit" name="findNearByStoresButton" id="findNearByStoresButton" class="ml-ppos-primary-button" value="{{ 'btn.ppos.findStores' | translate }}" data-ng-disabled="!nearByStoresDataModel.nearByStoresSearchKeyword"/></div>
+										</form>
+									</div>
+								</div>
+
+								<div class="ml-ppos-store-distance ml-ppos-toggle-container">
+									<div class="ml-ppos-store-search-distance-head" translate="lbl.ppos.storesWithinRadius"></div>
+
+									<div class="ml-ppos-toggle btn-group btn-toggle">
+										<label class="ml-ppos-toggle-button btn" ng-class="{active : radius == nearByStoresDataModel.selectedRadius}" data-ng-repeat="radius in nearByStoresDataModel.radiusArray">
+											<input type="radio" name="selectedStoreRadius" id="selectedStoreRadius" value="{{ radius }}" data-ng-model="nearByStoresDataModel.selectedRadius" data-ng-change="searchNearByStores(false)" /> <span translate="lbl.ppos.storeRadius" translate-values="{ storeRadius: radius }"></span>
+										</label>
+									</div>
+								</div>
+
+							</div>
+							
+							<!-- Store Detail -->
+							<div class="ml-ppos-store-detail-container">
+								<div class="ml-ppos-store-detail-row ml-ppos-store-detail-row-head">
+									<div class="ml-ppos-store-detail-row-store" translate="hdr.ppos.store"></div>
+									<div class="ml-ppos-store-detail-row-hours" translate="hdr.ppos.hours"></div>
+									<div class="ml-ppos-store-detail-row-distance" translate="hdr.ppos.distance"></div>
+									<div class="ml-ppos-store-detail-row-availability" translate="hdr.ppos.availability"></div>
+									<div class="ml-ppos-store-detail-row-add-btn"></div>
+								</div>
+								
+								<div class="ml-ppos-store-detail-content-scroll ml-ppos-scroll-container">
+									<div class="ml-ppos-store-detail-row">
+										<div class="ml-ppos-store-detail-row-store" translate="lbl.ppos.online"></div>
+										
+										<div data-ng-show="!nearByStoresDataModel.online.showStockAvailabilityMessage"  class="ml-ppos-store-detail-row-stock">
+											<div class="ml-ppos-store-detail-row-hours"></div>
+											<div class="ml-ppos-store-detail-row-distance"></div>
+											<div class="ml-ppos-store-detail-row-availability">
+												<span data-ng-if="nearByStoresDataModel.online.availableQty > 0"><span translate="msg.ppos.inStock"></span> <br> {{ nearByStoresDataModel.online.availableQty }}</span>
+												<span data-ng-if="nearByStoresDataModel.online.availableQty == 0" translate="msg.ppos.unavailable"></span>
+											</div>
+											<div class="ml-ppos-store-detail-row-add-btn"><a href="" data-ng-click="addItemToBasketFromWebStore()" data-ng-if="nearByStoresDataModel.online.availableQty > 0"><span class="ml-ppos-mini-white-icon ml-ppos-plus"></span></a></div>
+										</div>
+
+										<div data-ng-show="nearByStoresDataModel.online.showStockAvailabilityMessage" class="ml-ppos-store-stock-error">
+											<div class="ml-ppos-store-search-container">
+												<div class="ml-ppos-error-container">
+													<div class="ml-icon-error"></div>
+													<div class="ml-ppos-error-message">
+														<div translate="msg.ppos.stockAvailability.100" translate-values="{ requestedQuantity : nearByStoresDataModel.requestedQuantity, availableQuantity : nearByStoresDataModel.online.availableQty }"></div>
+													</div>
+												</div>
+												<div class="ml-ppos-store-stock-error-cancel-button">
+													<button type="button" name="stockAvailabilityCancelButton" id="stockAvailabilityCancelButton" class="ml-ppos-secondary-button" data-ng-click="cancelStockAvailability()" translate="btn.ppos.cancel"></button>
+												</div>
+												<div>
+													<button type="button" name="stockAvailabilityContinueButton" id="stockAvailabilityContinueButton" class="ml-ppos-primary-button" data-ng-click="continueStockAvailability()" translate="btn.ppos.stockAvailability.continue"></button>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div data-ng-if="nearByStoresDataModel.stores.length">
+										<div data-ng-repeat="store in nearByStoresDataModel.stores | filter : {pickupEnabled : true}" class="ml-ppos-store-detail-row">
+											<div class="ml-ppos-store-detail-row-store">
+												<div>{{ store.address.name }}</div>
+												<div>{{ store.address.street1 }}</div>
+												<div>{{ store.address.street2 }}</div>
+												<div>{{ store.address.street3 }}</div>
+												<div>
+													{{ store.address.city }},
+													{{ store.address.state }}
+													{{ store.address.zipCode }}
+												</div>
+												<div>{{ store.address.phone }}</div>
+											</div>
+
+											<div data-ng-show="!store.showStockAvailabilityMessage" class="ml-ppos-store-detail-row-stock">
+												<div class="ml-ppos-store-detail-row-hours" translate="{{ store.hours }}"></div>
+												<div class="ml-ppos-store-detail-row-distance" translate="lbl.ppos.storeDistance" translate-values="{ storeDistance: store.distance }"></div>
+												<div class="ml-ppos-store-detail-row-availability">
+													<span data-ng-if="store.availableQty > 0"><span translate="msg.ppos.inStock"></span> <br> {{ store.availableQty }}</span>
+													<span data-ng-if="store.availableQty == 0" translate="msg.ppos.unavailable"></span>
+												</div>
+												<div class="ml-ppos-store-detail-row-add-btn"><a href="" data-ng-click="addItemToBasketFromPhysicalStore(store)" data-ng-if="store.availableQty > 0"><span class="ml-ppos-mini-white-icon ml-ppos-plus"></span></a></div>
+											</div>
+
+											<div data-ng-show="store.showStockAvailabilityMessage" class="ml-ppos-store-stock-error">
+												<div class="ml-ppos-store-search-container">
+													<div class="ml-ppos-error-container">
+														<div class="ml-icon-error"></div>
+														<div class="ml-ppos-error-message">
+															<div translate="msg.ppos.stockAvailability.100" translate-values="{ requestedQuantity : nearByStoresDataModel.requestedQuantity, availableQuantity : store.availableQty }"></div>
+														</div>
+													</div>
+													<div class="ml-ppos-store-stock-error-cancel-button">
+														<button type="button" name="stockAvailabilityCancelButton" id="stockAvailabilityCancelButton" class="ml-ppos-secondary-button" data-ng-click="cancelStockAvailability()" translate="btn.ppos.cancel"></button>
+													</div>
+													<div>
+														<button type="button" name="stockAvailabilityContinueButton" id="stockAvailabilityContinueButton" class="ml-ppos-primary-button" data-ng-click="continueStockAvailability(store)" translate="btn.ppos.stockAvailability.continue"></button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<div data-ng-repeat="store in nearByStoresDataModel.stores | filter : {pickupEnabled : false}" class="ml-ppos-store-detail-row">
+											<div class="ml-ppos-store-detail-row-store">
+												<div>{{ store.address.name }}</div>
+												<div>{{ store.address.street1 }}</div>
+												<div>{{ store.address.street2 }}</div>
+												<div>{{ store.address.street3 }}</div>
+												<div>
+													{{ store.address.city }},
+													{{ store.address.state }}
+													{{ store.address.zipCode }}
+												</div>
+												<div>{{ store.address.phone }}</div>
+											</div>
+											<div class="ml-ppos-store-detail-row-hours" translate="{{ store.hours }}"></div>
+											<div class="ml-ppos-store-detail-row-distance" translate="lbl.ppos.storeDistance" translate-values="{ storeDistance: store.distance }"></div>
+											<div class="ml-ppos-store-detail-row-availability" translate="msg.ppos.notEligibleForStorePickup"></div>
+											<div class="ml-ppos-store-detail-row-add-btn"></div>
+										</div>
+									</div>
+									<div data-ng-if="!nearByStoresDataModel.stores.length" class="ml-ppos-error-container">
+										<div class="ml-icon-error"></div>
+										<div class="ml-ppos-error-message">
+											<div translate="msg.ppos.noStoresFound"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Store Detail End -->
+						</div>
+					</div>
+					
+					<!-- Footer -->
+					<!--<div class="modal-footer ml-ppos-button-product-search">
+						 <div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelNearByStoresModal()" data-dismiss="modal" translate>btn.ppos.cancel</button></div> 
+					</div>-->
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

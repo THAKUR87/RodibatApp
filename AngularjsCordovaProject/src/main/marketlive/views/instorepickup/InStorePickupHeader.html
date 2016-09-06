@@ -1,0 +1,30 @@
+<div class="ml-ppos-instore-pickup-header-container">
+	<div class="ml-ppos-instore-pickup-header-new">
+		<div class="ml-ppos-instore-pickup-order-new-bar" data-ng-class="{'ml-ppos-instore-pickup-inactive' : !inStorePickupHeaderDataModel.pickupNewOrderShipmentsState}"></div>
+		<div class="ml-ppos-instore-pickup-title">
+			<a data-ng-href="#/inStorePickupOrderShipments" data-ng-if="inStorePickupHeaderDataModel.pickupNewOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-new"></i>{{ 'hdr.ppos.inStorePickup.newPickup' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Ordered.length }}</span></a>
+			<a data-ng-href="#/pickupNewOrderShipments" data-ng-if="!inStorePickupHeaderDataModel.pickupNewOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-new"></i>{{ 'hdr.ppos.inStorePickup.newPickup' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Ordered.length }}</span></a>
+		</div>
+	</div>
+	<div class="ml-ppos-instore-pickup-header-process">
+		<div class="ml-ppos-instore-pickup-order-process-bar" data-ng-class="{'ml-ppos-instore-pickup-inactive' : !inStorePickupHeaderDataModel.pickupInProcessOrderShipmentsState}"></div>
+		<div class="ml-ppos-instore-pickup-title">
+			<a data-ng-href="#/inStorePickupOrderShipments" data-ng-if="inStorePickupHeaderDataModel.pickupInProcessOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-process"></i>{{ 'hdr.ppos.inStorePickup.inProcess' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupInProcess.length }}</span></a>
+			<a data-ng-href="#/pickupInProcessOrderShipments" data-ng-if="!inStorePickupHeaderDataModel.pickupInProcessOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-process"></i>{{ 'hdr.ppos.inStorePickup.inProcess' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupInProcess.length }}</span></a>
+		</div>
+	</div>
+	<div class="ml-ppos-instore-pickup-header-ready">
+		<div class="ml-ppos-instore-pickup-order-ready-bar" data-ng-class="{'ml-ppos-instore-pickup-inactive' : !inStorePickupHeaderDataModel.pickupReadyOrderShipmentsState}"></div>
+		<div class="ml-ppos-instore-pickup-title">
+			<a data-ng-href="#/inStorePickupOrderShipments" data-ng-if="inStorePickupHeaderDataModel.pickupReadyOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-ready"></i>{{ 'hdr.ppos.inStorePickup.pickUpReady' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupReady.length }}</span></a>
+			<a data-ng-href="#/pickupReadyOrderShipments" data-ng-if="!inStorePickupHeaderDataModel.pickupReadyOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-ready"></i>{{ 'hdr.ppos.inStorePickup.pickUpReady' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.PickupReady.length }}</span></a>
+		</div>
+	</div>
+	<div class="ml-ppos-instore-pickup-header-done">
+		<div class="ml-ppos-instore-pickup-order-done-bar" data-ng-class="{'ml-ppos-instore-pickup-inactive' : !inStorePickupHeaderDataModel.pickupDoneOrderShipmentsState}"></div>
+		<div class="ml-ppos-instore-pickup-title">
+			<a data-ng-href="#/inStorePickupOrderShipments" data-ng-if="inStorePickupHeaderDataModel.pickupDoneOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-done"></i>{{ 'hdr.ppos.inStorePickup.done' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Shipped.length }}</span></a>
+			<a data-ng-href="#/pickupDoneOrderShipments" data-ng-if="!inStorePickupHeaderDataModel.pickupDoneOrderShipmentsState"><i class="ml-ppos-instore-pickup-circle-done"></i>{{ 'hdr.ppos.inStorePickup.done' | translate }} <span>{{ inStorePickupOrderShipmentsDataModel.Shipped.length }}</span></a>
+		</div>
+	</div>
+</div>

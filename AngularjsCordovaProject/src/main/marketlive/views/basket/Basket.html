@@ -1,0 +1,271 @@
+<div class="ml-ppos-basket-wrapper" data-ng-controller="basketController">
+	<div class="ml-ppos-basket-container">
+		<div class="ml-ppos-basket-detail-container">
+			<div class="ml-ppos-basket-order-number"><span translate="lbl.ppos.basketNumber"></span> {{ basketDetailDataModel.data.id }}</div>
+			<!-- Basket row head -->
+			<div data-ng-controller="shippingAddressAndMethodModalController">
+				<input type="hidden" id="hiddenOpener" data-ng-click="showShippingAddressAndMethodModal(); $event.stopPropagation();">
+				<shipping-address-and-method-modal></shipping-address-and-method-modal>
+			</div>
+			<div class="ml-ppos-basket-head-item-row">
+				<div class="ml-ppos-basket-head-info" translate="hdr.ppos.productDetail"></div>
+				<div class="ml-ppos-basket-head-price" translate="hdr.ppos.price"></div>
+				<!--<div class="ml-ppos-basket-head-adjustment" translate="hdr.ppos.adjustment"></div>-->
+				<div class="ml-ppos-basket-head-quantity" translate="hdr.ppos.qty"></div>
+				<div class="ml-ppos-basket-head-total" translate="hdr.ppos.total"></div>
+				<div class="ml-ppos-basket-head-close-button"></div>
+			</div>
+
+			
+			<!-- Basket row head End -->
+			<div class="ml-ppos-scroll-container">
+				<div data-ng-repeat="basketShipment in basketDetailDataModel.data.shipments">
+					<div data-ng-repeat="basketItem in basketShipment.items">
+						<!-- Basket item row start -->
+						<div class="ml-ppos-basket-items-row-container">
+							<div class="ml-ppos-basket-items-row">
+								<div class="ml-ppos-basket-item-info">
+									<div class="ml-ppos-basket-item-thumb"><img src="{{basketItem.product.image.thumb}}" data-ng-click="viewProductDetail(basketItem.product.id)" /></div>
+									<div class="ml-ppos-basket-item-thumb-detail">
+										<div>
+											<div data-ng-click="viewProductDetail(basketItem.product.id)">{{ basketItem.product.name }}</div>
+											<div><span translate="lbl.ppos.style"></span> {{ basketItem.skuCode }}</div>
+											<div data-ng-repeat="option in basketItem.options">
+												<div>{{ option.optionType }}: {{ option.name }}</div>
+											</div>
+										</div>
+										<!-- Pickup or ship to section starts-->
+										<div class="ml-ppos-basket-shipment-container">
+											<div data-ng-if="basketItem.store.id != currentStore.id"><!--  show div if item is not from current store -->
+												<div class="ml-ppos-basket-shipment-options">
+													<label>
+														<input type="radio" data-ng-click="setItemAsShipTo(basketDetailDataModel.data.id, basketItem)" name="radioShipToPickup_{{basketItem.id}}" id="radioShipToPickup_{{basketItem.id}}" value="shipTo" data-ng-checked="!basketItem.isPickupFromStore" data-ng-disabled="!basketItem.isAvailableOnline">
+														<div for="radioShipToPickup_{{basketItem.id}}"><i></i>
+															<span data-ng-if="basketItem.isAvailableOnline" translate="lbl.ppos.shipToAvailable"/>
+															<span data-ng-if="!basketItem.isAvailableOnline" translate="lbl.ppos.shipToNotAvailable"/></div>
+													</label>
+												
+													<label>
+														<input type="radio" data-ng-click="setItemAsPickup(basketDetailDataModel.data.id, basketItem)" name="radioShipToPickup_{{basketItem.id}}" id="radioShipToPickup_{{basketItem.id}}" value="pickupInStore" data-ng-checked="basketItem.isPickupFromStore" data-ng-disabled="!basketItem.isAvailableInStore">
+														<div for="radioShipToPickup_{{basketItem.id}}"><i></i>
+														<span data-ng-if="basketItem.isAvailableInStore && basketItem.isPickupFromStore">
+															<span class="ml-ppos-basket-shipment-pickup-store-info" translate="msg.ppos.pickupItemInfo" translate-values="{ storeCity: basketItem.store.city, storeCode: basketItem.store.code }"/>
+														</span>
+														<span data-ng-if="basketItem.isAvailableInStore && !basketItem.isPickupFromStore" translate="lbl.ppos.pickupAvailable"/>
+														<span data-ng-if="!basketItem.isAvailableInStore" translate="lbl.ppos.pickupNotAvailable"/></div> <!-- Change link will be displaed in phase 2 -->
+													</label>
+												</div>
+											</div>
+											<div data-ng-if="basketItem.store.id == currentStore.id">
+												<div>
+													<span translate="lbl.ppos.puchasedStore"/> {{currentStore.name | translate }} ({{basketItem.store.code | translate }})
+												</div>
+											</div>
+										</div>
+										<!-- Pickup or ship to section ends-->
+									</div>
+								</div>
+
+								<div data-ng-switch on="basketItem.freeGift" class="ml-ppos-basket-item-price">
+									<div data-ng-switch-when="true">Free Gift</div>
+									<div data-ng-switch-default>{{ basketItem.regularPrice }}</div>
+								</div>
+
+								<!--<div class="ml-ppos-basket-item-adjustment">
+									<div data-ng-hide="basketItem.discounts.length"><a href=""><span class="ml-ppos-mini-white-icon ml-ppos-plus"></span></a></div>
+									<div data-ng-show="basketItem.discounts.length">-{{ basketItem.discountTotal }}</div>
+								</div>-->
+								
+								<div class="ml-ppos-basket-item-quantity">
+									<div data-ng-switch on="basketItem.freeGift">
+										<div data-ng-switch-when="true" class="ml-ppos-quantity-spinner-wrapper">
+											{{ basketItem.qty }}
+											<input type="hidden" data-ng-value="basketItem.qty" name="qty_{{ basketItem.id }}" id="qty_{{ basketItem.id }}" size="2" maxlength="2" />
+										</div>
+										<div data-ng-switch-default class="ml-ppos-quantity-spinner-wrapper">
+											<ml-numeric-spinner data-mapped-value="basketItem.qty" data-max-length="2"></ml-numeric-spinner>
+										</div>
+									</div>
+
+									<div data-ng-show="!basketItem.freeGift">
+										<div class="ml-ppos-basket-button-update"><a href="javascript:;" data-ng-click="updateBasketItem(basketDetailDataModel.data.id, basketItem.id, basketItem.product.id,  basketItem.skuID, basketItem.qty, basketItem.store)" translate="btn.ppos.update"></a></div>
+									</div>
+								</div>
+
+								<div data-ng-switch on="basketItem.freeGift" class="ml-ppos-basket-item-total">
+									<div data-ng-switch-when="true">Free Gift</div>
+									<div data-ng-switch-default>{{ basketItem.subTotal }}</div>
+								</div>
+
+								<div data-ng-show="!basketItem.freeGift">
+									<div class="ml-ppos-basket-item-close-button"><a href="" data-ng-click="removeItemFromBasket(basketDetailDataModel.data.id, basketItem.id)"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></a></div>
+								</div>
+							</div>
+							<div class="ml-ppos-basket-item-discount" data-ng-repeat="basketItemDiscount in basketItem.discounts">
+								<div class="ml-ppos-basket-item-discount-message">
+									{{ basketItemDiscount.message }}<!--  <span>-{{ basketItemDiscount.amount }}</span> -->
+								</div>
+							</div>
+						</div>
+						<!-- Basket item row End -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ml-ppos-basket-nav-container">
+			<div class="ml-ppos-basket-header-customer">
+				<div class="ml-ppos-default-header-wrapper">
+					<span>
+						<a href="javascript:;" data-ng-click="customerProfileInformationModal('update');">
+							<div class="ml-ppos-default-header-message">{{ customerInformation }}</div>
+							<div class="ml-ppos-default-header-icon"><span class="ml-ppos-mini-white-icon ml-ppos-plus"></span></div>
+						</a>
+					</span>
+					<customer-profile-information-modal></customer-profile-information-modal>
+				</div>
+			</div>
+			
+			<div class="ml-ppos-basket-sub-head" translate="lbl.ppos.product"></div>
+			<div class="ml-ppos-basket-product-search-row">
+				<div class="ml-ppos-product-scan">
+					<ml-barcode-search data-display-as-modal="true"
+									   data-modal-title="Product Scan"
+									   data-service-url="/api/scan/skus/UPC_CODE"
+									   data-service-post-data="skuBarcodeSearchPostData"
+									   data-scan-success-callback="scanSuccessHandler()"
+									   data-cancel-btn-resource="btn.ppos.close"
+									   data-continue-btn-resource="btn.ppos.done"
+									   data-multi-add-msg-resource="msg.ppos.itemWithCodeAddedToBasket"
+									   data-multi-add-count-resource="msg.ppos.scanAnotherProduct"
+							></ml-barcode-search>
+				</div>
+				<div class="ml-ppos-basket-product-search">
+					<div>
+						<a href="javascript:;" class="ml-ppos-basket-product-search-button" data-toggle="modal" data-target="#productSearchModal"><span class="ml-ppos-grey-icon ml-ppos-search"></span><span translate="btn.ppos.searchProduct"></span></a>
+						<product-search-modal></product-search-modal>
+						<product-detail-modal></product-detail-modal>
+						<near-by-stores-modal></near-by-stores-modal>
+					</div>
+				</div>
+			</div>
+
+			<!-- Don't show apply coupon code section, summary section, place order and adjustment if there are no items in the basket. -->
+			<div data-ng-if="basketDetailDataModel.data.shipments.length">
+				<div class="ml-ppos-basket-sub-head" translate="lbl.ppos.couponPromotion"></div>
+				<div class="ml-ppos-basket-product-coupon-row">
+					<!-- <div class="ml-ppos-basket-product-scan">
+						<a href="javascript:;" class="ml-ppos-basket-product-scan-button"><span class="ml-ppos-grey-icon ml-ppos-scan-barcode"></span><span translate="btn.ppos.scanCouponBarcode"></span></a>
+					</div> -->
+					<div class="ml-ppos-basket-product-typein">
+						<div data-ng-controller="addCouponCodeModalController">
+							<a href="javascript:;" class="ml-ppos-basket-product-typein-button" data-toggle="modal" data-target="#addCouponCodeModal"><span translate="btn.ppos.typeIn"></span><span class="ml-ppos-grey-icon ml-ppos-typein"></span></a>
+							<add-coupon-code-modal></add-coupon-code-modal>
+						</div>
+					</div>
+				</div>
+
+				<div class="ml-ppos-basket-coupon-message">
+					<div data-ng-repeat="sourceCode in basketDetailDataModel.data.sourceCodeInfoList" class="ml-ppos-default-header-wrapper" data-ng-if="!sourceCode.discountAmountZero">
+						<div class="ml-ppos-default-header-message"><span translate="msg.ppos.appliedCouponCodeWithAmount" translate-values="{ couponCode : sourceCode.code}"></span>{{ sourceCode.discountAmount }}</div>
+						<div class="ml-ppos-default-header-icon"><a href="" data-ng-click="removeSourceCode(basketDetailDataModel.data.id, sourceCode.code)"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></a></div>
+					</div>
+				</div>
+
+				<div class="ml-ppos-basket-summary-row">
+					<div class="ml-ppos-basket-sub-head" translate="lbl.ppos.summaryOfCharges"></div>
+					<div class="ml-ppos-scroll-container">	
+						<div class="ml-ppos-basket-summary-content">
+							<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.merchandiseSubtotalAmount"></div>
+							<div class="ml-ppos-basket-summary-value">{{ basketDetailDataModel.data.merchandiseTotal }}</div>
+						</div>
+						<div class="ml-ppos-basket-summary-content" data-ng-repeat="basketDiscount in basketDetailDataModel.data.discounts">
+							<div class="ml-ppos-basket-summary-label">{{ basketDiscount.message }}:</div>
+							<div class="ml-ppos-basket-summary-value">-{{ basketDiscount.amount }}</div>
+						</div>
+						<div class="ml-ppos-basket-summary-content">
+							<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.subtotalAmount"></div>
+							<div class="ml-ppos-basket-summary-value">{{ basketDetailDataModel.data.subTotal }}</div>
+						</div>
+						<div class="ml-ppos-basket-summary-content">
+							<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.taxAmount"></div>
+							<div class="ml-ppos-basket-summary-value">{{ basketDetailDataModel.data.taxTotal }}</div>
+						</div>
+						<div class="ml-ppos-basket-summary-content">
+							<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.shippingAmount"></div>
+							<div class="ml-ppos-basket-summary-value">{{ basketDetailDataModel.data.shippingTotal }}</div>
+						</div>
+						<div data-ng-repeat="basketShipment in basketDetailDataModel.data.shipments">
+							<div  class="ml-ppos-basket-summary-content" data-ng-repeat="basketShipmentDiscount in basketShipment.discounts" data-ng-if="!basketShipment.pickupFromStore">
+								<div class="ml-ppos-basket-summary-label" data-ng-if="!basketShipmentDiscount.discountAmountZero">{{ basketShipmentDiscount.message }}:</div>
+								<div class="ml-ppos-basket-summary-value" data-ng-if="!basketShipmentDiscount.discountAmountZero">-{{ basketShipmentDiscount.amount }}</div>
+							</div>
+						</div>
+						<!-- 
+						<div class="ml-ppos-basket-summary-content">
+							<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.adjustmentAmount"></div>
+							<div class="ml-ppos-basket-summary-value"></div>
+						</div>-->
+					</div> 
+					<div class="ml-ppos-basket-summary-total-content">
+						<div class="ml-ppos-basket-summary-label" translate="lbl.ppos.totalAmount"></div>
+						<div class="ml-ppos-basket-summary-value">{{ basketDetailDataModel.data.total }}</div>
+					</div>
+				</div>
+				<div class="ml-ppos-basket-button-row" data-ng-controller="paymentController">
+					<div class="ml-ppos-basket-button-place-order">
+						<span class="ml-ppos-btn-inner">
+							<span class="ml-ppos-btn-text" translate="btn.ppos.placeOrder"></span>
+							<span class="ml-ppos-btn ml-ppos-mini-grey-icon ml-ppos-arrow-right"></span>
+						</span>
+						<button type="submit" class="ml-ppos-btn-hidden" data-ng-click="showPaymentModal(basketDetailDataModel.data.id, basketDetailDataModel.data.total)" id="btnOpenPymtModal" translate="btn.ppos.placeOrder"></button>
+					</div>
+					<payment-modal></payment-modal>
+				</div>
+
+                <!-- Receipt Start -->
+                <div class="ml-ppos-dashboard-bag-widget-button-wrapper">
+                    <receipt-modal></receipt-modal>
+                </div>
+                <!-- Receipt End -->
+
+                <div class="ml-ppos-dashboard-order-confirm-widget-button-wrapper">
+                    <order-confirmation-modal></order-confirmation-modal>
+                </div>
+
+                <!-- NOTE: PEBL-15818 Item Level adjustment is in phase 2 of PPOS -->
+				<!--<div class="ml-ppos-basket-button-row">
+					<div class="ml-ppos-basket-button-adjustment"><a href="javascript:;" translate="btn.ppos.adjustment"></a></div>
+				</div>-->
+			</div>
+
+			<div class="ml-ppos-basket-button-row" data-ng-if="!basketDetailDataModel.isAutoSaveBag">
+				<div class="ml-ppos-basket-button-save-bag" data-ng-show="!basketDetailDataModel.data.csrID"><a href="javascript:;" data-ng-click="saveBag(basketDetailDataModel.data.id)"><span translate>btn.ppos.saveBag</span> <i class="ml-ppos-mini-white-icon ml-ppos-circle-bag"></i></a></div>
+				<div class="ml-ppos-basket-button-save-bag" data-ng-show="basketDetailDataModel.data.csrID"><a href="javascript:;"><span translate>btn.ppos.saved</span> <i class="ml-ppos-mini-white-icon ml-ppos-circle-bag"></i></a></div>
+			</div>
+
+			<!-- Save Bag Success Message -->
+			<div class="ml-ppos-modal-container ml-ppos-product-search-wrapper">
+				<div class="modal" id="saveBagSuccessModal" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<div class="modal-body">
+								<div class="ml-ppos-error-container">
+									<div class="ml-icon-success"></div>
+									<div class="ml-ppos-error-message">
+										<div translate>btn.ppos.shoppingBagSavedMessage</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="modal-footer ml-ppos-button-product-search">
+								<div><button type="submit" name="saveBagSuccessOkButton" id="saveBagSuccessOkButton" data-dismiss="modal" class="ml-ppos-primary-button" translate="btn.ppos.ok"></button></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

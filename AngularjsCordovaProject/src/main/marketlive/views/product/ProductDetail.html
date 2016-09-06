@@ -1,0 +1,93 @@
+<div class="ml-product-detail-wrapper">
+    <div class="ml-product-detail-container">
+        <!-- Main Content -->
+        <div class="ml-product-detail-main-content">
+            <!-- Image -->
+            <div class="ml-product-detail-image-wrapper">
+                <div class="ml-product-detail-image"><img src="{{model.product.image.detail}}"></div>
+                <!-- Suggested Items -->
+                <div class="ml-product-detail-suggestions" data-ng-if="model.crossSells.length">
+					<div translate="msg.ppos.suggestedProducts"></div>
+                    <div class="ml-ppos-grid-view-items">
+                        <div data-ng-repeat="crossSellItem in model.crossSells track by $index" class="ml-ppos-grid-view-item">
+                            <div data-ng-if="$index < 6">
+                                <a data-ng-href="#/productDetail?productId={{ crossSellItem.id }}&fromProductSearch=false">
+                                    <div class="ml-ppos-item-image"><img ng-src="{{crossSellItem.image.thumb}}" width="80" height="80"/></div>
+                                    <div class="ml-ppos-item-info">
+                                        <div class="ml-ppos-item-product-name" data-ng-if="model.showName">{{ crossSellItem.name }}</div>
+                                        <div class="ml-ppos-item-price">
+                                            <div>{{ crossSellItem.prices.displayPrice.price }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<!-- Suggested Items End -->
+            </div>
+
+            <!-- Details -->
+            <div class="ml-product-detail-data-wrapper">
+                <div class="ml-product-detail-backto-search" data-ng-if="model.fromProductSearch === 'true'">
+    				<a data-ng-click="backToProductSearchResult()"><i class="ml-ppos-mini-white-icon ml-ppos-arrow-left"></i> <span translate>btn.ppos.backToSearchResult</span></a>
+				</div>
+				
+					<!-- Name, Description, Code, etc... -->
+					<div class="ml-product-detail-data-section">
+						<div class="ml-ppos-item-product-name" data-ng-if="model.showName">{{model.product.name}}</div>
+						<div class="ml-ppos-item-short-desc" data-ng-if="model.showShortDescription">{{model.product.description.shortDescription}}</div>
+						<div class="ml-ppos-item-long-desc" data-ng-if="model.showLongDescription">{{model.product.description.longDescription}}</div>
+						<div class="ml-ppos-item-product-code"><span translate="lbl.ppos.style"></span> {{model.product.code}}</div>
+						<div class="ml-product-detail-price-product">
+							<div class="ml-item-price-was">{{model.product.prices.displayPrice.priceWas}}</div>
+							<div>{{model.product.prices.displayPrice.price}}</div>
+						</div>
+					</div>
+
+					<div class="ml-product-detail-data-section">
+						<!-- Options -->
+						<div class="ml-product-detail-options-wrapper"
+							 data-ml-product-options
+							 data-options="model.product.optionsWithAssociatedSkuIDs"></div>
+						<!-- Qty -->
+						<div class="ml-ppos-quantity-spinner-wrapper">
+							<label class="ml-ppos-quantity-spinner-label"><div translate="msg.ppos.qty"></div></label>
+							<div>
+								<ml-numeric-spinner data-mapped-value="model.addToBasketItem.qty"
+													data-max-length="2"></ml-numeric-spinner>
+							</div>
+						</div>
+						<div class="ml-product-detail-price-wrapper">
+							<div class="ml-product-detail-price-sku">{{model.priceSkuMsg}}</div>
+						</div>
+						<div class="ml-product-detail-stock-wrapper">
+							<div data-ng-if="model.stockAvailable === true">
+								<span class="ml-product-detail-stock-label" translate="msg.ppos.inStock"></span>
+								<span class="ml-product-detail-stock-qty">{{model.stockQty}}</span>
+								<span class="ml-product-detail-stock-available" translate="msg.ppos.available"></span>
+							</div>
+							<div data-ng-if="model.stockUnavailable === true">
+								<span class="ml-product-detail-stock-unavailable" translate="msg.ppos.unavailable"></span>
+							</div>
+
+							<div class="ml-product-detail-button-wrapper" data-ng-if="model.initialized">
+								<div data-ng-if="!getSelectedSku()" class="ml-ppos-error-container">
+									<div class="ml-icon-error"></div>
+									<div class="ml-ppos-error-message" translate>msg.ppos.selectValidOption</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ml-product-detail-button-wrapper" data-ng-if="model.initialized">
+						<!-- Nearby Store Button -->
+						<div class="ml-product-detail-store-button" data-ng-class="{'disabled' : model.disableStoresButton}"><input type="button" name="nearByStoresButton" id="nearByStoresButton" value="{{'btn.ppos.stores' | translate}}" data-ng-click="showNearByStoresModal(model.product.id, getSelectedSku(), model.addToBasketItem.qty)" class="ml-ppos-secondary-button"> <near-by-stores-modal></near-by-stores-modal></div>
+						<!-- Add to Cart Button -->
+						<div class="ml-product-detail-cart-button" data-ng-class="{'disabled' : model.disableAddToCartButton}"><input type="button" name="addToCartButton" id="addToCartButton" class="ml-ppos-primary-button" value="{{'btn.ppos.addToBasket' | translate}}" ng-click="addItemToBasket()"></div>
+					</div>
+				
+            </div>
+        </div>
+    </div>
+</div>

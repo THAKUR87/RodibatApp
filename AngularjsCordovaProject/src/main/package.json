@@ -1,0 +1,70 @@
+{
+  "name": "marketlive-ppos-build-tool",
+  "description": "a marketlive development tool for ppos builds",
+  "version": "0.0.0",
+  "repository": {
+    "type": "svn",
+    "url": "http://pd-svn.marketlive.com/repo/marketlive/dev/branches/15.1.0_ppos/source/Apps/PPOS"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.3.15",
+    "grunt": "~0.4.5",
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-bower-concat": "^0.4.0",
+    "grunt-connect-rewrite": "^0.2.1",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-exec": "^0.4.6",
+    "grunt-karma": "^0.10.1",
+    "jasmine-core": "^2.2.0",
+    "jit-grunt": "~0.7.0",
+    "jshint-stylish": "^1.0.1",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-jasmine": "^0.3.5",
+    "karma-js-coverage": "^0.4.0",
+    "karma-junit-reporter": "^0.3.3",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "load-grunt-tasks": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.33"
+  },
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "angular-mocks": "^1.4.1",
+    "grunt": "^0.4.5",
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-bower-concat": "^0.4.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "^0.10.1",
+    "grunt-exec": "^0.4.6",
+    "jit-grunt": "^0.7.1",
+    "karma": "^0.12.37",
+    "jshint-stylish": "^1.0.2",
+    "karma-chrome-launcher": "^0.1.12",
+    "load-grunt-tasks": "^1.0.0",
+    "jasmine-core": "^2.3.4",
+    "karma-js-coverage": "^0.4.0",
+    "karma-jasmine": "^0.3.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

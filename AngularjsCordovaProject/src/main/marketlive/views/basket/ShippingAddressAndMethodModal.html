@@ -1,0 +1,117 @@
+<div class="ml-ppos-modal-container ml-ppos-basket-new-shipping-wrapper">
+	<div class="modal" id="shippingAddressAndMethodModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form novalidate id="frmShipAddressMethodModal">
+					<div class="modal-header">
+						<button type="button" class="close" data-ng-click="closeShippingAddressAndMethodModal()" data-dismiss="modal" aria-label="Close" id="btnCloseModal"><span aria-hidden="true"><span class="ml-ppos-mini-white-icon ml-ppos-close"></span></span></button>
+						<h4 class="modal-title"><span translate="hdr.ppos.shipToAddress"/></h4>
+						<!-- Error Block Start -->
+						<div class="ml-ppos-error-container" data-ng-show="shipping.showMessage">
+							<div class="ml-icon-error" id="divMsgIconContainer"></div>
+							<div class="ml-ppos-error-message">
+								<div>{{ shipping.operationMessage | translate }}</div>
+							</div>
+						</div>
+						<!-- Error Block End -->
+					</div>
+					<div class="modal-body ml-ppos-basket-new-shipping-container">
+						<!-- Address Block -->
+						<div class="ml-ppos-basket-new-shipment-address-container">
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.firstName"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.firstName" name="txtFirstName" id="txtFirstName" maxlength="40"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.lastName"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.lastName" name="txtLastName" id="txtLastName" required="" maxlength="40"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.streetAddress"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.streetAddress" name="txtStreetAddress" id="txtStreetAddress" required="" maxlength="50"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.optionalAddress"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.optionalAddress" name="txtOptionalAddress" id="txtOptionalAddress" maxlength="50"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.city"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.city" name="txtCity" id="txtCity" required="" maxlength="50"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.state"/></label>
+								<div><select name="selState" class="form-control" id="selState" data-ng-model="shipping.selectedState" data-ng-change="populateShippingMethods('selState')"> 
+									<option ng-repeat="option in shipping.states" value="{{option.id}}" ng-selected="{{option.id == shipping.selectedState}}">{{ option.description | translate }}</option>
+								</select></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.zipCode"/></label>
+								<div><input type="text" class="form-control" data-ng-model="shipping.zipCode" name="txtZipCode" id="txtZipCode" required="" maxlength="10"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.country"/></label>
+								<div><select name="selCountry" class="form-control" id="selCountry" data-ng-model="shipping.selectedCountry" data-ng-change="populateShippingMethods('selCountry')"> 
+									<option ng-repeat="option in shipping.countries" value="{{option.id}}" ng-selected="{{option.id == shipping.selectedCountry}}">{{ option.description | translate }}</option>
+								</select></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.phoneNumber"/></label>
+								<div><input type="tel" class="form-control" data-ng-model="shipping.phoneNumber" name="txtPhone" id="txtPhone" required="" maxlength="20"/></div>
+							</div>
+							<div class="ml-ppos-basket-new-address-row">
+								<label><span translate="lbl.ppos.emailAddress"/></label>
+								<div><input type="email" class="form-control" data-ng-model="shipping.email" name="txtEmail" id="txtEmail" required="" maxlength="100"/></div>
+							</div>
+						</div>
+						<!-- Address Block -->
+
+						<!-- shipping method -->
+						<div class="ml-ppos-basket-new-shipment-container ml-ppos-toggle-container">
+							<div class="ml-ppos-toggle btn-group btn-toggle" data-ng-show="shipping.shippingMethods.length > 0">
+								<label class="ml-ppos-toggle-button btn" ng-class="{active : option.id == shipping.selectedShippingMethod}" data-ng-repeat="option in shipping.shippingMethods">
+									<input type="radio" data-ng-model="shipping.selectedShippingMethod"  name="radioShippingMethod" id="radioShippingMethod" value="{{option.id}}"/>
+									<div>
+										<i ng-show="option.id != shipping.selectedShippingMethod">
+											<i class="ml-ppos-mini-white-icon ml-ppos-unselect"></i>
+										</i>
+										<i ng-hide="option.id != shipping.selectedShippingMethod">
+											<i class="ml-ppos-mini-grey-icon ml-ppos-select"></i>
+										</i>
+										<span class="ml-ppos-basket-new-shipment-name">{{ option.name | translate }} - {{ option.cost }}</span>
+									</div> <span>{{ option.description | translate }}</span>
+								</label>
+							</div>
+						</div>
+						
+						<!--<div class="ml-ppos-basket-new-shipment-container ml-ppos-toggle-container" data-ng-show="shipping.shippingMethods.length == 0">
+							<div class="ml-ppos-toggle btn-group btn-toggle">
+								<span translate="msg.ppos.noShippingMethod"/>
+							</div>
+						</div>-->
+						<!-- shipping method -->
+					</div>
+					
+					<div class="modal-footer ml-ppos-button-product-search">
+						<div><button type="submit" name="addShippingAddress" id="addShippingAddress" class="ml-ppos-primary-button" translate="btn.ppos.paymentOptions" data-ng-click="saveShippingAddressAndMethod(shipping)"></button></div>
+						<div><button type="button" class="ml-ppos-secondary-button" data-ng-click="cancelShippingAddressAndMethodModal()" data-dismiss="modal" translate="btn.ppos.cancel" name="btnCancelShipToModal" id="btnCancelShipToModal"></button></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Following script tag added for fixing PEBL-15999 -->
+<script>
+$('#addShippingAddress').on('touchend', function(e){
+    e.stopPropagation(); e.preventDefault();
+	$('#addShippingAddress').trigger('click');
+});
+$('#btnCancelShipToModal').on('touchend', function(e){
+	e.stopPropagation(); e.preventDefault();
+	// following is the hack to hide soft keyboard
+	document.activeElement.blur();
+	$('input').blur();
+	$('select').blur();
+	$('#btnCancelShipToModal').trigger('click');
+});
+</script>
