@@ -212,7 +212,7 @@
   </build>
   <properties>
 	  <spring.version>4.2.1.RELEASE</spring.version>
-	  <hibernate.core>4.2.7.Final</hibernate.core>
+	  <hibernate.core>5.4.24.Final</hibernate.core>
 	  <jdk.version>1.8</jdk.version>
 	  <org.slf4j-version>1.7.12</org.slf4j-version>
   </properties>
